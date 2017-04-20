@@ -1,0 +1,73 @@
+
+.channel-content{
+	padding: 0.18rem 0;
+	margin-bottom: 0.13rem;
+
+	.channel-list li{
+		display: inline-block;
+		width: 33.333%;
+
+		a{
+			display: block;
+			padding: 0.1rem 0;
+			text-align: center;
+
+			i.channel-icon{
+				display: block;
+				width: 68px;
+				height: 68px;
+				margin: 0 auto 0.07rem;
+				background-image: url('../image/ui_3@2x.png');
+				background-size: 274px 228px;
+				background-repeat: no-repeat;
+				position: relative;
+				
+				span.channel-num{
+					display: inline-block;
+					height: 0.17rem;
+					padding: 0 0.06rem;
+					border-radius: 0.08rem;
+					background: #ccc;
+					color: #fff;
+					font-size: 0.12rem;
+					font-style: normal;
+					position: absolute;
+					top: 0; right: 0;
+				}
+			}
+			i.channel-icon-live{ background-position: -137px 0; }
+			i.channel-icon-bangumi{ background-position: -206px -137px; }
+			i.channel-icon-douga{ background-position: -206px 0; }
+			i.channel-icon-music{ background-position: 0 -69px; }
+			i.channel-icon-dance{ background-position: -206px -69px; }
+			i.channel-icon-game{ background-position: 0 -137px; }
+			i.channel-icon-tech{ background-position: -69px 0; }
+			i.channel-icon-kichiku{ background-position: -137px -69px; }
+			i.channel-icon-movie{ background-position: -69px -69px; }
+			i.channel-icon-tv{ background-position: 0 0; }
+			i.channel-icon-fashion{ background-position: -69px -137px; }
+			i.channel-icon-life{ 
+				background-image: url('../image/channel/channel_life@2x.png');
+				background-size: 68px 68px;
+			}
+			i.channel-icon-ent{ 
+				background-image: url('../image/channel/channel_ent@2x.png');
+				background-size: 68px 68px;
+			}
+			i.channel-icon-advertise{ 
+				background-image: url('../image/channel/channel_advertise@2x.png');
+				background-size: 68px 68px;
+			}
+			i.channel-icon-guoman{ 
+				background-image: url('../image/channel/channel_guoman@2x.png');
+				background-size: 68px 68px;
+			}
+
+			p.channel-name{
+				color: #212121;
+				font-size: 0.14rem;
+				padding: 1px 0;
+			}
+		}
+	}
+}

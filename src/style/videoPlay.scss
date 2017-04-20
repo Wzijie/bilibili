@@ -1,0 +1,696 @@
+.video-content{
+
+	.icon{
+		background: url('../image/ui_2.png') center no-repeat;
+		background-size: 400px;
+	}
+	
+	/* 视频内容 */
+	.video-container{
+		height: 2.345rem;
+		position: relative;
+		background: #000;
+		
+		/* video容器 */
+		.player-container{
+			width: 100%;
+			height: 100%;
+			background: #000;
+
+			video{
+				width: 100%;
+				height: 100%;
+			}
+		}
+
+		/* 视频播放前的显示信息 */
+		.load-layer{
+			position: absolute;
+			top: 0; left: 0; bottom: 0; right: 0;
+			background: rgba(60,60,60,0.5);
+			overflow: hidden;
+			
+			/* 视频封面 */
+			.video-cover{
+				width: 100%;
+				height: 100%;
+				opacity: 0.85;
+				-webkit-filter: blur(3px);
+				filter: blur(3px);
+			}
+
+			/* 视频标题 */
+			.video-load-title{
+				width: 100%;
+				line-height: 0.36rem;
+				position: absolute;
+				top: 0;
+				padding: 0 0.2rem;
+				font-size: 1em;
+				color: #fff;
+				font-weight: normal;
+				white-space: nowrap;
+	    		overflow: hidden;
+	    		text-overflow: ellipsis;
+	    		box-sizing: border-box;
+	    		text-shadow: 1px 1px 2px #666;
+			}
+
+			/* 底部提示下载app */
+			.app-down{
+				display: block;
+				width: 100%;
+				line-height: 0.36rem;
+				position: absolute;
+				bottom: 0;
+				text-align: center;
+				font-size: 0.85em;
+				color: #fff;
+				background: rgba(0,0,0,0.5);
+			}
+			
+			/* 视频长度显示 */
+			.video-length{
+				position: absolute;
+				left: 0.12rem; bottom: 0.48rem;
+				line-height: 0.2rem;
+				padding: 0 3px;
+				font-size: 0.16rem;
+				color: #fff;
+				background: rgba(255,255,255,0.2);
+				border: 2px solid rgba(255,255,255,0.6);
+				border-radius: 5px;
+				box-sizing: border-box;
+			}
+			
+			/* 播放图标显示 */
+			.load-player{
+				display: block;
+				width: 77px;
+				height: 73px;
+				position: absolute;
+				bottom: 0.36rem; right: 0.12rem;
+				background: url('../image/ui_2.png') no-repeat -90px -265px;
+				background-size: 530px;
+			}
+		}
+
+		/* 播放器控制面板 */
+		.player-control{
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			width: 100%;
+			height: 0.37rem;
+			line-height: 0.37rem;
+			position: absolute;
+			bottom: 0;
+			background: rgba(0,0,0,0.5);
+			color: #e2e2e2;
+
+			/* 视频时间显示 */
+			.time-container{
+				max-width: 0.92rem;
+				height: 100%;
+				font-size: 0.13rem;
+				color: #fff;
+				padding-left: 10px;
+				box-sizing: border-box;
+				overflow: hidden;
+				white-space: nowrap;
+			}
+
+			/* 进度条 */
+			.progress{
+				flex: 1;
+				height: 10px;
+				margin: 0 10px;
+				position: relative;
+				
+				div{
+					height: 3px;
+					position: absolute;
+					top: 50%; left: 0;
+					transform: translateY(-50%);
+				}
+
+				.current-progress{
+					width: 0%;
+					background: #de698c;
+
+					&:after{
+						content: '';
+						display: block;
+						width: 0.12rem;
+						height: 0.12rem;
+						position: absolute;
+						top: 50%; right: 0;
+						background: #fff;
+						border-radius: 50%;
+						transform: translate(50%,-50%);
+					}
+				}
+				.buffered-progress{
+					width: 0%;
+					background: #de698c;
+				}
+				.total-progress{
+					width: 100%;
+					background: #4c4c4c;
+				}
+
+			}
+
+			/* 右侧弹幕切换和全屏切换 */
+			.more-control{
+				height: 100%;
+
+				div{
+					display: inline-block;
+					width: 30px;
+					height: 100%;
+					margin: 0 0.1rem;
+
+					i{
+						display: block;
+						height: 100%;
+						background: url('../image/ui_2.png') no-repeat;
+						background-size: 400px;
+
+						&.danmu-toggle-icon{
+							background-position: -98px -322px;
+						}
+
+						&.full-screen-icon{
+							background-position: -66px -323px;
+						}
+					}
+				}
+			}
+		}
+		
+		/* 状态按钮 播放、暂停、缓冲 */
+		.state-icon{
+			width: 77px;
+			height: 77px;
+			position: absolute;
+			bottom: 36px; right: 9px;
+			opacity: 0.85;
+
+			i{
+				position: absolute;
+				top: 0; left: 0; bottom: 0; right: 0;
+				background: url('../image/ui_2.png') no-repeat;
+				display: none;
+
+				&.loading-icon{
+					background: url('../../src/image/videoPlayer/loading.gif') no-repeat;
+					background-position: center;
+				}
+
+				&.play-icon{
+					background-position: -90px -266px;
+					background-size: 530px;;
+				}
+
+				&.pause-icon{
+					background-position: -90px -354px;
+					background-size: 530px;
+				}
+			}
+
+			.active{
+				display: block;
+			}
+		}
+		
+		/* 视频发生错误信息 */
+		.error-info{
+			position: absolute;
+			top: 0; left: 0; bottom: 0; right: 0;
+			background: rgba(0,0,0,0.7);
+			padding: 0 10px;
+			text-align: center;
+			font-size: 0.16rem;
+			color: #eee;
+
+			.error-msg{
+				margin: 0.5rem 0 0.2rem;
+			}
+			.video-reload{
+				padding: 5px 10px;
+				background: #de689c;
+				border-radius: 5px;
+			}
+		}
+
+		.hide{
+			display: none;
+		}
+	}
+	/* 视频容器全屏 */
+	.video-full-screen{
+		height: 100%;
+		position: fixed;
+		top: 0; left: 0; bottom: 0; right: 0;
+		z-index: 9999;
+	}
+
+	/* 操作面板 分享收藏下载 */
+	.video-option{
+		height: 50px;
+		background: #fff;
+		position: relative;
+		padding: 2px 0;
+		margin-bottom: 15px;
+
+		.control-btn{
+			display: inline-block;
+			width: 0.5rem;
+			height: 100%;
+			text-align: center;
+		
+			i{
+				display: inline-block;
+				width: 24px;
+				height: 24px;
+				margin-top: 3px;
+			}
+			.icon-share{
+				background-position: -251px -100px;
+			}
+			.icon-collect{
+				background-position: -251px -33px;
+			}
+			.icon-down{
+				background-position: -251px -67px;
+			}
+			p{
+				font-size: 0.12rem;
+				color: #999;
+			}
+			
+		}
+
+		.open-app{
+			display: block;
+			line-height: 0.35rem;
+			position: absolute;
+			top: 50%; right: 0.17rem;
+			transform: translateY(-50%);
+			padding: 0 0.4rem;	
+			font-size: 0.12rem;
+			color: #fff;
+			background: #de698c;
+			border-radius: 8px;
+		}
+	}
+
+	/* 视频信息 */
+	.video-intro{
+		padding: 0.1rem;
+		background: #fff;
+		box-sizing: border-box;
+		border-top: 1px solid #eee;
+		border-bottom: 1px solid #eee;
+		font-size: 0.14rem;
+		color: #444;
+
+		/* up主信息 */
+		.up-info{
+			display: flex;
+			align-items: center;
+			border-bottom: 1px solid #eee;
+			padding: 0 5px 10px;
+
+			.up-face{
+				width: 0.5rem;
+				height: 0.5rem;
+				border: 1px solid #eee;
+				border-radius: 50%;
+				overflow: hidden;
+
+				img{
+					width: 100%;
+					height: 100%;
+				}
+			}
+
+			.up-name{
+				flex: 1;
+				max-width: 2.15rem;
+				margin-left: 0.14rem;
+
+				a{
+					display: block;
+					line-height: 0.27rem;
+					overflow: hidden;
+	    			text-overflow: ellipsis;
+	    			white-space: nowrap;
+	    			color: #333;
+
+	    			&:nth-of-type(2){
+	    				color: #de698c;
+	    			};
+				}
+			}
+
+			.up-follow{
+				height: 0.36rem;
+				line-height: 0.36rem;
+				padding: 0 0.16rem;
+				border-radius: 6px;
+				color: #de698c;
+				border: 1px solid #de698c;
+			}
+		}
+
+		/* 标题及视频描述 */
+		.title-desc{
+			/*height: 0;*/
+			overflow: hidden;
+			transition: all 0.4s ease;
+
+			.video-title{
+				margin: 6px 0;
+				font-size: 0.16rem;
+				font-weight: normal;
+				line-height: 0.24rem;
+			}
+
+			.video-desc{
+
+				p{
+					font-size: 0.12rem;
+					color: #666;
+					line-height: 0.2rem;
+				}
+			}
+		}
+		
+		/* 当前所在位置 */
+		.nav-info{
+			margin: 10px 0;
+
+			a{
+				color: #de698c;
+			}
+			span{
+				color: #444;
+			}
+		}
+		
+		/* 详细信息 播放数、弹幕数等 */
+		.detaied-info{
+
+			li{
+				display: inline-block;
+				width: 33%;
+				line-height: 0.27rem;
+				white-space: nowrap;
+				font-size: 0.12rem;
+				color: #aaa;
+
+				&.hide{
+					display: none;
+				}
+			}
+		}
+		
+		/* 切换部分内容显示隐藏 按钮 */
+		.more-info-toggle{
+			padding: 5px 0;
+			text-align: center;
+
+			i{
+				display: inline-block;
+				width: 24px;
+				height: 12px;
+
+				&.icon-arrow-down{
+					background-position: -135px -157px;
+				}
+				&.icon-arrow-up{
+					background-position: -135px -191px;
+				}
+			}
+		}
+	}
+
+	/* 视频切换 */
+	.video-part{
+		background: #fff;
+		border-top: 1px solid #eee;
+		border-bottom: 1px solid #eee;
+		margin: 10px 0;
+		padding: 5px 11px;
+
+		.part-list{
+			margin-top: 10px;
+
+			li{
+				margin-bottom: 10px;
+				border: 1px solid #ccc;
+				border-radius: 6px;
+				text-align: center;
+
+				&.on{
+					border-color: #de698c;
+
+					a{
+						color: #de698c;
+					}
+				}
+
+				a{
+					display: block;
+					width: 100%;
+					font-size: 0.16rem;
+					line-height: 0.4rem;
+					color: #444;
+
+					&:visited{
+						color: #ccc;
+					}
+				}
+
+				&.display-more-part{
+					border: none;
+
+					a{
+						font-size: 0.14rem;
+						color: #de698c;
+					}
+				}
+			}
+		}
+	}
+	
+	/* 推荐视频和评论 */
+	.recommend-comment{
+		background: #fff;
+		border-top: 1px solid #eee;
+		border-bottom: 1px solid #eee;
+	
+		/* 切换显示内容 按钮 */
+		.cont-toggle{
+
+			li{
+				display: inline-block;
+				width: 50%;
+				line-height: 0.43rem;
+				text-align: center;
+				font-size: 0.16rem;
+				position: relative;
+
+				&:nth-of-type(1):after{
+					content: '';
+					display: block;
+					width: 1px;
+					height: 24px;
+					background: #eee;
+					position: absolute;
+					top: 50%; right: 0;
+					transform: translate(50%,-50%);
+				}
+
+				p{
+					margin: 0 0.14rem;
+					border-bottom: 2px solid transparent;
+					box-sizing: border-box;
+
+					&.on{
+						color: #de698c;
+						border-color: #de698c;
+					}
+
+					.comment-num{
+						font-size: 0.12rem;
+						color: #fff;
+						font-style: normal;
+						line-height: normal;
+						padding: 1px 7px;
+						margin-left: 5px;
+						border-radius: 10px;
+						background: #ccc;
+						position: absolute;
+						top: 50%;
+						transform: translateY(-50%);
+					}
+				}
+			}
+		}
+		
+		/* 推荐视频 */
+		.recommend{
+			margin-top: 10px;
+
+			.load-more{
+				background: transparent;
+				padding: 10px 0;
+				margin: 10px 0.1rem;
+				border: 1px solid #ddd;
+				border-radius: 6px;
+				text-align: center;
+				font-size: 0.14rem;
+				color: #de698c;
+			}
+			.load-disabled{
+				color: #bbb;
+			}
+		}
+		
+		/* 评论 */
+		.comment{
+			
+			.comment-list{
+				padding: 0 0.075rem;
+
+				li{
+					display: flex;
+					justify-content: space-between;
+					padding: 0.1rem;
+					border-bottom: 1px solid #eee;
+
+					.comment-face{
+						width: 0.55rem;
+						height: 0.55rem;
+
+						a{
+							display: block;
+							height: 100%;
+							border-radius: 50%;
+							overflow: hidden;
+							border: 1px solid #eee;
+							box-sizing: border-box;
+
+							img{
+								width: 100%;
+								height: 100%;
+							}
+						}
+					}
+
+					.comment-main{
+						width: 2.7rem;
+
+						.comment-info{
+							display: flex;
+							justify-content: space-between;
+							font-size: 0.128rem;
+							color: #999;
+							line-height: 1.5;
+
+							.comment-name{
+								max-width: 50%;
+								text-overflow: ellipsis;
+								white-space: nowrap;
+								overflow: hidden;
+								color: inherit;
+							}
+
+							.comment-date{
+								max-width: 50%;
+							}
+						}
+
+						.comment-cont{
+							display: -webkit-box;
+							-webkit-line-clamp: 10;
+							-webkit-box-orient: vertical;
+							overflow: hidden;
+							line-height: 1.5;
+							font-size: 0.16rem;
+						}
+					}
+				}
+			}
+
+			.download-link{
+				background: #de698c;
+				padding: 10px 0;
+				margin: 10px 0.1rem;
+				border-radius: 6px;
+				text-align: center;
+				font-size: 0.14rem;
+
+				a{
+					color: #fff;
+				}
+			}
+		}
+
+		.hide{
+			display: none;
+		}
+
+	}
+
+	/* 标签 */
+	.video-tag{
+		padding: 8px 15px;
+		margin: 10px 0;
+		background: #fff;
+
+		.tag-desc{
+			line-height: 2;
+			font-size: 0.16rem;
+			font-weight: normal;
+			margin-bottom: 10px;
+		}
+
+		.tag-list{
+
+			li{
+				display: inline-block;
+				font-size: 0.144rem;
+				line-height: 1.5;
+				padding: 8px 15px;
+				margin: 0 8px 5px 0;
+				border: 1px solid #ddd;
+				border-radius: 24px;
+
+				a{
+					color: #999;
+				}
+			}
+		}
+	}
+
+	.video-loading{
+		position: absolute;
+		top: 0; left: 0; bottom: 0; right: 0;
+		background: #f8f8f8;
+		
+		p{
+			width: 100%;
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			font-size: 0.16rem;
+			color: #666;
+			text-align: center;
+		}
+	}
+
+}

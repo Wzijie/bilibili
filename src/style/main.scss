@@ -1,0 +1,564 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+body{
+	background: #f4f4f4;
+	font-family: 'Microsoft YaHei','arial';
+	font-size: 16px;
+}
+ul{
+	list-style-type: none; 
+}
+a{
+	text-decoration: none;
+}
+.index-sprite{	
+	background: url('../image/index@2x.png');
+	background-size: 30px 582px;
+}
+.icons{
+	background: url('../image/ui_2.png');
+	background-size: 400px;
+}
+.text-overflow {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+/* header start */
+.header{
+	display: flex;
+	justify-content: space-between;
+	height: 0.4rem;
+	background: #fff;
+	border-bottom: 1px solid #e7e7e7;
+	padding: 0 0.08rem;
+	box-sizing: border-box;
+	position: relative;
+	z-index: 1000;
+
+	a.logo{
+		display: block;
+		width: 0.63rem;
+		height: 0.28rem;
+		background: url('../image/logo.png');
+		background-size: 0.63rem 0.28rem;
+		margin: 0.06rem 0 0 0.1rem;
+	}
+	div.btn-box{
+		display: flex;
+		height: 100%;
+
+		a{
+			display: block;
+			width: 44px;
+			height: 100%;
+			margin-right: 5px;
+			position: relative;
+
+			i{
+				display: block;
+				width: 22px;
+				height: 22px;
+				background: url('../image/ui_3@2x.png') no-repeat;
+				background-size: 274px 228px;
+				position: absolute;
+				left: calc(50% - 11px); top: calc(50% - 11px);
+			}
+			i.icon-search{
+				background-position: 0 -206px;
+			}
+			i.icon-history{
+				background-position: -22px -206px;
+			}
+		}
+	}
+}
+/* header end */
+
+/* 导航 start */
+.menu{
+	height: 0.41rem;
+	line-height: 0.4rem;
+	padding: 0 0.08rem;
+	background: #fff;
+	border-bottom: 1px solid #e7e7e7;
+	box-sizing: border-box;
+
+	ul.menu-list{
+		height: 0.41rem;
+		display: flex;
+		justify-content: space-between;
+
+		li{
+			width: 0.6rem;
+			font-size: 0.16rem;
+			text-align: center;
+			box-sizing: border-box;
+
+			a{
+				display: block;
+				color: #444;
+			}
+		}
+		li.menu-active{
+			border-bottom: 0.04rem solid #de698c;
+		}
+	}
+}
+/* 导航 end */
+
+/* banner start */
+.banner{
+	width: 100%;
+	height: 1.2rem;
+	background: rgba(0,0,0,0.8);
+	margin-bottom: 0.12rem;
+	overflow: hidden;
+	position: relative;
+
+	ul.slide{
+		height: 100%;
+		width: 100%;
+		display: flex;
+
+		li{
+			min-width: 3.75rem;
+			height: 100%;
+			background: #000;
+
+			a{
+				display: block;
+				width: 100%;
+				height: 100%;
+
+				img{
+					width: 100%;
+					height: 100%;
+				}
+			}
+		}
+	}
+
+	ul.slide-active{
+		display: flex;
+		position: absolute;
+		left: 50%;
+		bottom: 0.06rem;
+		transform: translate(-50%,0);
+		padding: 0 0.05rem;
+		border-radius: 0.1rem;
+		background: rgba(0,0,0,0.5);
+
+		li{
+			width: 0.06rem;
+			height: 0.06rem;
+			margin: 0.03rem;
+			border-radius: 50%;
+			background: #fff;
+		}
+		li.active{
+			background: #de698c;
+		}
+	}
+
+	.load-tip{
+		position: absolute;
+		top: 0; left: 0; bottom: 0; right: 0;
+		background: #f8f8f8;
+		text-align: center;
+
+		p{
+			width: 100%;
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			font-size: 0.16rem;
+			color: #666;
+		}
+	}
+}
+/* banner end */
+
+/* 主要内容 start */
+.loading-info{
+	text-align: center;
+	padding: 50px 0;
+	color: #666;
+}
+.main-container{
+	background: #fff;
+	margin-bottom: 0.12rem;
+
+	/* 标题部分 start */
+	.cont-head{
+		height: 0.44rem;
+		line-height: 0.44rem;
+		
+		a{
+			display: flex;
+			justify-content: space-between;
+			font-size: 0.14rem;
+			color: #444;
+			padding: 0 0.12rem;
+	
+			div{
+				display: flex;
+				align-items: center;
+
+				&.cont-title p{
+					margin-left: 0.05rem;
+				}
+				&.cont-more p{
+					margin: 0 0.05rem 0 0;
+					color: #999;
+
+					&.rank-txt{
+						margin-left: 0.05rem;
+						font-size: 0.13rem;
+						color: #ffb30f;
+					}
+				}
+			}
+
+			span{
+				display: block;
+				width: 20px;
+				height: 20px;
+
+				&.index-sprite-hot{
+					background-position: -5px -335px;
+				}
+				&.index-sprite-rank{
+					background-position: -5px -185px;
+				}
+				&.index-sprite-live{
+					background-position: -5px -275px;
+				}
+				&.index-sprite-arrow{
+					background-position: -5px -515px;
+				}
+				&.index-sprite-bangumi{
+					background-position: -5px -485px;
+				}
+				&.index-sprite-douga{
+					background-position: -5px -425px;
+				}
+				&.index-sprite-music{
+					background-position: -5px -215px;
+				}
+				&.index-sprite-dance{
+					background-position: -5px -455px;
+				}
+				&.index-sprite-game{
+					background-position: -5px -365px;
+				}
+				&.index-sprite-technology{
+					background-position: -5px -155px;
+				}
+				&.index-sprite-life{
+					background-position: -5px -5px;
+				}
+				&.index-sprite-kichiku{
+					background-position: -5px -305px;
+				}
+				&.index-sprite-fashion{
+					background-position: -5px -35px;
+				}
+				&.index-sprite-ent{
+					background-position: -5px -63px;
+				}
+				&.index-sprite-teleplay{
+					background-position: -5px -125px;
+				}
+				&.index-sprite-movie{
+					background-position: -5px -245px;
+				}
+				&.index-sprite-advertise{
+					background-position: -5px -95px;
+				}
+				&.index-sprite-guoman{
+					background: url('../image/index_guoman.png');
+					background-size: contain;
+				}
+			}
+				
+		}
+	}
+	/* 标题部分 end */
+
+	/* 主体列表部分 start */
+	.content-list{
+		padding: 0 0.06rem;
+
+		li{
+			&.content-item{
+				width: 50%;
+				display: inline-block;
+				padding: 0 0.06rem 0.24rem;
+				box-sizing: border-box;
+				vertical-align: top;
+
+				a{ display: block; }
+
+				/* 默认容器样式 start*/
+				div.video-cover{
+					width: 100%;
+					height: 1.07rem;
+					background-image: url('../image/img_loading.png');
+					background-repeat: no-repeat;
+					background-position: center;
+					border-radius: 0.05rem;
+					margin-bottom: 0.05rem;
+
+					div.cover-img{
+						height: 100%;
+						background-repeat: no-repeat;
+						background-size: 100% 100%;
+						opacity: 0;
+						transition: all 0.3s ease;
+						border-radius: 0.05rem;
+						border: 1px solid #ddd;
+						box-sizing: border-box;
+					}
+				}
+				p.video-name{
+					max-height: 0.36rem;
+					font-size: 0.13rem;
+					color: #444;
+					line-height: 1.4;
+					overflow: hidden;
+				}
+				div.video-info{
+					display: flex;
+					padding: 1px 0;
+
+					div{
+						width: 50%;
+						display: flex;
+						align-items: center;
+
+						p{
+							font-size: 0.13rem;
+							color: #999;
+						}
+
+						span{
+							display: block;
+							width: 15px;
+							height: 11px;
+							margin-right: 2px;
+
+							&.index-sprite-play{
+								background-position: -5px -545px;
+							}
+							&.index-sprite-barrage{
+								background-position: -5px -566px;
+							}
+						}
+					}
+				}
+				/* 默认容器样式 end*/
+
+				/* 正在直播容器 start */
+				.user{
+					position: relative;
+					margin-bottom: 0.06rem;
+
+					div.face{
+						width: 0.42rem;
+						height: 0.42rem;
+						border: 0.02rem solid #fff;
+						border-radius: 50%;
+						box-sizing: border-box;
+						position: absolute;
+						top: 0; left: 0.07rem;
+						transform: translateY(-60%); 
+
+						img{
+							width: 100%;
+							height: 100%;
+							border-radius: 50%;
+						}
+					}
+					p.name{
+						font-size: 0.13rem;
+						color: #444;
+						margin-left: 0.56rem;
+					}
+					div.online{
+						display: inline-block;
+						width: 0.48rem;
+						height: 0.2rem;
+						line-height: 0.2rem;
+						background: #ccc;
+						border-radius: 0.06rem;
+						font-size: 0.12rem;
+						color: #fff;
+						text-align: center;
+					}
+					p.intro{
+						display: inline-block;
+						width: calc(100% - 0.56rem);
+						font-size: 0.13rem;
+						color: #999;
+						margin-left: 0.08rem;
+						vertical-align: middle;
+					}
+				}
+			}
+			/* 番剧更新容器 start */
+			&.bangumi-item{
+				width: 33.3%;
+				text-align: center;
+
+				div.video-cover{
+					height: 1.5rem;
+				}
+				p.bangumi-name{
+					font-size: 0.13rem;
+					color: #444;
+					margin: 2px 0;
+				}
+				p.bangumi-update-to{
+					font-size: 0.12rem;
+					color: #de698c;
+				}
+			}
+			/* 番剧更新容器 end */
+		}
+	}
+	/* 主体列表部分 end */
+}
+/* 主要内容 end */
+
+/* footer start */
+.footer{
+	padding: 0 0.1rem;
+	color: #aaa;
+	font-size: 0.13rem;
+	text-align: center;
+
+	ul.foot-menu{
+		display: flex;
+		margin-bottom: 0.13rem;
+
+		li{
+			flex: 1;
+			box-sizing: border-box;
+			&+li{ border-left: 1px solid #ddd; }
+			a{
+				display: block;
+				width: 100%;
+				line-height: 20px;
+				color: #666;
+
+				i{
+					display: inline-block;
+					width: 20px;
+					height: 20px;
+					margin-right: 0.05rem;
+					vertical-align: top;
+
+					&.icons-computer{
+						background-position: -210px -10px;
+					}
+					&.icons-app{
+						background-position: -210px -59px;
+					}
+					&.icons-top{
+						background-position: -210px -109px;
+					}
+				}
+			}
+		}
+	}
+	p{
+		margin-bottom: 0.13rem;
+	}
+}
+/* footer end */
+
+/* load画面 start */
+.load-cover{
+	background: #f8f8f8;
+	position: fixed;
+	top: 0; left: 0; bottom: 0; right: 0;
+	z-index: 999;
+	opacity: 1;
+	visibility: visible;
+	-webkit-transition: all 0.3s;
+	transition: all 0.3s;
+
+	.loading-txt{
+		width: 100%;
+		color: #666;
+		text-align: center;
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+}
+.loaded{
+	opacity: 0;
+	visibility: hidden;
+	/*display: none;*/
+}
+/* load画面 end */
+
+/* 底部悬浮窗口 start */
+.app-link{
+	width: 100%;
+	height: 0.54rem;
+	position: fixed;
+	bottom: 0;
+	background: #de698c;
+	display: flex;
+	align-items: center;
+	transition: all 0.2s ease;
+
+	.app-logo{
+		min-width: 0.36rem;
+		min-height: 0.36rem;
+		margin: 0 0.11rem;
+		background: url('../image/app_logo.v3.png');
+		background-size: cover;
+		border: 1px solid #fff;
+		border-radius: 0.04rem;
+	}
+	.app-intro{
+		min-width: 2.3rem;
+		max-width: 2.3rem;
+		color: #fff;
+
+		p:nth-of-type(1){
+			font-size: 0.14rem;
+		};
+		p:nth-of-type(2){
+			font-size: 0.11rem;
+			color: rgba(255,255,255,0.7);
+		};
+	}
+	.app-down-btn{
+		display: block;
+		min-width: 0.6rem;
+		min-height: 0.2rem;
+		line-height: 0.2rem;
+		padding: 0.06rem 0;
+		border-radius: 0.06rem;
+		background: #fff;
+		text-align: center;
+		color: #de689c;
+		font-size: 0.13rem;
+	}
+	.close-btn{
+		min-width: 0.22rem;
+		min-height: 0.22rem;
+		margin-left: 1px;
+		background: url('../image/close_icon.png') no-repeat;
+		background-size: 13px;
+		background-position: 50%;
+	}
+}
+/* 底部悬浮窗口 end */

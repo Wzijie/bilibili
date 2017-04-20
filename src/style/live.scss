@@ -1,0 +1,75 @@
+/*.banner{
+	height: 1.2rem;
+	background: rgba(0,0,0,0.8);
+	margin-bottom: 0;
+
+	ul.slide{
+		height: calc(100% - 3px);
+	}
+}*/
+.live-content{
+	.icon{
+		background: url('../image/live/ui_2.png') no-repeat;
+		background-size: 480px;
+	}
+
+	.main-container{
+		margin-bottom: 0.18rem;
+		border-top: 1px solid #eee;
+		border-bottom: 1px solid #eee;
+
+		.cont-head{
+			height: 0.56rem;
+			line-height: 0.56rem;
+
+			a{
+				padding: 0 0.16rem;
+
+				.cont-title{
+					font-size: 0.16rem;
+					
+					span.icon{
+						width: 28px;
+						height: 28px;
+					}
+					span.icon-hot{ background-position: 0 -618px; }
+					span.icon-newest{ background-position: -40px -618px; }
+					span.icon-mobile{ background-position: 0 -860px; }
+					span.icon-sing-dance{ background-position: -40px -818px; }
+					span.icon-ent-life{ background-position: -40px -738px; }
+					span.icon-draw{ background-position: 0 -818px; }
+					span.icon-otaku{ background-position: -40px -658px; }
+					span.icon-single{ background-position: 0 -658px; }
+					span.icon-online{ background-position: 0 -698px; }
+					span.icon-e-sports{ background-position: -40px -698px; }
+					span.icon-mobile-game{ background-position: -41px -860px; }
+					span.icon-movie{ 
+						background: url('../image/live/movie.png') no-repeat;
+						background-size: contain;
+					}
+				}
+				.cont-more{
+					font-size: 0.144rem;
+
+					span.icon-more{ 
+						width: 25px;
+						height: 25px;
+						background-position: -200px -340px; 
+					}
+				}
+			}
+		}
+		.content-list{
+			padding: 0 0.08rem;
+
+			li.content-item{
+				padding: 0 0.08rem 0.40rem;
+
+				div.video-cover{
+					height: 1.01rem;
+					border: 1px solid #ddd;
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,219 @@
+
+.rank-title{
+	height: 0.5rem;
+	line-height: 0.5rem;
+	background: #fff;
+	text-align: center;
+	border-bottom: 1px solid #ddd;
+	position: relative;
+
+	a.back-index{
+		display: block;
+		width: 0.6rem;
+		height: 100%;
+		position: absolute;
+		left: 0;
+
+		i.rank-icon-back{
+			display: block;
+			width: 0.2rem;
+			height: 0.3rem;
+			position: absolute;
+			top: calc(50% - 0.15rem);
+			left: calc(50% - 0.1rem);
+			background: url('../image/ranking/back.png') no-repeat;
+			background-size: contain;
+		}
+	}
+
+	h2{
+		font-size: 0.18rem;
+		font-weight: normal;
+	}
+}
+
+.rank-type{
+	background: #fff;
+	text-align: center;
+	display: flex;
+	border-bottom: 1px solid #ddd;
+	box-sizing: border-box;
+
+	li{
+		flex: 1;
+		height: 0.5rem;
+		position: relative;
+
+		a{
+			display: flex;
+			width: 100%;
+			height: 100%;
+			color: #777;
+			justify-content: center;
+			align-items: center;
+
+			i{
+				display: block;
+				width: 20px;
+				height: 20px;
+				background: url('../image/ranking/rank_icon.png') no-repeat;
+				background-size: 20px;
+				margin-right: 5px;
+
+				&.rank-icon-origin{
+					background-position: center center; 
+				}
+				&.rank-icon-bangumi{
+					background-position: center bottom; 
+				}
+			}
+			h3{
+				font-size: 0.14rem;
+				font-weight: normal;
+			}
+		}
+
+		span.rank-icon-arrow{
+			display: block;
+			width: 0.24rem;
+			height: 0.1rem;
+			background: url('../image/ranking/tri_rank.png') no-repeat;
+			background-size: contain;
+			position: absolute;
+			left: calc(50% - 0.12rem);
+			bottom: -1px;
+		}
+		/*span.on{ display: block; }*/
+	}
+}
+
+.rank-nav{
+	height: 0.45rem;
+	line-height: 0.41rem;
+	border-bottom: 1px solid #ddd;
+	background: #fff;
+	overflow: hidden;
+
+	ul.roll-list{
+		height: 100%;
+		white-space: nowrap;
+		transition: 0.2s;
+
+		li{
+			display: inline-block;
+			height: 100%;
+			padding: 0 0.16rem;
+			
+			a{
+				display: block;
+				height: 100%;
+				font-size: 0.16rem;
+				color: #999;
+			}
+		}
+
+		li.on a{
+			color: #de698c;
+			border-bottom: 0.04rem solid #de698c;
+			box-sizing: border-box;
+		}
+	}
+}
+
+.rank-list{
+	padding: 0.2rem 0.1rem;
+	overflow: hidden;
+
+	li{
+		margin-bottom: 0.2rem;
+
+		a{
+			display: flex;
+			height: 0.77rem;
+			opacity: 0;
+			transform: scale(1.1);
+			transition: 0.5s;
+
+			&.fade-in{
+				opacity: 1;
+				transform: scale(1);
+			}
+
+			div.video-cover{
+				display: flex;
+				width: 43%;
+				height: 100%;
+
+				div{
+					height: 100%;
+
+					&.rank-num{
+						width: 24%;
+						background: #989898;
+						color: #fff;
+						border-radius: 4px 0 0 4px;
+						line-height: 0.73rem;
+						text-align: center;
+						color: #fff;
+					}
+					&.top-three{
+						background: #fb7299;
+					}
+
+					&.cover-box{
+						width: 76%;
+						background: url('../image/img_loading.png') no-repeat center center;
+						background-size: contain;
+						border-radius: 4px;
+
+						div.cover-img{
+							opacity: 0;
+							background-size: cover;
+							transition: 0.3s;
+						}
+					}
+
+				}
+			}
+			div.video-info{
+				width: 57%;
+				height: 100%;
+				padding: 0 0.1rem;
+				box-sizing: border-box;
+
+				div.video-title{
+					height: 0.4rem;
+					font-size: 0.15rem;
+					line-height: 1.3;
+					color: #666;
+					overflow: hidden;
+					/*margin-bottom: 0.14rem;*/
+				}
+				div.video-detaied{
+					line-height: 0.2rem;
+					font-size: 0.12rem;
+					color: #999;
+					white-space: nowrap;
+					text-overflow: ellipsis;
+					overflow: hidden;
+
+					.play-danmu{
+						display: inline-block;
+						width: 50%;
+					}
+					.icon-detaied{
+						height: 0.12rem;
+						max-height: 0.2rem;
+						margin-right: 5px;
+					}
+				}
+			}
+		}
+	}	
+}
+
+.rank-loading{
+	text-align: center;
+	color: #999;
+	margin: 0.3rem 0;
+}
