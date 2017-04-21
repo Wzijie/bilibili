@@ -1669,7 +1669,7 @@ webpackJsonp([6],{
 			// 用户名
 			var username = videoInfo !== null ? videoInfo.username : '正在加载';
 			// 头像URL
-			var face = videoInfo !== null ? videoInfo.face : '../../../../src/image/img_loading.png';
+			var face = videoInfo !== null ? videoInfo.face : './src/image/img_loading.png';
 			// 视频标题
 			var title = videoInfo !== null ? videoInfo.title : '正在加载';
 			// 视频描述
@@ -1785,7 +1785,7 @@ webpackJsonp([6],{
 				),
 				_react2.default.createElement(
 					'div',
-					{ className: 'more-info-toggle', onTouchStart: this.changeDisplayEle },
+					{ className: 'more-info-toggle', onClick: this.changeDisplayEle },
 					_react2.default.createElement('i', { className: 'icon icon-arrow-down', ref: 'arrowDownIcon' })
 				)
 			);
@@ -2012,7 +2012,7 @@ webpackJsonp([6],{
 					partDisplay.map(function (name, index) {
 						return _react2.default.createElement(
 							'li',
-							{ key: index, className: videoPage === index + 1 ? 'on' : '', onTouchStart: _this3.changeVideoPageHandler(index + 1) },
+							{ key: index, className: videoPage === index + 1 ? 'on' : '', onClick: _this3.changeVideoPageHandler(index + 1) },
 							_react2.default.createElement(
 								'a',
 								null,
@@ -2031,7 +2031,7 @@ webpackJsonp([6],{
 					) : '',
 					partName.length > 3 ? _react2.default.createElement(
 						'li',
-						{ className: 'display-more-part', onTouchStart: this.toggleDisplayAll },
+						{ className: 'display-more-part', onClick: this.toggleDisplayAll },
 						_react2.default.createElement(
 							'a',
 							{ ref: 'displayMoreText' },
