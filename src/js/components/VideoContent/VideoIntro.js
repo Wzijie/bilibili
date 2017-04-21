@@ -103,7 +103,7 @@ var VideoIntro = React.createClass({
 		// 用户名
 		var username = videoInfo !== null ? videoInfo.username : '正在加载';
 		// 头像URL
-		var face =  videoInfo !== null ? videoInfo.face : '../../../../src/image/img_loading.png';
+		var face =  videoInfo !== null ? videoInfo.face : './src/image/img_loading.png';
 		// 视频标题
 		var title = videoInfo !== null ? videoInfo.title : '正在加载';
 		// 视频描述
@@ -144,7 +144,7 @@ var VideoIntro = React.createClass({
 						<li>收藏：{favorite >= 10000 ? (favorite/10000).toFixed(1) + '万' : favorite}</li>
 						<li className='hide' ref='dateInfo'>时间：{createTime}</li>
 					</ul>
-					<div className='more-info-toggle' onTouchStart={this.changeDisplayEle}>
+					<div className='more-info-toggle' onClick={this.changeDisplayEle}>
 						<i className='icon icon-arrow-down' ref='arrowDownIcon'></i>
 					</div>
 				</div>

@@ -109,7 +109,7 @@ var VideoPart = React.createClass({
 					<ul className='part-list'>
 					{
 						partDisplay.map((name, index) => {
-							return	<li key={index} className={videoPage === index+1 ? 'on' : ''} onTouchStart={this.changeVideoPageHandler(index+1)}>
+							return	<li key={index} className={videoPage === index+1 ? 'on' : ''} onClick={this.changeVideoPageHandler(index+1)}>
 										<a>{name}</a>
 									</li>
 						})
@@ -123,7 +123,7 @@ var VideoPart = React.createClass({
 					}
 					{
 						partName.length > 3
-						?	<li className='display-more-part' onTouchStart={this.toggleDisplayAll}>
+						?	<li className='display-more-part' onClick={this.toggleDisplayAll}>
 								<a ref='displayMoreText'>查看全部（共{partName.length}P）</a>
 							</li>
 						: ''
