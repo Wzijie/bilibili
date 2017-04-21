@@ -1706,7 +1706,7 @@ webpackJsonp([6],{
 						_react2.default.createElement(
 							'a',
 							null,
-							'\u56F4\u89C2UP\u4E3B\u7684\u5168\u90E8\u6295\u7A3F'
+							'\u56F4\u89C2UP\u4E3B\u7684\u5168\u90E8\u6295\u7A3F\u554A'
 						)
 					),
 					_react2.default.createElement(

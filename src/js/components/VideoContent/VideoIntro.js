@@ -114,40 +114,40 @@ var VideoIntro = React.createClass({
 		var navInfo = videoInfo !== null ? videoInfo.navInfo : [];
 
 		return	<div className='video-intro'>
-					<div className='up-info'>
-						<div className='up-face'>
-							<a><img src={face} /></a>
+							<div className='up-info'>
+								<div className='up-face'>
+									<a><img src={face} /></a>
+								</div>
+								<div className='up-name'>
+									<a>UP主：{username}</a>
+									<a>围观UP主的全部投稿啊</a>
+								</div>
+								<a href='' className='up-follow'>关注</a>
+							</div>
+							<div className='title-desc' ref='titleDesc'>
+								<h1 className='video-title'>{title}</h1>
+								<div className='video-desc'>
+									<p>{descript}</p>
+								</div>
+							</div>
+							<div className='nav-info'>
+							{	
+								navInfo.map((navInfoItem, index) => {
+									return	<a key={index}>{navInfoItem}<span> &gt; </span></a>; 
+								})
+							}
+							<span>av{this.props.avNum}</span>
+							</div>
+							<ul className='detaied-info'>
+								<li>播放：{view >= 10000 ? (view/10000).toFixed(1) + '万' : view}</li>
+								<li>弹幕：{danmaku >= 10000 ? (danmaku/10000).toFixed(1) + '万' : danmaku}</li>
+								<li>收藏：{favorite >= 10000 ? (favorite/10000).toFixed(1) + '万' : favorite}</li>
+								<li className='hide' ref='dateInfo'>时间：{createTime}</li>
+							</ul>
+							<div className='more-info-toggle' onClick={this.changeDisplayEle}>
+								<i className='icon icon-arrow-down' ref='arrowDownIcon'></i>
+							</div>
 						</div>
-						<div className='up-name'>
-							<a>UP主：{username}</a>
-							<a>围观UP主的全部投稿</a>
-						</div>
-						<a href='' className='up-follow'>关注</a>
-					</div>
-					<div className='title-desc' ref='titleDesc'>
-						<h1 className='video-title'>{title}</h1>
-						<div className='video-desc'>
-							<p>{descript}</p>
-						</div>
-					</div>
-					<div className='nav-info'>
-					{	
-						navInfo.map((navInfoItem, index) => {
-							return	<a key={index}>{navInfoItem}<span> &gt; </span></a>; 
-						})
-					}
-					<span>av{this.props.avNum}</span>
-					</div>
-					<ul className='detaied-info'>
-						<li>播放：{view >= 10000 ? (view/10000).toFixed(1) + '万' : view}</li>
-						<li>弹幕：{danmaku >= 10000 ? (danmaku/10000).toFixed(1) + '万' : danmaku}</li>
-						<li>收藏：{favorite >= 10000 ? (favorite/10000).toFixed(1) + '万' : favorite}</li>
-						<li className='hide' ref='dateInfo'>时间：{createTime}</li>
-					</ul>
-					<div className='more-info-toggle' onClick={this.changeDisplayEle}>
-						<i className='icon icon-arrow-down' ref='arrowDownIcon'></i>
-					</div>
-				</div>
 	}
 });
 
