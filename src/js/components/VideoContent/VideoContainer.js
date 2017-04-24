@@ -18,7 +18,9 @@ var VideoContainer = React.createClass({
 			// 进度条是否在拖动中
 			isProgressTouchMove: false,
 			// 视频播放出错的错误代码
-			errorCode: null
+			errorCode: null,
+			// 弹幕数据 Array
+			barrageData: null
 		};
 	},
 	componentDidMount: function(){
@@ -82,6 +84,37 @@ var VideoContainer = React.createClass({
 	// 首次点击封面后视频加载
 	playerLoadHandler: function(){
 		this.setState({playerLoad: true});
+
+		// xhr请求弹幕数据
+		var xhr = new XMLHttpRequest();
+		var barrageURL = this.state.playerData.cid;
+		var barrageList = [];
+		xhr.open('GET', barrageURL);
+		xhr.addEventListener('readystatechange', (event) => {
+			var xhrTarget = event.target;
+			if(xhrTarget.readyState === 4 && xhrTarget.status === 200){
+				console.log(xhrTarget.responseXML, 'xhr');
+				// 因为是xml文档所以使用responseXML，获取到的是整个xml文档
+				var xmlRoot = xhrTarget.responseXML;
+				// 获取所有d标签，d标签为弹幕内容
+				var barrageNode = xmlRoot.querySelectorAll('d');
+				// 遍历拿到想要的数据，弹幕内容及弹幕发送时间
+				Array.from(barrageNode).forEach((barrageItem) => {
+					var content = barrageItem.innerHTML;
+					var playTime = barrageItem.getAttribute('p');
+					barrageList.push({
+						content: content,
+						playTime: playTime.slice( 0, playTime.indexOf(',') )
+					});
+				});
+				// 设置弹幕数据
+				this.setState({ barrageData: barrageList });
+			}
+		});
+		xhr.addEventListener('error', (event) => {
+			console.log('请求弹幕数据出错');
+		});
+		xhr.send(null);
 	},
 
 	// 视频播放
@@ -158,6 +191,40 @@ var VideoContainer = React.createClass({
 			return;
 		}
 		this.refs.currentProgress.style.width = currentProgress*100 + "%";
+
+		/* 初步实现播放弹幕 */
+		// 获取弹幕轨道
+		var barrageTrack = document.querySelectorAll('.barrage-track');
+		var trackIndex = 0;
+		this.state.barrageData.forEach((barrageItem) => {
+			// 判断当前播放时间与弹幕播放时发送时间是否一致
+			if(Math.round(event.target.currentTime) === Math.round(barrageItem.playTime)){
+				// 创建弹幕内容插入轨道
+				var barrageContent = document.createElement('p');
+				barrageContent.innerHTML = barrageItem.content;
+				barrageTrack[trackIndex].appendChild(barrageContent);
+				// barrageContent.style.transform = 'translateX(-3.75rem)';
+
+				((node, index) => {
+					setTimeout(() => {
+						node.style.transform = 'translateX(-3.75rem)';
+					}, 0);
+
+					// 5s后删除弹幕
+					setTimeout(() => {
+						barrageTrack[index].removeChild(node);
+					}, 5000);
+				})(barrageContent, trackIndex);
+
+				// 轨道索引+1
+				trackIndex++;
+				// 等于轨道数量则归0
+				if(trackIndex === barrageTrack.length){
+					trackIndex = 0;
+				}
+			}
+		});
+		console.log(trackIndex)
 	},
 
 	// 改变缓冲条长度
@@ -291,6 +358,26 @@ var VideoContainer = React.createClass({
 		var videoLengthStr = (videoLength.min < 10 ? '0' + videoLength.min : videoLength.min) + ':' + (videoLength.second < 10 ? '0' + videoLength.second : videoLength.second);
 
 		return	<div className='video-container'>
+					<div className='barrage'>
+						<div className='barrage-track'>
+						</div>
+						<div className='barrage-track'>
+						</div>
+						<div className='barrage-track'>
+						</div>
+						<div className='barrage-track'>
+						</div>
+						<div className='barrage-track'>
+						</div>
+						<div className='barrage-track'>
+						</div>
+						<div className='barrage-track'>
+						</div>
+						<div className='barrage-track'>
+						</div>
+						<div className='barrage-track'>
+						</div>
+					</div>
 					<div className='player-container' onTouchStart={this.controlToggle}>
 						<video className='player'  data-webkit-playsinline preload='auto' onDurationChange={this.changeTotalTime} onLoadStart={this.waiting} onCanPlay={this.canplayHandler} onTimeUpdate={this.changeCurrentTime} onProgress={this.progressHandler} onWaiting={this.waiting} onPlaying={this.playing} onError={this.error} ref='player'>
 							{this.state.playerLoad ? <source src={playerData.durl[0].url} type="video/mp4" /> : ''}

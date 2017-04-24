@@ -186,6 +186,26 @@
           background-size: 530px; }
       .video-content .video-container .state-icon .active {
         display: block; }
+    .video-content .video-container .barrage {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0; }
+      .video-content .video-container .barrage .barrage-track {
+        height: 0.21rem; }
+        .video-content .video-container .barrage .barrage-track p {
+          display: inline-block;
+          font-size: 0.16rem;
+          font-weight: bold;
+          color: #fff;
+          text-shadow: 1px 1px 1px #000;
+          position: absolute;
+          right: 0;
+          transform: translateX(100%);
+          transition: 5s linear; }
+      .video-content .video-container .barrage:hover p {
+        transform: translateX(-3.75rem); }
     .video-content .video-container .error-info {
       position: absolute;
       top: 0;

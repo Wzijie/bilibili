@@ -223,6 +223,30 @@
 				display: block;
 			}
 		}
+
+		.barrage{
+			position: absolute;
+			top: 0; left: 0; bottom: 0; right: 0;
+
+			.barrage-track{
+				height: 0.21rem;
+				
+				p{
+					display: inline-block;
+					font-size: 0.16rem;
+					font-weight: bold;
+					color: #fff;
+					text-shadow: 1px 1px 1px #000;
+					position: absolute;
+					right: 0;
+					transform: translateX(100%);
+					transition: 5s linear;
+				}
+			}
+			&:hover p{
+				transform: translateX(-3.75rem);
+			}
+		}
 		
 		/* 视频发生错误信息 */
 		.error-info{
