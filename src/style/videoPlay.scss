@@ -227,6 +227,7 @@
 		.barrage{
 			position: absolute;
 			top: 0; left: 0; bottom: 0; right: 0;
+			overflow: hidden;
 
 			.barrage-track{
 				height: 0.21rem;

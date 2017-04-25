@@ -101,10 +101,11 @@ var VideoContainer = React.createClass({
 				// 遍历拿到想要的数据，弹幕内容及弹幕发送时间
 				Array.from(barrageNode).forEach((barrageItem) => {
 					var content = barrageItem.innerHTML;
-					var playTime = barrageItem.getAttribute('p');
+					var info = barrageItem.getAttribute('p').split(',');
 					barrageList.push({
 						content: content,
-						playTime: playTime.slice( 0, playTime.indexOf(',') )
+						playTime: info[0],
+						color: info[3]
 					});
 				});
 				// 设置弹幕数据
@@ -174,6 +175,9 @@ var VideoContainer = React.createClass({
 		this.refs.totalTime.innerHTML = totalTimeStr;
 	},
 
+	// 弹幕轨道索引
+	trackIndex: 0,
+
 	// 修改视频当前播放时间及进度条长度
 	// timeupdate事件 当目前的播放位置已更改时触发
 	changeCurrentTime: function(event){
@@ -195,36 +199,44 @@ var VideoContainer = React.createClass({
 		/* 初步实现播放弹幕 */
 		// 获取弹幕轨道
 		var barrageTrack = document.querySelectorAll('.barrage-track');
-		var trackIndex = 0;
-		this.state.barrageData.forEach((barrageItem) => {
+		// var trackIndex = 0;
+		this.state.barrageData.forEach((barrageItem, barrageIndex) => {
 			// 判断当前播放时间与弹幕播放时发送时间是否一致
 			if(Math.round(event.target.currentTime) === Math.round(barrageItem.playTime)){
 				// 创建弹幕内容插入轨道
 				var barrageContent = document.createElement('p');
 				barrageContent.innerHTML = barrageItem.content;
-				barrageTrack[trackIndex].appendChild(barrageContent);
+				// 颜色数据是10进制数字字符串 例'16777215'先用parseInt转成数字，再用toString(16)转成16进制数字字符串，得'16777215'->'ffffff'
+				barrageContent.style.color = '#' + parseInt(barrageItem.color).toString(16);
+				barrageTrack[this.trackIndex].appendChild(barrageContent);
 				// barrageContent.style.transform = 'translateX(-3.75rem)';
 
-				((node, index) => {
-					setTimeout(() => {
-						node.style.transform = 'translateX(-3.75rem)';
-					}, 0);
+				// 用定时器延迟执行是为了不同步执行
+				// 在弹幕插入之后同步添加transform会导致没有transition过渡效果
+				// 按理说延迟0秒就可以达到异步效果
+				// 但是延迟越小就会有越多的弹幕元素没有transition的过渡效果，原因未知
+				// 效果为直接出现在屏幕左边而不是从右边移动到左边
+				setTimeout(() => {
+					barrageContent.style.transform = 'translateX(-3.75rem)';
+				}, 30);
 
+				// 用个自执行函数保存当前trackIndex
+				((index) => {
 					// 5s后删除弹幕
 					setTimeout(() => {
-						barrageTrack[index].removeChild(node);
+						barrageTrack[index].removeChild(barrageContent);
 					}, 5000);
-				})(barrageContent, trackIndex);
+				})(this.trackIndex);
 
 				// 轨道索引+1
-				trackIndex++;
+				this.trackIndex++;
 				// 等于轨道数量则归0
-				if(trackIndex === barrageTrack.length){
-					trackIndex = 0;
+				if(this.trackIndex === barrageTrack.length){
+					this.trackIndex = 0;
 				}
+				this.state.barrageData.splice(barrageIndex, 1);
 			}
 		});
-		console.log(trackIndex)
 	},
 
 	// 改变缓冲条长度
@@ -235,7 +247,6 @@ var VideoContainer = React.createClass({
 		// length - 获得音视频中已缓冲范围的数量
 		// start(index) - 获得某个已缓冲范围的开始位置
 		// end(index) - 获得某个已缓冲范围的结束位置
-		console.log(event.target.buffered);
 		var buffered = event.target.buffered;
 		// 没有缓冲数据则退出
 		if(buffered.length <= 0){
