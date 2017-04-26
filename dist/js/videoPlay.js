@@ -33,7 +33,7 @@ webpackJsonp([6],{
 
 	var _AppLink2 = _interopRequireDefault(_AppLink);
 
-	var _VideoContent = __webpack_require__(219);
+	var _VideoContent = __webpack_require__(220);
 
 	var _VideoContent2 = _interopRequireDefault(_VideoContent);
 
@@ -470,7 +470,7 @@ webpackJsonp([6],{
 
 /***/ },
 
-/***/ 207:
+/***/ 208:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -566,7 +566,7 @@ webpackJsonp([6],{
 
 /***/ },
 
-/***/ 219:
+/***/ 220:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -579,27 +579,27 @@ webpackJsonp([6],{
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _VideoContainer = __webpack_require__(220);
+	var _VideoContainer = __webpack_require__(221);
 
 	var _VideoContainer2 = _interopRequireDefault(_VideoContainer);
 
-	var _RecommendComment = __webpack_require__(221);
+	var _RecommendComment = __webpack_require__(222);
 
 	var _RecommendComment2 = _interopRequireDefault(_RecommendComment);
 
-	var _VideoIntro = __webpack_require__(224);
+	var _VideoIntro = __webpack_require__(225);
 
 	var _VideoIntro2 = _interopRequireDefault(_VideoIntro);
 
-	var _VideoOption = __webpack_require__(225);
+	var _VideoOption = __webpack_require__(226);
 
 	var _VideoOption2 = _interopRequireDefault(_VideoOption);
 
-	var _VideoPart = __webpack_require__(226);
+	var _VideoPart = __webpack_require__(227);
 
 	var _VideoPart2 = _interopRequireDefault(_VideoPart);
 
-	var _VideoTag = __webpack_require__(227);
+	var _VideoTag = __webpack_require__(228);
 
 	var _VideoTag2 = _interopRequireDefault(_VideoTag);
 
@@ -683,7 +683,7 @@ webpackJsonp([6],{
 
 /***/ },
 
-/***/ 220:
+/***/ 221:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -882,7 +882,19 @@ webpackJsonp([6],{
 
 		// 弹幕轨道索引
 		trackIndex: 0,
-
+		// 是否显示弹幕
+		barrageDisplay: true,
+		// 切换弹幕显示隐藏
+		toggleBarrageDisplay: function toggleBarrageDisplay(event) {
+			if (this.barrageDisplay) {
+				this.refs.barrage.classList.add('hide');
+				event.currentTarget.firstElementChild.className = 'danmu-show-icon';
+			} else {
+				this.refs.barrage.classList.remove('hide');
+				event.currentTarget.firstElementChild.className = 'danmu-hide-icon';
+			}
+			this.barrageDisplay = !this.barrageDisplay;
+		},
 		// 修改视频当前播放时间及进度条长度
 		// timeupdate事件 当目前的播放位置已更改时触发
 		changeCurrentTime: function changeCurrentTime(event) {
@@ -903,6 +915,9 @@ webpackJsonp([6],{
 			}
 			this.refs.currentProgress.style.width = currentProgress * 100 + "%";
 
+			if (this.barrageDisplay === false) {
+				return;
+			}
 			/* 初步实现播放弹幕 */
 			// 获取弹幕轨道
 			var barrageTrack = document.querySelectorAll('.barrage-track');
@@ -1096,7 +1111,7 @@ webpackJsonp([6],{
 				{ className: 'video-container' },
 				_react2.default.createElement(
 					'div',
-					{ className: 'barrage' },
+					{ className: 'barrage', ref: 'barrage' },
 					_react2.default.createElement('div', { className: 'barrage-track' }),
 					_react2.default.createElement('div', { className: 'barrage-track' }),
 					_react2.default.createElement('div', { className: 'barrage-track' }),
@@ -1172,8 +1187,8 @@ webpackJsonp([6],{
 						{ className: 'more-control' },
 						_react2.default.createElement(
 							'div',
-							{ className: 'danmu-toggle' },
-							_react2.default.createElement('i', { className: 'danmu-toggle-icon' })
+							{ className: 'danmu-toggle', onClick: this.toggleBarrageDisplay },
+							_react2.default.createElement('i', { className: 'danmu-hide-icon' })
 						),
 						_react2.default.createElement(
 							'div',
@@ -1213,7 +1228,7 @@ webpackJsonp([6],{
 
 /***/ },
 
-/***/ 221:
+/***/ 222:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1226,11 +1241,11 @@ webpackJsonp([6],{
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Recommend = __webpack_require__(222);
+	var _Recommend = __webpack_require__(223);
 
 	var _Recommend2 = _interopRequireDefault(_Recommend);
 
-	var _Comment = __webpack_require__(223);
+	var _Comment = __webpack_require__(224);
 
 	var _Comment2 = _interopRequireDefault(_Comment);
 
@@ -1304,7 +1319,7 @@ webpackJsonp([6],{
 
 /***/ },
 
-/***/ 222:
+/***/ 223:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1321,7 +1336,7 @@ webpackJsonp([6],{
 
 	var _ajaxRequest2 = _interopRequireDefault(_ajaxRequest);
 
-	var _imgLazyLoad = __webpack_require__(207);
+	var _imgLazyLoad = __webpack_require__(208);
 
 	var _imgLazyLoad2 = _interopRequireDefault(_imgLazyLoad);
 
@@ -1471,7 +1486,7 @@ webpackJsonp([6],{
 
 /***/ },
 
-/***/ 223:
+/***/ 224:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1634,7 +1649,7 @@ webpackJsonp([6],{
 
 /***/ },
 
-/***/ 224:
+/***/ 225:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1891,7 +1906,7 @@ webpackJsonp([6],{
 
 /***/ },
 
-/***/ 225:
+/***/ 226:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1956,7 +1971,7 @@ webpackJsonp([6],{
 
 /***/ },
 
-/***/ 226:
+/***/ 227:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2144,7 +2159,7 @@ webpackJsonp([6],{
 
 /***/ },
 
-/***/ 227:
+/***/ 228:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

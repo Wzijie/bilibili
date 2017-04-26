@@ -156,8 +156,10 @@
             height: 100%;
             background: url(../image/ui_2.png) no-repeat;
             background-size: 400px; }
-            .video-content .video-container .player-control .more-control div i.danmu-toggle-icon {
+            .video-content .video-container .player-control .more-control div i.danmu-hide-icon {
               background-position: -98px -322px; }
+            .video-content .video-container .player-control .more-control div i.danmu-show-icon {
+              background-position: -98px -355px; }
             .video-content .video-container .player-control .more-control div i.full-screen-icon {
               background-position: -66px -323px; }
     .video-content .video-container .state-icon {

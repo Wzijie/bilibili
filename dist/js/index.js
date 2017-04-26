@@ -45,19 +45,23 @@ webpackJsonp([2],{
 
 	var _LoadCover2 = _interopRequireDefault(_LoadCover);
 
-	var _IndexContent = __webpack_require__(205);
+	var _InitialSearch = __webpack_require__(205);
+
+	var _InitialSearch2 = _interopRequireDefault(_InitialSearch);
+
+	var _IndexContent = __webpack_require__(206);
 
 	var _IndexContent2 = _interopRequireDefault(_IndexContent);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// 存放全局jsonp回调函数
-	// 根据屏幕宽度改变根节点的fontsize值remAdaptation.js
-	window.jsonpCallBack = {};
-	// 主要内容组件
 
 
 	// 组件
+	window.jsonpCallBack = {};
+	// 主要内容组件
+	// 根据屏幕宽度改变根节点的fontsize值remAdaptation.js
 
 
 	(0, _setRootFontsize2.default)();
@@ -98,6 +102,7 @@ webpackJsonp([2],{
 				'div',
 				null,
 				_react2.default.createElement(_Header2.default, null),
+				_react2.default.createElement(_InitialSearch2.default, null),
 				_react2.default.createElement(_LoadCover2.default, { loading: this.state.loading }),
 				_react2.default.createElement(_Nav2.default, { pageActive: 0 }),
 				_react2.default.createElement(_Banner2.default, { bannerData: this.state.bannerData }),
@@ -893,23 +898,224 @@ webpackJsonp([2],{
 
 	var _ajaxRequest2 = _interopRequireDefault(_ajaxRequest);
 
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var InitialSearch = _react2.default.createClass({
+		displayName: 'InitialSearch',
+
+		getInitialState: function getInitialState() {
+			return {
+				hotSearch: null
+			};
+		},
+		componentDidMount: function componentDidMount() {
+			var _this = this;
+
+			var hotSearchSuccess = function hotSearchSuccess(data) {
+				console.log(JSON.parse(data.data), 'hotSearch');
+				var hotSearchList = JSON.parse(data.data).list;
+				_this.setState({ hotSearch: hotSearchList });
+			};
+			var hotSearchError = function hotSearchError(error) {
+				console.log(error, 'hotSearchError');
+			};
+			var hotSearchURL = 'http://localhost:3000/hotSearch';
+			(0, _ajaxRequest2.default)(hotSearchURL, 'GET', hotSearchSuccess, hotSearchError);
+		},
+		render: function render() {
+			var hotSearch = this.state.hotSearch;
+			return _react2.default.createElement(
+				'div',
+				{ className: 'initial-search' },
+				_react2.default.createElement(
+					'div',
+					{ className: 'search-operation' },
+					_react2.default.createElement(
+						'form',
+						{ action: 'search.html', method: 'GET', className: 'search-form' },
+						_react2.default.createElement('input', { className: 'search-input', name: 'keyword', type: 'text', autoComplete: 'off', placeholder: '\u641C\u7D22\u89C6\u9891\u3001\u756A\u5267\u3001up\u4E3B\u6216AV\u53F7' })
+					),
+					_react2.default.createElement('i', { className: 'search-input-delete' }),
+					_react2.default.createElement(
+						'div',
+						{ className: 'search-cancel' },
+						'\u53D6\u6D88'
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'search-message' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'hot-search' },
+						_react2.default.createElement(
+							'h3',
+							{ className: 'search-info-title' },
+							'\u70ED\u95E8\u641C\u7D22'
+						),
+						hotSearch === null ? _react2.default.createElement(
+							'p',
+							{ className: 'loading-info' },
+							'\u6B63\u5728\u52A0\u8F7D...'
+						) : _react2.default.createElement(
+							'ul',
+							{ className: 'hot-search-list' },
+							hotSearch.map(function (hotSearchItem, index) {
+								var kwyword = hotSearchItem.keyword;
+								return _react2.default.createElement(
+									'li',
+									{ key: index },
+									_react2.default.createElement(
+										'a',
+										{ href: 'search.html?keyword=' + kwyword },
+										kwyword
+									)
+								);
+							})
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'history-search' },
+						_react2.default.createElement(
+							'h3',
+							{ className: 'search-info-title' },
+							'\u5386\u53F2\u641C\u7D22'
+						),
+						_react2.default.createElement(
+							'ul',
+							{ className: 'history-search-list' },
+							_react2.default.createElement(
+								'li',
+								null,
+								_react2.default.createElement(
+									'a',
+									{ href: '###' },
+									'\u54E5\u54E5\u592A\u7231\u6211\u600E\u4E48\u529E'
+								),
+								_react2.default.createElement('i', { className: 'history-delete' })
+							),
+							_react2.default.createElement(
+								'li',
+								null,
+								_react2.default.createElement(
+									'a',
+									{ href: '###' },
+									'\u54E5\u54E5\u592A\u7231\u6211\u600E\u4E48\u529E'
+								),
+								_react2.default.createElement('i', { className: 'history-delete' })
+							),
+							_react2.default.createElement(
+								'li',
+								null,
+								_react2.default.createElement(
+									'a',
+									{ href: '###' },
+									'\u54E5\u54E5\u592A\u7231\u6211\u600E\u4E48\u529E'
+								),
+								_react2.default.createElement('i', { className: 'history-delete' })
+							),
+							_react2.default.createElement(
+								'li',
+								null,
+								_react2.default.createElement(
+									'a',
+									{ href: '###' },
+									'\u54E5\u54E5\u592A\u7231\u6211\u600E\u4E48\u529E'
+								),
+								_react2.default.createElement('i', { className: 'history-delete' })
+							)
+						)
+					),
+					_react2.default.createElement(
+						'ul',
+						{ className: 'search-suggest' },
+						_react2.default.createElement(
+							'li',
+							null,
+							_react2.default.createElement(
+								'a',
+								{ href: '###' },
+								'\u54E5\u54E5\u592A\u7231\u6211\u600E\u4E48\u529E'
+							),
+							_react2.default.createElement(
+								'span',
+								{ className: 'suggest-bangumi' },
+								'\u756A\u5267'
+							)
+						),
+						_react2.default.createElement(
+							'li',
+							null,
+							_react2.default.createElement(
+								'a',
+								{ href: '###' },
+								'\u54E5\u54E5\u592A\u7231\u6211\u600E\u4E48\u529E'
+							),
+							_react2.default.createElement(
+								'span',
+								{ className: 'suggest-bangumi' },
+								'\u756A\u5267'
+							)
+						),
+						_react2.default.createElement(
+							'li',
+							null,
+							_react2.default.createElement(
+								'a',
+								{ href: '###' },
+								'\u54E5\u54E5\u592A\u7231\u6211\u600E\u4E48\u529E'
+							),
+							_react2.default.createElement(
+								'span',
+								{ className: 'suggest-bangumi' },
+								'\u756A\u5267'
+							)
+						)
+					)
+				)
+			);
+		}
+	});
+
+	exports.default = InitialSearch;
+
+/***/ },
+
+/***/ 206:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _react = __webpack_require__(9);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _ajaxRequest = __webpack_require__(202);
+
+	var _ajaxRequest2 = _interopRequireDefault(_ajaxRequest);
+
 	var _createScriptJsonp = __webpack_require__(201);
 
 	var _createScriptJsonp2 = _interopRequireDefault(_createScriptJsonp);
 
-	var _RecommendVideoContainer = __webpack_require__(206);
+	var _RecommendVideoContainer = __webpack_require__(207);
 
 	var _RecommendVideoContainer2 = _interopRequireDefault(_RecommendVideoContainer);
 
-	var _LiveVideoContainer = __webpack_require__(208);
+	var _LiveVideoContainer = __webpack_require__(209);
 
 	var _LiveVideoContainer2 = _interopRequireDefault(_LiveVideoContainer);
 
-	var _BangumiVideoContainer = __webpack_require__(209);
+	var _BangumiVideoContainer = __webpack_require__(210);
 
 	var _BangumiVideoContainer2 = _interopRequireDefault(_BangumiVideoContainer);
 
-	var _DefaultVideoContainer = __webpack_require__(210);
+	var _DefaultVideoContainer = __webpack_require__(211);
 
 	var _DefaultVideoContainer2 = _interopRequireDefault(_DefaultVideoContainer);
 
@@ -1041,7 +1247,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 206:
+/***/ 207:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1054,7 +1260,7 @@ webpackJsonp([2],{
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _imgLazyLoad = __webpack_require__(207);
+	var _imgLazyLoad = __webpack_require__(208);
 
 	var _imgLazyLoad2 = _interopRequireDefault(_imgLazyLoad);
 
@@ -1177,7 +1383,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 207:
+/***/ 208:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1273,7 +1479,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 208:
+/***/ 209:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1286,7 +1492,7 @@ webpackJsonp([2],{
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _imgLazyLoad = __webpack_require__(207);
+	var _imgLazyLoad = __webpack_require__(208);
 
 	var _imgLazyLoad2 = _interopRequireDefault(_imgLazyLoad);
 
@@ -1404,7 +1610,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 209:
+/***/ 210:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1417,7 +1623,7 @@ webpackJsonp([2],{
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _imgLazyLoad = __webpack_require__(207);
+	var _imgLazyLoad = __webpack_require__(208);
 
 	var _imgLazyLoad2 = _interopRequireDefault(_imgLazyLoad);
 
@@ -1515,7 +1721,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 210:
+/***/ 211:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1528,7 +1734,7 @@ webpackJsonp([2],{
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _imgLazyLoad = __webpack_require__(207);
+	var _imgLazyLoad = __webpack_require__(208);
 
 	var _imgLazyLoad2 = _interopRequireDefault(_imgLazyLoad);
 

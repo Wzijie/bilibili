@@ -41,7 +41,7 @@ webpackJsonp([3],{
 
 	var _LoadCover2 = _interopRequireDefault(_LoadCover);
 
-	var _LiveContent = __webpack_require__(211);
+	var _LiveContent = __webpack_require__(212);
 
 	var _LiveContent2 = _interopRequireDefault(_LiveContent);
 
@@ -875,7 +875,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 207:
+/***/ 208:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -971,7 +971,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 211:
+/***/ 212:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -984,7 +984,7 @@ webpackJsonp([3],{
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _LiveSection = __webpack_require__(212);
+	var _LiveSection = __webpack_require__(213);
 
 	var _LiveSection2 = _interopRequireDefault(_LiveSection);
 
@@ -1015,7 +1015,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 212:
+/***/ 213:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1028,7 +1028,7 @@ webpackJsonp([3],{
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _imgLazyLoad = __webpack_require__(207);
+	var _imgLazyLoad = __webpack_require__(208);
 
 	var _imgLazyLoad2 = _interopRequireDefault(_imgLazyLoad);
 

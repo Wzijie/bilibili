@@ -11,6 +11,7 @@ import Banner from './components/Banner.js';
 import Footer from './components/Footer.js';
 import AppLink from './components/AppLink.js';
 import LoadCover from './components/LoadCover.js';
+import InitialSearch from './components/InitialSearch.js';
 // 主要内容组件
 import IndexContent from './components/IndexContent/IndexContent.js';
 
@@ -50,6 +51,7 @@ var Root = React.createClass({
 		
 		return  <div>
 					<Header />
+					<InitialSearch />
 					<LoadCover loading={this.state.loading} />
 					<Nav pageActive={0} />
 					<Banner bannerData={this.state.bannerData} />

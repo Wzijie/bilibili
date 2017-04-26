@@ -444,3 +444,149 @@ a {
     background-position: 50%; }
 
 /* 底部悬浮窗口 end */
+/* 搜索面板 start */
+.initial-search {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: #fff;
+  z-index: 10001; }
+  .initial-search .search-operation {
+    height: 0.4rem;
+    background: #f4f4f4;
+    position: relative; }
+    .initial-search .search-operation .search-form {
+      margin: 0 0.7rem 0 0.12rem;
+      position: relative; }
+      .initial-search .search-operation .search-form:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0.09rem;
+        left: 0.07rem;
+        width: 0.22rem;
+        height: 0.22rem;
+        background: url(../image/ui_3@2x.png);
+        background-size: 2.74rem 2.28rem;
+        background-position: 0.01rem -2.06rem; }
+      .initial-search .search-operation .search-form .search-input {
+        width: 100%;
+        height: 0.3rem;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        box-sizing: border-box;
+        margin-top: 0.05rem;
+        padding-left: 0.36rem;
+        outline: none;
+        font: inherit;
+        font-size: 0.14rem;
+        color: #999; }
+        .initial-search .search-operation .search-form .search-input::-webkit-input-placeholder {
+          font-size: 0.12rem; }
+        .initial-search .search-operation .search-form .search-input::-moz-placeholder {
+          font-size: 0.12rem; }
+    .initial-search .search-operation .search-input-delete {
+      display: block;
+      width: 0.16rem;
+      height: 0.18rem;
+      background: url(../image/ui_3@2x.png);
+      background-size: 2.74rem 2.28rem;
+      background-position: -1.441rem -2.05rem;
+      position: absolute;
+      top: 0.11rem;
+      right: 0.8rem; }
+    .initial-search .search-operation .search-cancel {
+      width: 0.7rem;
+      line-height: 0.4rem;
+      text-align: center;
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-size: 0.14rem;
+      color: #999; }
+  .initial-search .search-message {
+    padding: 0 0.12rem; }
+    .initial-search .search-message .hot-search .hot-search-list li {
+      display: inline-block;
+      line-height: 0.26rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin: 0 0.12rem 0.12rem 0;
+      font-size: 0.14rem; }
+      .initial-search .search-message .hot-search .hot-search-list li a {
+        display: block;
+        padding: 0 0.1rem;
+        color: #444; }
+    .initial-search .search-message .history-search .history-search-list li {
+      line-height: 0.4rem;
+      border-bottom: 1px solid #ccc;
+      box-sizing: border-box;
+      font-size: 0.14rem;
+      padding: 0 0.2rem 0 0.32rem;
+      position: relative; }
+      .initial-search .search-message .history-search .history-search-list li a {
+        display: block;
+        color: #444; }
+      .initial-search .search-message .history-search .history-search-list li:before,
+      .initial-search .search-message .history-search .history-search-list li .history-delete {
+        content: '';
+        display: block;
+        background: url(../image/ui_3@2x.png);
+        background-size: 2.74rem 2.28rem;
+        position: absolute; }
+      .initial-search .search-message .history-search .history-search-list li:before {
+        width: 0.22rem;
+        height: 0.22rem;
+        background-position: -0.22rem -2.06rem;
+        top: 0.09rem;
+        left: 0; }
+      .initial-search .search-message .history-search .history-search-list li .history-delete {
+        width: 0.1rem;
+        height: 0.1rem;
+        background-position: -1.67rem -2.06rem;
+        top: 0.15rem;
+        right: 0; }
+    .initial-search .search-message .search-info-title {
+      text-align: center;
+      font-size: 0.13rem;
+      font-weight: normal;
+      color: #999;
+      margin: 0.12rem 0;
+      position: relative; }
+      .initial-search .search-message .search-info-title:before, .initial-search .search-message .search-info-title:after {
+        content: '';
+        display: block;
+        width: 1.3rem;
+        height: 1px;
+        background: #ccc;
+        position: absolute;
+        top: 50%; }
+      .initial-search .search-message .search-info-title:before {
+        left: 0; }
+      .initial-search .search-message .search-info-title:after {
+        right: 0; }
+    .initial-search .search-message .search-suggest li {
+      line-height: 0.4rem;
+      border-bottom: 1px solid #ccc;
+      box-sizing: border-box;
+      font-size: 0.14rem;
+      position: relative; }
+      .initial-search .search-message .search-suggest li a {
+        display: block;
+        color: #444; }
+      .initial-search .search-message .search-suggest li .suggest-bangumi {
+        display: block;
+        width: 0.34rem;
+        line-height: 0.2rem;
+        background: #de698c;
+        border-radius: 2px;
+        font-size: 0.12rem;
+        color: #fff;
+        text-align: center;
+        position: absolute;
+        top: 0.1rem;
+        right: 0; }
+
+/* 搜索面板 end */

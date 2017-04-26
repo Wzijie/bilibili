@@ -177,7 +177,19 @@ var VideoContainer = React.createClass({
 
 	// 弹幕轨道索引
 	trackIndex: 0,
-
+	// 是否显示弹幕
+	barrageDisplay: true,
+	// 切换弹幕显示隐藏
+	toggleBarrageDisplay: function(event){
+		if(this.barrageDisplay){
+			this.refs.barrage.classList.add('hide');
+			event.currentTarget.firstElementChild.className = 'danmu-show-icon';
+		}else{
+			this.refs.barrage.classList.remove('hide');
+			event.currentTarget.firstElementChild.className = 'danmu-hide-icon';
+		}
+		this.barrageDisplay = !this.barrageDisplay;
+	},
 	// 修改视频当前播放时间及进度条长度
 	// timeupdate事件 当目前的播放位置已更改时触发
 	changeCurrentTime: function(event){
@@ -196,6 +208,9 @@ var VideoContainer = React.createClass({
 		}
 		this.refs.currentProgress.style.width = currentProgress*100 + "%";
 
+		if(this.barrageDisplay === false){
+			return;
+		}
 		/* 初步实现播放弹幕 */
 		// 获取弹幕轨道
 		var barrageTrack = document.querySelectorAll('.barrage-track');
@@ -369,25 +384,16 @@ var VideoContainer = React.createClass({
 		var videoLengthStr = (videoLength.min < 10 ? '0' + videoLength.min : videoLength.min) + ':' + (videoLength.second < 10 ? '0' + videoLength.second : videoLength.second);
 
 		return	<div className='video-container'>
-					<div className='barrage'>
-						<div className='barrage-track'>
-						</div>
-						<div className='barrage-track'>
-						</div>
-						<div className='barrage-track'>
-						</div>
-						<div className='barrage-track'>
-						</div>
-						<div className='barrage-track'>
-						</div>
-						<div className='barrage-track'>
-						</div>
-						<div className='barrage-track'>
-						</div>
-						<div className='barrage-track'>
-						</div>
-						<div className='barrage-track'>
-						</div>
+					<div className='barrage' ref='barrage'>
+						<div className='barrage-track'></div>						
+						<div className='barrage-track'></div>						
+						<div className='barrage-track'></div>						
+						<div className='barrage-track'></div>						
+						<div className='barrage-track'></div>					
+						<div className='barrage-track'></div>						
+						<div className='barrage-track'></div>						
+						<div className='barrage-track'></div>						
+						<div className='barrage-track'></div>
 					</div>
 					<div className='player-container' onTouchStart={this.controlToggle}>
 						<video className='player'  data-webkit-playsinline preload='auto' onDurationChange={this.changeTotalTime} onLoadStart={this.waiting} onCanPlay={this.canplayHandler} onTimeUpdate={this.changeCurrentTime} onProgress={this.progressHandler} onWaiting={this.waiting} onPlaying={this.playing} onError={this.error} ref='player'>
@@ -413,8 +419,8 @@ var VideoContainer = React.createClass({
 							<div className='current-progress' ref='currentProgress'></div>
 						</div>
 						<div className='more-control'>
-							<div className='danmu-toggle'>
-								<i className='danmu-toggle-icon'></i>
+							<div className='danmu-toggle' onClick={this.toggleBarrageDisplay}>
+								<i className='danmu-hide-icon'></i>
 							</div>
 							<div className='full-screen' onClick={this.playerFullScreen}>
 								<i className='full-screen-icon'></i>

@@ -177,8 +177,11 @@
 						background: url('../image/ui_2.png') no-repeat;
 						background-size: 400px;
 
-						&.danmu-toggle-icon{
+						&.danmu-hide-icon{
 							background-position: -98px -322px;
+						}
+						&.danmu-show-icon{
+							background-position: -98px -355px;
 						}
 
 						&.full-screen-icon{
