@@ -1,0 +1,42 @@
+.search-content .search-nav {
+  height: auto; }
+  .search-content .search-nav ul {
+    line-height: 0.41rem; }
+    .search-content .search-nav ul li a {
+      color: #999; }
+    .search-content .search-nav ul li.filter-btn {
+      position: relative; }
+      .search-content .search-nav ul li.filter-btn:before {
+        content: '';
+        display: block;
+        width: 1px;
+        height: 50%;
+        background: #ccc;
+        position: absolute;
+        top: 25%;
+        left: 0; }
+      .search-content .search-nav ul li.filter-btn i.filter-icon {
+        display: inline-block;
+        width: 0.2rem;
+        height: 0.19rem;
+        margin-top: 0.1rem;
+        background: url(../image/ui_3@2x.png);
+        background-size: 2.74rem 2.28rem;
+        background-position: -1.05rem -2.06rem; }
+      .search-content .search-nav ul li.filter-btn i.on {
+        background-position: -0.85rem -2.06rem; }
+
+.search-content .filter-container {
+  height: 0;
+  overflow: hidden;
+  transition: 0.3s ease; }
+  .search-content .filter-container.show {
+    height: 0.8rem; }
+
+.search-content .search-filter {
+  height: 0.4rem;
+  line-height: 0.36rem; }
+  .search-content .search-filter .roll-list li a {
+    font-size: 0.14rem; }
+  .search-content .search-filter .roll-list li.on a {
+    border: 0; }

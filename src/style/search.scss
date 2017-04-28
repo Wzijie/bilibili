@@ -1,0 +1,54 @@
+
+.search-content{
+
+	.search-nav{
+		height: auto;
+
+		ul{
+			line-height: 0.41rem;
+			
+			li a{ color: #999; }
+			li.filter-btn{
+				position: relative;
+
+				&:before{
+					content: '';
+					display: block;
+					width: 1px;
+					height: 50%;
+					background: #ccc;
+					position: absolute;
+					top: 25%; left: 0;
+				}
+				i.filter-icon{
+					display: inline-block;
+					width: 0.2rem;
+					height: 0.19rem;
+					margin-top: 0.1rem;
+					background: url('../image/ui_3@2x.png');
+					background-size: 2.74rem 2.28rem;
+					background-position: -1.05rem -2.06rem;
+				}
+				i.on{ background-position: -0.85rem -2.06rem; }
+			}
+		}
+	}
+	.filter-container{
+		height: 0;
+		overflow: hidden;
+		transition: 0.3s ease;
+
+		&.show{ height: 0.8rem; }
+	}
+	.search-filter{
+		height: 0.4rem;
+		line-height: 0.36rem;
+
+		.roll-list li a{
+			font-size: 0.14rem;
+		}
+		.roll-list li.on a{
+			border: 0;
+		}
+	}
+}

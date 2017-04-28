@@ -8,12 +8,14 @@ module.exports = {
         'js/ranking': './src/js/ranking.js',
         'js/user': './src/js/user.js',
         'js/videoPlay': './src/js/videoPlay.js',
+        'js/search': './src/js/search.js',
         'main': './src/style/main.scss',
         'channel': './src/style/channel.scss',
         'live': './src/style/live.scss',
         'ranking': './src/style/ranking.scss',
         'user': './src/style/user.scss',
         'videoPlay': './src/style/videoPlay.scss',
+        'search': './src/style/search.scss',
 		'vendor': [
           'react',
           'react-dom'

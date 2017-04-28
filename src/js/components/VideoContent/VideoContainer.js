@@ -44,10 +44,10 @@ var VideoContainer = React.createClass({
 
 	// 在接受到的videoPage改变时重新请求视频数据(更换part时)
 	componentWillReceiveProps: function(nextProps){
-		if(this.state.playerData === null){
+		if(this.state.playerData === null || nextProps.videoPage === this.props.videoPage){
 			return;
 		}
-		console.log('componentWillReceiveProps');
+		console.log(nextProps.videoPage,this.props.videoPage,'componentWillReceiveProps');
 
 		// 视频暂停
 		this.refs.player.pause();

@@ -1,4 +1,4 @@
-webpackJsonp([4],{
+webpackJsonp([5],{
 
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
@@ -37,9 +37,9 @@ webpackJsonp([4],{
 
 	var _InitialSearch2 = _interopRequireDefault(_InitialSearch);
 
-	var _RankingContent = __webpack_require__(218);
+	var _SearchContent = __webpack_require__(223);
 
-	var _RankingContent2 = _interopRequireDefault(_RankingContent);
+	var _SearchContent2 = _interopRequireDefault(_SearchContent);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -48,8 +48,6 @@ webpackJsonp([4],{
 
 	// 组件
 	window.jsonpCallBack = {};
-	// 主要内容组件
-
 
 	(0, _setRootFontsize2.default)();
 
@@ -64,6 +62,7 @@ webpackJsonp([4],{
 			};
 		},
 
+		// 改变loading数据,当数据请求完成后执行
 		loadingChange: function loadingChange() {
 			this.setState({ loading: false });
 		},
@@ -82,7 +81,7 @@ webpackJsonp([4],{
 				_react2.default.createElement(_Header2.default, { toggleInitialSearch: this.toggleInitialSearch }),
 				_react2.default.createElement(_InitialSearch2.default, { initialSearchDisplay: this.state.initialSearchDisplay, toggleInitialSearch: this.toggleInitialSearch }),
 				_react2.default.createElement(_LoadCover2.default, { loading: this.state.loading }),
-				_react2.default.createElement(_RankingContent2.default, { loadingChange: this.loadingChange }),
+				_react2.default.createElement(_SearchContent2.default, { loadingChange: this.loadingChange }),
 				_react2.default.createElement(_AppLink2.default, null),
 				_react2.default.createElement(_Footer2.default, null)
 			);
@@ -887,330 +886,6 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 212:
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-	// 图片懒加载
-	function imgLazyLoad(imgBoxSelector, isFadeIn, listBoxSelector, fadeInClass) {
-
-		var imgBoxArray = [].concat(_toConsumableArray(document.querySelectorAll(imgBoxSelector)));
-		var isScroll = false; // 让滚动事件执行的少一点
-		var removeEventTime = null;
-
-		// ranking排行榜页面用到的列项容器
-		var listBox = isFadeIn !== undefined ? document.querySelectorAll(listBoxSelector) : null;
-
-		// 符合条件的图片显示
-		var imgShow = function imgShow() {
-			imgBoxArray.forEach(function (imgBox, key) {
-				// 如果这个图片容器已经插入了图片则退出此次操作
-				if (imgBox.innerHTML !== '') {
-
-					// 这个判断是为了排行榜页加的，需要处理一些特殊的地方
-					// 排行榜页图片容器会出现已有图片的情况，不需要执行插入图片，但是要将容器显示出来
-					if (listBox !== null) {
-						listBox[key].classList.add(fadeInClass);
-					}
-
-					return;
-				}
-
-				var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
-
-				// 排行榜页的图片容器的父元素用了flex属性，导致offsetTop为0，使用父元素的offsetTop
-				var showEleOffsetTop = listBox === null ? imgBox.offsetTop : listBox[key].offsetTop;
-
-				// 视口上方因滚动隐藏的区域 + 视口高度 >= 图片离顶部的距离 则可以认为图片出现在视口底部离页面顶部的距离范围内
-				// -50意思是判定点为图片顶部再往上50px
-				if (scrollTop + window.innerHeight >= showEleOffsetTop - 50) {
-					var coverImgUrl = imgBox.getAttribute('data-img');
-					var coverImgHtml = '<div class="cover-img" \
-										style="background-image: url(' + coverImgUrl + ')" > \
-										</div>';
-					imgBox.innerHTML = coverImgHtml;
-
-					// ranking排行榜页面用到的列项淡入效果
-					if (listBox !== null) {
-						listBox[key].classList.add(fadeInClass);
-					}
-
-					setTimeout(function () {
-						imgBox.firstElementChild.style.opacity = '1';
-					}, 50);
-				}
-			});
-
-			// 图片加载完毕后清除滚动事件
-			var imgDisplayComplete = imgBoxArray.every(function (item) {
-				return item.innerHTML !== '';
-			});
-			if (imgDisplayComplete) {
-				window.onscroll = undefined;
-			}
-		};
-
-		// 默认执行一次
-		imgShow();
-
-		var scrollHandler = function scrollHandler() {
-			if (isScroll === true) {
-				return;
-			}
-			console.log('imgLazyLoad');
-			imgShow();
-			isScroll = true;
-
-			// 限制100毫秒内最多执行一次
-			setTimeout(function () {
-				isScroll = false;
-			}, 100);
-		};
-
-		// 后来再看下面这句没意义，赋值操作已经覆盖了事件
-		// window.onscroll = undefined;
-		window.onscroll = scrollHandler;
-	}
-
-	exports.default = imgLazyLoad;
-
-/***/ },
-
-/***/ 218:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _react = __webpack_require__(9);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _RankingTitle = __webpack_require__(219);
-
-	var _RankingTitle2 = _interopRequireDefault(_RankingTitle);
-
-	var _RankingNav = __webpack_require__(220);
-
-	var _RankingNav2 = _interopRequireDefault(_RankingNav);
-
-	var _RankingList = __webpack_require__(222);
-
-	var _RankingList2 = _interopRequireDefault(_RankingList);
-
-	var _ajaxRequest = __webpack_require__(204);
-
-	var _ajaxRequest2 = _interopRequireDefault(_ajaxRequest);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	// ajax方法
-
-	// 排行榜导航
-	var RankingContent = _react2.default.createClass({
-		displayName: 'RankingContent',
-
-		getInitialState: function getInitialState() {
-
-			// 创建排行榜导航数据
-			function createNavData(title, dataName) {
-				return {
-					// 标题
-					title: title,
-					// 数据名
-					dataName: dataName
-				};
-			}
-
-			// 排行榜导航数据
-			var navData = [createNavData('全站', 'all-3-0'), createNavData('动画', 'all-3-1'), createNavData('番剧', 'all-3-33'), createNavData('国创', 'all-3-167'), createNavData('电影', 'all-3-23'), createNavData('音乐', 'all-3-3'), createNavData('舞蹈', 'all-3-129'), createNavData('游戏', 'all-3-4'), createNavData('科技', 'all-3-36'), createNavData('生活', 'all-3-160'), createNavData('鬼畜', 'all-3-119'), createNavData('时尚', 'all-3-155'), createNavData('娱乐', 'all-3-5'), createNavData('电视剧', 'all-3-11')];
-
-			return {
-				// 排行榜导航数据
-				navData: navData,
-				// 储存请求过的排行榜数据
-				rankingDataStorage: {},
-				// 当前显示的排行榜数据 Array
-				currentRankingData: null
-			};
-		},
-		componentDidMount: function componentDidMount() {
-			this.props.loadingChange();
-
-			// 默认请求'全站'数据
-			this.requestRankData('all-3-0');
-		},
-
-		// 请求并设置排行榜数据方法
-		// dataName为需要请求的数据名
-		requestRankData: function requestRankData(dataName) {
-			var _this = this;
-
-			// 先将当前排行榜数据清空
-			this.setState({ currentRankingData: null });
-
-			// 判断是否已经储存过当前需要请求的数据
-			// 有就直接使用储存好的数据，没有则执行下方ajax请求数据
-			if (this.state.rankingDataStorage[dataName] !== undefined) {
-				// 用一个ready属性来标记这个数据是已经存在的
-				this.state.rankingDataStorage[dataName].ready = true;
-				// 设置数据
-				this.setState({ currentRankingData: this.state.rankingDataStorage[dataName] });
-				return;
-			}
-
-			var rankingSuccess = function rankingSuccess(data) {
-				console.log(JSON.parse(data.data).rank, 'rankData:' + dataName);
-				var currentRankingData = JSON.parse(data.data).rank.list;
-				_this.setState(function () {
-					// 用数据名作为属性名来储存请求的数据
-					_this.state.rankingDataStorage[dataName] = currentRankingData;
-					return { currentRankingData: currentRankingData };
-				});
-			};
-			var rankingError = function rankingError(error) {
-				console.log(error);
-			};
-
-			var rankingDataURL = 'http://weizijie.cc:3000/rank/' + dataName;
-			(0, _ajaxRequest2.default)(rankingDataURL, 'GET', rankingSuccess, rankingError);
-		},
-		render: function render() {
-			return _react2.default.createElement(
-				'div',
-				{ className: 'ranking-content' },
-				_react2.default.createElement(_RankingTitle2.default, null),
-				_react2.default.createElement(_RankingNav2.default, { navData: this.state.navData, requestRankData: this.requestRankData }),
-				_react2.default.createElement(_RankingList2.default, { currentRankingData: this.state.currentRankingData })
-			);
-		}
-	}); // 排行榜列表
-
-	// 排行榜标题
-	exports.default = RankingContent;
-
-/***/ },
-
-/***/ 219:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _react = __webpack_require__(9);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var RankingTitle = _react2.default.createClass({
-		displayName: 'RankingTitle',
-
-		render: function render() {
-			return _react2.default.createElement(
-				'div',
-				{ className: 'rank-title' },
-				_react2.default.createElement(
-					'a',
-					{ href: 'index.html', className: 'back-index' },
-					_react2.default.createElement('i', { className: 'rank-icon-back' })
-				),
-				_react2.default.createElement(
-					'h2',
-					null,
-					'\u6392\u884C\u699C'
-				)
-			);
-		}
-	});
-
-	exports.default = RankingTitle;
-
-/***/ },
-
-/***/ 220:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _react = __webpack_require__(9);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _navRoll = __webpack_require__(221);
-
-	var _navRoll2 = _interopRequireDefault(_navRoll);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var RankingNav = _react2.default.createClass({
-		displayName: 'RankingNav',
-
-		componentDidMount: function componentDidMount() {
-			(0, _navRoll2.default)('.roll-list');
-		},
-		render: function render() {
-
-			var navData = this.props.navData;
-
-			// 请求并设置排行榜数据方法
-			var requestRankData = this.props.requestRankData;
-
-			function navClickHandler(dataName) {
-				return function () {
-					requestRankData(dataName);
-				};
-			}
-
-			return _react2.default.createElement(
-				'nav',
-				{ className: 'rank-nav' },
-				_react2.default.createElement(
-					'ul',
-					{ className: 'roll-list' },
-					navData.map(function (navItem, index) {
-
-						// 标题，数据名
-						var title = navItem.title,
-						    dataName = navItem.dataName;
-
-
-						return _react2.default.createElement(
-							'li',
-							{ className: index === 0 ? 'on' : '', key: index, onClick: navClickHandler(dataName) },
-							_react2.default.createElement(
-								'a',
-								null,
-								title
-							)
-						);
-					})
-				)
-			);
-		}
-	});
-
-	exports.default = RankingNav;
-
-/***/ },
-
 /***/ 221:
 /***/ function(module, exports) {
 
@@ -1262,7 +937,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 222:
+/***/ 223:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1275,126 +950,216 @@ webpackJsonp([4],{
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _imgLazyLoad = __webpack_require__(212);
+	var _SearchNav = __webpack_require__(224);
 
-	var _imgLazyLoad2 = _interopRequireDefault(_imgLazyLoad);
+	var _SearchNav2 = _interopRequireDefault(_SearchNav);
+
+	var _SearchFilterChannel = __webpack_require__(225);
+
+	var _SearchFilterChannel2 = _interopRequireDefault(_SearchFilterChannel);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var RankingList = _react2.default.createClass({
-		displayName: 'RankingList',
+	var SearchContent = _react2.default.createClass({
+		displayName: 'SearchContent',
 
-		componentDidUpdate: function componentDidUpdate() {
-			if (this.props.currentRankingData !== null) {
-				(0, _imgLazyLoad2.default)('.cover-box', true, '.list-box', 'fade-in');
+
+		getInitialState: function getInitialState() {
+
+			function createSearchNavData(title, filterName) {
+				return {
+					// 标题
+					title: title,
+					// 筛选关键字
+					filterName: filterName
+				};
 			}
+
+			var searchNavData = [createSearchNavData('综合', 'video'), createSearchNavData('番剧', 'series'), createSearchNavData('专题', 'special'), createSearchNavData('UP主', 'upuser')];
+
+			var filterChannel = [createSearchNavData('全部', '-1'), createSearchNavData('动画', '1'), createSearchNavData('番剧', '33'), createSearchNavData('国创', '167'), createSearchNavData('舞蹈', '20'), createSearchNavData('游戏', '4'), createSearchNavData('科技', '36'), createSearchNavData('生活', '160'), createSearchNavData('娱乐', '5'), createSearchNavData('鬼畜', '119'), createSearchNavData('电影', '23'), createSearchNavData('时尚', '155'), createSearchNavData('电视剧', '11')];
+
+			var filterOrder = [createSearchNavData('综合', 'default'), createSearchNavData('点击', 'click'), createSearchNavData('弹幕', 'dm'), createSearchNavData('评论', 'scores'), createSearchNavData('日期', 'senddate'), createSearchNavData('收藏', 'stow')];
+
+			return {
+				searchNavData: searchNavData,
+				filterChannel: filterChannel,
+				filterOrder: filterOrder,
+				type: 'video'
+			};
 		},
+
+		componentDidMount: function componentDidMount() {
+			this.props.loadingChange();
+		},
+
 		render: function render() {
-
-			if (this.props.currentRankingData === null) {
-				return _react2.default.createElement(
-					'p',
-					{ className: 'loading-info' },
-					'\u6B63\u5728\u52A0\u8F7D...'
-				);
-			}
-
-			var rankingData = this.props.currentRankingData;
-
 			return _react2.default.createElement(
-				'ul',
-				{ className: 'rank-list' },
-				rankingData.slice(0, 30).map(function (rankItem, index) {
-
-					// av号
-					var aid = rankItem.aid;
-					// 用户名
-					var username = rankItem.author;
-					// 视频封面
-					var pic = rankItem.pic;
-					// 视频标题
-					var title = rankItem.title;
-					// 播放数
-					var playNum = rankItem.play >= 10000 ? (rankItem.play / 10000).toFixed(1) + '万' : rankItem.play;
-					// 弹幕数
-					var barrageNum = rankItem.video_review >= 10000 ? (rankItem.video_review / 10000).toFixed(1) + '万' : rankItem.video_review;
-					// 排名top3添加class改变背景颜色
-					var topThreeClass = index < 3 ? ' top-three' : '';
-
-					return _react2.default.createElement(
-						'li',
-						{ key: index },
-						_react2.default.createElement(
-							'a',
-							{ href: 'video.html?aid=' + aid, className: 'list-box' },
-							_react2.default.createElement(
-								'div',
-								{ className: 'video-cover' },
-								_react2.default.createElement(
-									'div',
-									{ className: 'rank-num' + topThreeClass },
-									index + 1
-								),
-								_react2.default.createElement(
-									'div',
-									{ className: 'cover-box', 'data-img': pic },
-
-									// 如果当前的数据已经加载过保存起来了，就将图片显示出来
-									// 如果是新的数据则依靠懒加载滚动将图片插入
-									rankingData.ready === true ? _react2.default.createElement('div', { className: 'cover-img', style: { 'backgroundImage': 'url("' + pic + '")', 'opacity': '1' } }) : ''
-								)
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'video-info' },
-								_react2.default.createElement(
-									'div',
-									{ className: 'video-title' },
-									title
-								),
-								_react2.default.createElement(
-									'div',
-									{ className: 'video-detaied' },
-									_react2.default.createElement('img', { className: 'icon-detaied', src: './src/image/ranking/ico_up.png' }),
-									_react2.default.createElement(
-										'span',
-										null,
-										username
-									)
-								),
-								_react2.default.createElement(
-									'div',
-									{ className: 'video-detaied' },
-									_react2.default.createElement(
-										'div',
-										{ className: 'play-danmu' },
-										_react2.default.createElement('img', { className: 'icon-detaied', src: './src/image/ranking/ico_play.png' }),
-										_react2.default.createElement(
-											'span',
-											null,
-											playNum
-										)
-									),
-									_react2.default.createElement(
-										'div',
-										{ className: 'play-danmu' },
-										_react2.default.createElement('img', { className: 'icon-detaied', src: './src/image/ranking/ico_danmu.png' }),
-										_react2.default.createElement(
-											'span',
-											null,
-											barrageNum
-										)
-									)
-								)
-							)
-						)
-					);
-				})
+				'div',
+				{ className: 'search-content' },
+				_react2.default.createElement(_SearchNav2.default, { searchNavData: this.state.searchNavData }),
+				_react2.default.createElement(
+					'div',
+					{ className: 'filter-container' },
+					_react2.default.createElement(_SearchFilterChannel2.default, { filterChannel: this.state.filterChannel, 'class': 'channel-filter' }),
+					_react2.default.createElement(_SearchFilterChannel2.default, { filterChannel: this.state.filterOrder, 'class': 'order-filter' })
+				)
 			);
 		}
 	});
 
-	exports.default = RankingList;
+	exports.default = SearchContent;
+
+/***/ },
+
+/***/ 224:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _react = __webpack_require__(9);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var SearchNav = _react2.default.createClass({
+		displayName: 'SearchNav',
+
+
+		// search-nav li 点击后添加选中class
+		searchNavClickHandler: function searchNavClickHandler(event) {
+			var navList = Array.from(event.currentTarget.parentNode.children).slice(0, -1);
+			navList.forEach(function (navItem) {
+				navItem.classList.remove('menu-active');
+			});
+			event.currentTarget.classList.add('menu-active');
+		},
+
+		// 切换filter-container筛选容器的显示隐藏
+		toggleFilterContainer: false,
+		filterBtnClick: function filterBtnClick(event) {
+			var filterIcon = event.currentTarget.firstElementChild;
+			var filterContainer = document.querySelector('.filter-container');
+			this.toggleFilterContainer = !this.toggleFilterContainer;
+			if (this.toggleFilterContainer) {
+				filterIcon.classList.add('on');
+				filterContainer.classList.add('show');
+			} else {
+				filterIcon.classList.remove('on');
+				filterContainer.classList.remove('show');
+			}
+		},
+
+		render: function render() {
+			var _this = this;
+
+			var searchNavData = this.props.searchNavData;
+			return _react2.default.createElement(
+				'nav',
+				{ className: 'search-nav menu' },
+				_react2.default.createElement(
+					'ul',
+					{ className: 'menu-list' },
+					searchNavData.map(function (searchNavItem, index) {
+
+						// 标题，筛选关键字
+						var title = searchNavItem.title,
+						    filterName = searchNavItem.filterName;
+
+
+						var firstListClass = index === 0 ? 'menu-active' : '';
+
+						return _react2.default.createElement(
+							'li',
+							{ className: firstListClass, key: index, onClick: _this.searchNavClickHandler },
+							_react2.default.createElement(
+								'a',
+								null,
+								title
+							)
+						);
+					}),
+					_react2.default.createElement(
+						'li',
+						{ className: 'filter-btn', onClick: this.filterBtnClick },
+						_react2.default.createElement('i', { className: 'filter-icon' })
+					)
+				)
+			);
+		}
+	});
+
+	exports.default = SearchNav;
+
+/***/ },
+
+/***/ 225:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _react = __webpack_require__(9);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _navRoll = __webpack_require__(221);
+
+	var _navRoll2 = _interopRequireDefault(_navRoll);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var SearchFilterChannel = _react2.default.createClass({
+		displayName: 'SearchFilterChannel',
+
+
+		componentDidMount: function componentDidMount() {
+			(0, _navRoll2.default)('.' + this.props.class + ' .roll-list');
+		},
+
+		render: function render() {
+
+			var filterChannel = this.props.filterChannel;
+
+			return _react2.default.createElement(
+				'nav',
+				{ className: 'search-filter rank-nav ' + this.props.class },
+				_react2.default.createElement(
+					'ul',
+					{ className: 'roll-list' },
+					filterChannel.map(function (filterChannelItem, index) {
+						// 标题，筛选关键字
+
+						var title = filterChannelItem.title,
+						    filterName = filterChannelItem.filterName;
+
+
+						var firstListClass = index === 0 ? 'on' : '';
+
+						return _react2.default.createElement(
+							'li',
+							{ className: firstListClass, key: index },
+							_react2.default.createElement(
+								'a',
+								null,
+								title
+							)
+						);
+					})
+				)
+			);
+		}
+	});
+
+	exports.default = SearchFilterChannel;
 
 /***/ }
 

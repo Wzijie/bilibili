@@ -11,10 +11,14 @@ import Banner from './components/Banner.js';
 import Footer from './components/Footer.js';
 import AppLink from './components/AppLink.js';
 import LoadCover from './components/LoadCover.js';
+import InitialSearch from './components/InitialSearch/InitialSearch.js';
 // 主要内容组件
 import LiveContent from './components/LiveContent/LiveContent.js';
 
 import ajaxRequest from './plugs/ajaxRequest.js'; // ajax方法
+
+// 存放全局jsonp回调函数
+window.jsonpCallBack = {};
 
 setRootFontsize();
 
@@ -30,7 +34,9 @@ var Root = React.createClass({
 				// 直播版块数据名
 				dataName: dataName,
 				// 存放主要数据
-				data: null
+				data: null,
+				// 搜索面板是否显示
+				initialSearchDisplay: false
 			}
 		}
 
@@ -75,14 +81,23 @@ var Root = React.createClass({
 		var liveDataURL = 'http://weizijie.cc:3000/livePageData';
 		ajaxRequest(liveDataURL, 'GET', liveRequestSuccess, liveRequestError);
 	},
+
 	// 改变loading状态
 	loadingChange: function(){
 		this.setState({ loading: false });
 	},
+
+	// 切换搜索面板是否显示
+	toggleInitialSearch: function(){
+		var initialSearchDisplay = !this.state.initialSearchDisplay;
+		this.setState({ initialSearchDisplay: initialSearchDisplay });
+	},
+
 	render: function(){
 		
 		return  <div>
-					<Header />
+					<Header toggleInitialSearch={this.toggleInitialSearch} />
+					<InitialSearch initialSearchDisplay={this.state.initialSearchDisplay} toggleInitialSearch={this.toggleInitialSearch} />
 					<LoadCover loading={this.state.loading} />
 					<Nav pageActive={2} />
 					<Banner bannerData={this.state.bannerData} />

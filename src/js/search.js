@@ -1,16 +1,16 @@
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import setRootFontsize from './plugs/setRootFontsize.js';
+import setRootFontsize from './plugs/setRootFontsize.js'; // 根据屏幕宽度改变根节点的fontsize值remAdaptation.js
 
+// 组件
 import Header from './components/Header.js';
 import Footer from './components/Footer.js';
-import LoadCover from './components/LoadCover.js';
 import AppLink from './components/AppLink.js';
+import LoadCover from './components/LoadCover.js';
 import InitialSearch from './components/InitialSearch/InitialSearch.js';
-// 主要内容组件
-import VideoContent from './components/VideoContent/VideoContent.js';
+
+import SearchContent from './components/SearchContent/SearchContent.js';
 
 // 存放全局jsonp回调函数
 window.jsonpCallBack = {};
@@ -26,8 +26,9 @@ var Root = React.createClass({
 		}
 	},
 
+	// 改变loading数据,当数据请求完成后执行
 	loadingChange: function(){
-		this.setState({ loading: false });
+		this.setState({loading: false});
 	},
 
 	// 切换搜索面板是否显示
@@ -37,13 +38,14 @@ var Root = React.createClass({
 	},
 
 	render: function(){
-		return	<div>
+		
+		return  <div>
 					<Header toggleInitialSearch={this.toggleInitialSearch} />
 					<InitialSearch initialSearchDisplay={this.state.initialSearchDisplay} toggleInitialSearch={this.toggleInitialSearch} />
 					<LoadCover loading={this.state.loading} />
-					<VideoContent loadendChange={this.loadingChange} />
+					<SearchContent loadingChange={this.loadingChange} />
 					<AppLink />
-					<Footer />
+					<Footer />			
 				</div>
 	}
 });

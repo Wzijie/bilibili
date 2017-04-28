@@ -104,6 +104,10 @@ a{
 		}
 		li.menu-active{
 			border-bottom: 0.04rem solid #de698c;
+
+			a{
+				color: #de698c;
+			}
 		}
 	}
 }
@@ -185,6 +189,7 @@ a{
 .loading-info{
 	text-align: center;
 	padding: 50px 0;
+	font-size: 0.16rem;
 	color: #666;
 }
 .main-container{
@@ -569,6 +574,12 @@ a{
 	top: 0; left: 0; bottom: 0; right: 0;
 	background: #fff;
 	z-index: 10001;
+	transform: scale(0, 0);
+	transform-origin: top right;
+	transition: 0.3s ease;
+	opacity: 0;
+
+	&.show{ transform: scale(1, 1); opacity: 1; }
 
 	.search-operation{
 		height: 0.4rem;
@@ -612,7 +623,7 @@ a{
 			}
 		}
 		.search-input-delete{
-			display: block;
+			display: none;
 			width: 0.16rem;
 			height: 0.18rem;
 			background: url('../image/ui_3@2x.png');
@@ -620,6 +631,8 @@ a{
 			background-position: -1.441rem -2.05rem;
 			position: absolute;
 			top: 0.11rem; right: 0.8rem;
+
+			&.show{ display: block; }
 		}
 		.search-cancel{
 			width: 0.7rem;
@@ -722,6 +735,10 @@ a{
 				a{
 					display: block;
 					color: #444;
+
+					em{
+						color: #de698c;
+					}
 				}
 				.suggest-bangumi{
 					display: block;

@@ -91,6 +91,8 @@ a {
         color: #444; }
     .menu ul.menu-list li.menu-active {
       border-bottom: 0.04rem solid #de698c; }
+      .menu ul.menu-list li.menu-active a {
+        color: #de698c; }
 
 /* 导航 end */
 /* banner start */
@@ -154,6 +156,7 @@ a {
 .loading-info {
   text-align: center;
   padding: 50px 0;
+  font-size: 0.16rem;
   color: #666; }
 
 .main-container {
@@ -452,7 +455,14 @@ a {
   bottom: 0;
   right: 0;
   background: #fff;
-  z-index: 10001; }
+  z-index: 10001;
+  transform: scale(0, 0);
+  transform-origin: top right;
+  transition: 0.3s ease;
+  opacity: 0; }
+  .initial-search.show {
+    transform: scale(1, 1);
+    opacity: 1; }
   .initial-search .search-operation {
     height: 0.4rem;
     background: #f4f4f4;
@@ -488,7 +498,7 @@ a {
         .initial-search .search-operation .search-form .search-input::-moz-placeholder {
           font-size: 0.12rem; }
     .initial-search .search-operation .search-input-delete {
-      display: block;
+      display: none;
       width: 0.16rem;
       height: 0.18rem;
       background: url(../image/ui_3@2x.png);
@@ -497,6 +507,8 @@ a {
       position: absolute;
       top: 0.11rem;
       right: 0.8rem; }
+      .initial-search .search-operation .search-input-delete.show {
+        display: block; }
     .initial-search .search-operation .search-cancel {
       width: 0.7rem;
       line-height: 0.4rem;
@@ -576,6 +588,8 @@ a {
       .initial-search .search-message .search-suggest li a {
         display: block;
         color: #444; }
+        .initial-search .search-message .search-suggest li a em {
+          color: #de698c; }
       .initial-search .search-message .search-suggest li .suggest-bangumi {
         display: block;
         width: 0.34rem;

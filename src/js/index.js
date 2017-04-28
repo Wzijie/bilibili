@@ -11,7 +11,7 @@ import Banner from './components/Banner.js';
 import Footer from './components/Footer.js';
 import AppLink from './components/AppLink.js';
 import LoadCover from './components/LoadCover.js';
-import InitialSearch from './components/InitialSearch.js';
+import InitialSearch from './components/InitialSearch/InitialSearch.js';
 // 主要内容组件
 import IndexContent from './components/IndexContent/IndexContent.js';
 
@@ -25,7 +25,9 @@ var Root = React.createClass({
 		return { 
 			loading: true,
 			// banner数据 Array
-			bannerData: null
+			bannerData: null,
+			// 搜索面板是否显示
+			initialSearchDisplay: false
 		}
 	},
 
@@ -43,19 +45,25 @@ var Root = React.createClass({
 	},
 
 	// 改变loading数据,当数据请求完成后执行
-	loadendChange: function(){
+	loadingChange: function(){
 		this.setState({loading: false});
+	},
+
+	// 切换搜索面板是否显示
+	toggleInitialSearch: function(){
+		var initialSearchDisplay = !this.state.initialSearchDisplay;
+		this.setState({ initialSearchDisplay: initialSearchDisplay });
 	},
 
 	render: function(){
 		
 		return  <div>
-					<Header />
-					<InitialSearch />
+					<Header toggleInitialSearch={this.toggleInitialSearch} />
+					<InitialSearch initialSearchDisplay={this.state.initialSearchDisplay} toggleInitialSearch={this.toggleInitialSearch} />
 					<LoadCover loading={this.state.loading} />
 					<Nav pageActive={0} />
 					<Banner bannerData={this.state.bannerData} />
-					<IndexContent loadendChange={this.loadendChange} />
+					<IndexContent loadingChange={this.loadingChange} />
 					<AppLink />
 					<Footer />			
 				</div>

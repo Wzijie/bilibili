@@ -58,7 +58,7 @@ var IndexContent = React.createClass({
 	},
 	componentDidMount: function(){
 
-		this.props.loadendChange();
+		this.props.loadingChange();
 
 		// 推荐视频数据获取 start
 		var recommendDataSuccess = (data) => {
