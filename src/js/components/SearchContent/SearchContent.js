@@ -2,12 +2,32 @@
 import React from 'react';
 
 import SearchNav from './SearchNav.js';
-import SearchFilterChannel from './SearchFilterChannel.js';
+import SearchFilter from './SearchFilter.js';
+import SearchResult from './SearchResult.js';
+
+import ajaxRequest from '../../plugs/ajaxRequest.js';
 
 var SearchContent = React.createClass({
 
 	getInitialState: function(){
 
+		// 获取查询字符keyword
+		// 首先将字符串以&分成数组
+		var searchStr = location.search.slice(1).split('&');
+		var keyword = null;
+		searchStr.forEach((searchItem, index) => {
+			if(keyword !== null){
+				return;
+			}
+			// 拿到=号前面的key值，key=value
+			var searchKey = searchItem.slice(0, searchItem.indexOf('='));
+			// 找到key值为keyword的value
+			if(searchKey === 'keyword'){
+				keyword = searchItem.slice( searchItem.indexOf('=')+1 );
+			}
+		});
+
+		// 创建筛选数据
 		function createSearchNavData(title, filterName){
 			return {
 				// 标题
@@ -17,6 +37,7 @@ var SearchContent = React.createClass({
 			};
 		}
 
+		// 搜索类型
 		var searchNavData = [
 			createSearchNavData('综合', 'video'),
 			createSearchNavData('番剧', 'series'),
@@ -24,6 +45,7 @@ var SearchContent = React.createClass({
 			createSearchNavData('UP主', 'upuser'),
 		];
 
+		// 版块筛选
 		var filterChannel = [
 			createSearchNavData('全部', '-1'),
 			createSearchNavData('动画', '1'),
@@ -40,6 +62,7 @@ var SearchContent = React.createClass({
 			createSearchNavData('电视剧', '11')
 		];
 
+		// 排序方式
 		var filterOrder = [
 			createSearchNavData('综合', 'default'),
 			createSearchNavData('点击', 'click'),
@@ -53,21 +76,69 @@ var SearchContent = React.createClass({
 			searchNavData: searchNavData,
 			filterChannel: filterChannel,
 			filterOrder: filterOrder,
-			type: 'video'
+			keyword: keyword,
+			type: 'video',
+			channel: '-1',
+			order: 'default',
+			page: 1,
+			searchResultStorage: {},
+			currentSearchResult: null
 		}
 	},
 
 	componentDidMount: function(){
 		this.props.loadingChange();
+		this.requestSearchResult();
+	},
+
+	requestSearchResult: function(){
+		var { keyword, type, channel, order, page, searchResultStorage } = this.state;
+		var filterName = type + channel + order;
+		this.setState({ currentSearchResult: null });
+		if(searchResultStorage[filterName] !== undefined){
+			searchResultStorage[filterName].ready = true;
+			this.setState({ currentSearchResult: searchResultStorage[filterName] });
+			return;
+		}
+
+		var searchResultSuccess = (data) => {
+			console.log(JSON.parse(data.data), 'searchResultSuccess');
+			var data = JSON.parse(data.data);
+			var searchResult = null;
+			switch (type){
+				case 'video':
+					searchResult = data.res.result || [];
+					break;
+				case 'series':
+					searchResult = data.tp_res.result || [];
+					break;
+				case 'special':
+					searchResult = data.sp_res.result || [];
+					break;
+				case 'upuser':
+					searchResult = data.up_res.result || [];
+					break;
+				default: break;
+			} 
+			searchResultStorage[filterName] = searchResult;
+			this.setState({ currentSearchResult: searchResult });
+		}
+		var searchResultError = (error) => {
+			console.log(error, 'searchResultError');
+		}
+		var searchResultURL = 'http://localhost:3000/search?keyword='+keyword+'&page='+page+'&order='+order+'&tids='+channel+'&type='+type;
+		ajaxRequest(searchResultURL, 'GET', searchResultSuccess, searchResultError);
+
 	},
 
 	render: function(){
 		return	<div className='search-content'>
 							<SearchNav searchNavData={this.state.searchNavData} />
 							<div className='filter-container'>
-								<SearchFilterChannel filterChannel={this.state.filterChannel} class='channel-filter' />
-								<SearchFilterChannel filterChannel={this.state.filterOrder} class='order-filter' />
+								<SearchFilter filterChannel={this.state.filterChannel} class='channel-filter' />
+								<SearchFilter filterChannel={this.state.filterOrder} class='order-filter' />
 							</div>
+							<SearchResult currentSearchResult={this.state.currentSearchResult} />
 						</div>
 	}
 });

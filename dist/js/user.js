@@ -41,7 +41,7 @@ webpackJsonp([6],{
 
 	var _InitialSearch2 = _interopRequireDefault(_InitialSearch);
 
-	var _UserContent = __webpack_require__(226);
+	var _UserContent = __webpack_require__(227);
 
 	var _UserContent2 = _interopRequireDefault(_UserContent);
 
@@ -960,7 +960,7 @@ webpackJsonp([6],{
 
 /***/ },
 
-/***/ 226:
+/***/ 227:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

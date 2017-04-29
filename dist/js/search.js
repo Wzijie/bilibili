@@ -886,6 +886,102 @@ webpackJsonp([5],{
 
 /***/ },
 
+/***/ 212:
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+	// 图片懒加载
+	function imgLazyLoad(imgBoxSelector, isFadeIn, listBoxSelector, fadeInClass) {
+
+		var imgBoxArray = [].concat(_toConsumableArray(document.querySelectorAll(imgBoxSelector)));
+		var isScroll = false; // 让滚动事件执行的少一点
+		var removeEventTime = null;
+
+		// ranking排行榜页面用到的列项容器
+		var listBox = isFadeIn !== undefined ? document.querySelectorAll(listBoxSelector) : null;
+
+		// 符合条件的图片显示
+		var imgShow = function imgShow() {
+			imgBoxArray.forEach(function (imgBox, key) {
+				// 如果这个图片容器已经插入了图片则退出此次操作
+				if (imgBox.innerHTML !== '') {
+
+					// 这个判断是为了排行榜页加的，需要处理一些特殊的地方
+					// 排行榜页图片容器会出现已有图片的情况，不需要执行插入图片，但是要将容器显示出来
+					if (listBox !== null) {
+						listBox[key].classList.add(fadeInClass);
+					}
+
+					return;
+				}
+
+				var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+
+				// 排行榜页的图片容器的父元素用了flex属性，导致offsetTop为0，使用父元素的offsetTop
+				var showEleOffsetTop = listBox === null ? imgBox.offsetTop : listBox[key].offsetTop;
+
+				// 视口上方因滚动隐藏的区域 + 视口高度 >= 图片离顶部的距离 则可以认为图片出现在视口底部离页面顶部的距离范围内
+				// -50意思是判定点为图片顶部再往上50px
+				if (scrollTop + window.innerHeight >= showEleOffsetTop - 50) {
+					var coverImgUrl = imgBox.getAttribute('data-img');
+					var coverImgHtml = '<div class="cover-img" \
+										style="background-image: url(' + coverImgUrl + ')" > \
+										</div>';
+					imgBox.innerHTML = coverImgHtml;
+
+					// ranking排行榜页面用到的列项淡入效果
+					if (listBox !== null) {
+						listBox[key].classList.add(fadeInClass);
+					}
+
+					setTimeout(function () {
+						imgBox.firstElementChild.style.opacity = '1';
+					}, 50);
+				}
+			});
+
+			// 图片加载完毕后清除滚动事件
+			var imgDisplayComplete = imgBoxArray.every(function (item) {
+				return item.innerHTML !== '';
+			});
+			if (imgDisplayComplete) {
+				window.onscroll = undefined;
+			}
+		};
+
+		// 默认执行一次
+		imgShow();
+
+		var scrollHandler = function scrollHandler() {
+			if (isScroll === true) {
+				return;
+			}
+			console.log('imgLazyLoad');
+			imgShow();
+			isScroll = true;
+
+			// 限制100毫秒内最多执行一次
+			setTimeout(function () {
+				isScroll = false;
+			}, 100);
+		};
+
+		// 后来再看下面这句没意义，赋值操作已经覆盖了事件
+		// window.onscroll = undefined;
+		window.onscroll = scrollHandler;
+	}
+
+	exports.default = imgLazyLoad;
+
+/***/ },
+
 /***/ 221:
 /***/ function(module, exports) {
 
@@ -954,9 +1050,17 @@ webpackJsonp([5],{
 
 	var _SearchNav2 = _interopRequireDefault(_SearchNav);
 
-	var _SearchFilterChannel = __webpack_require__(225);
+	var _SearchFilter = __webpack_require__(225);
 
-	var _SearchFilterChannel2 = _interopRequireDefault(_SearchFilterChannel);
+	var _SearchFilter2 = _interopRequireDefault(_SearchFilter);
+
+	var _SearchResult = __webpack_require__(226);
+
+	var _SearchResult2 = _interopRequireDefault(_SearchResult);
+
+	var _ajaxRequest = __webpack_require__(204);
+
+	var _ajaxRequest2 = _interopRequireDefault(_ajaxRequest);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -966,6 +1070,23 @@ webpackJsonp([5],{
 
 		getInitialState: function getInitialState() {
 
+			// 获取查询字符keyword
+			// 首先将字符串以&分成数组
+			var searchStr = location.search.slice(1).split('&');
+			var keyword = null;
+			searchStr.forEach(function (searchItem, index) {
+				if (keyword !== null) {
+					return;
+				}
+				// 拿到=号前面的key值，key=value
+				var searchKey = searchItem.slice(0, searchItem.indexOf('='));
+				// 找到key值为keyword的value
+				if (searchKey === 'keyword') {
+					keyword = searchItem.slice(searchItem.indexOf('=') + 1);
+				}
+			});
+
+			// 创建筛选数据
 			function createSearchNavData(title, filterName) {
 				return {
 					// 标题
@@ -975,22 +1096,81 @@ webpackJsonp([5],{
 				};
 			}
 
+			// 搜索类型
 			var searchNavData = [createSearchNavData('综合', 'video'), createSearchNavData('番剧', 'series'), createSearchNavData('专题', 'special'), createSearchNavData('UP主', 'upuser')];
 
+			// 版块筛选
 			var filterChannel = [createSearchNavData('全部', '-1'), createSearchNavData('动画', '1'), createSearchNavData('番剧', '33'), createSearchNavData('国创', '167'), createSearchNavData('舞蹈', '20'), createSearchNavData('游戏', '4'), createSearchNavData('科技', '36'), createSearchNavData('生活', '160'), createSearchNavData('娱乐', '5'), createSearchNavData('鬼畜', '119'), createSearchNavData('电影', '23'), createSearchNavData('时尚', '155'), createSearchNavData('电视剧', '11')];
 
+			// 排序方式
 			var filterOrder = [createSearchNavData('综合', 'default'), createSearchNavData('点击', 'click'), createSearchNavData('弹幕', 'dm'), createSearchNavData('评论', 'scores'), createSearchNavData('日期', 'senddate'), createSearchNavData('收藏', 'stow')];
 
 			return {
 				searchNavData: searchNavData,
 				filterChannel: filterChannel,
 				filterOrder: filterOrder,
-				type: 'video'
+				keyword: keyword,
+				type: 'video',
+				channel: '-1',
+				order: 'default',
+				page: 1,
+				searchResultStorage: {},
+				currentSearchResult: null
 			};
 		},
 
 		componentDidMount: function componentDidMount() {
 			this.props.loadingChange();
+			this.requestSearchResult();
+		},
+
+		requestSearchResult: function requestSearchResult() {
+			var _this = this;
+
+			var _state = this.state,
+			    keyword = _state.keyword,
+			    type = _state.type,
+			    channel = _state.channel,
+			    order = _state.order,
+			    page = _state.page,
+			    searchResultStorage = _state.searchResultStorage;
+
+			var filterName = type + channel + order;
+			this.setState({ currentSearchResult: null });
+			if (searchResultStorage[filterName] !== undefined) {
+				searchResultStorage[filterName].ready = true;
+				this.setState({ currentSearchResult: searchResultStorage[filterName] });
+				return;
+			}
+
+			var searchResultSuccess = function searchResultSuccess(data) {
+				console.log(JSON.parse(data.data), 'searchResultSuccess');
+				var data = JSON.parse(data.data);
+				var searchResult = null;
+				switch (type) {
+					case 'video':
+						searchResult = data.res.result || [];
+						break;
+					case 'series':
+						searchResult = data.tp_res.result || [];
+						break;
+					case 'special':
+						searchResult = data.sp_res.result || [];
+						break;
+					case 'upuser':
+						searchResult = data.up_res.result || [];
+						break;
+					default:
+						break;
+				}
+				searchResultStorage[filterName] = searchResult;
+				_this.setState({ currentSearchResult: searchResult });
+			};
+			var searchResultError = function searchResultError(error) {
+				console.log(error, 'searchResultError');
+			};
+			var searchResultURL = 'http://localhost:3000/search?keyword=' + keyword + '&page=' + page + '&order=' + order + '&tids=' + channel + '&type=' + type;
+			(0, _ajaxRequest2.default)(searchResultURL, 'GET', searchResultSuccess, searchResultError);
 		},
 
 		render: function render() {
@@ -1001,9 +1181,10 @@ webpackJsonp([5],{
 				_react2.default.createElement(
 					'div',
 					{ className: 'filter-container' },
-					_react2.default.createElement(_SearchFilterChannel2.default, { filterChannel: this.state.filterChannel, 'class': 'channel-filter' }),
-					_react2.default.createElement(_SearchFilterChannel2.default, { filterChannel: this.state.filterOrder, 'class': 'order-filter' })
-				)
+					_react2.default.createElement(_SearchFilter2.default, { filterChannel: this.state.filterChannel, 'class': 'channel-filter' }),
+					_react2.default.createElement(_SearchFilter2.default, { filterChannel: this.state.filterOrder, 'class': 'order-filter' })
+				),
+				_react2.default.createElement(_SearchResult2.default, { currentSearchResult: this.state.currentSearchResult })
 			);
 		}
 	});
@@ -1160,6 +1341,136 @@ webpackJsonp([5],{
 	});
 
 	exports.default = SearchFilterChannel;
+
+/***/ },
+
+/***/ 226:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _react = __webpack_require__(9);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _imgLazyLoad = __webpack_require__(212);
+
+	var _imgLazyLoad2 = _interopRequireDefault(_imgLazyLoad);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var SearchResult = _react2.default.createClass({
+		displayName: 'SearchResult',
+
+		componentDidUpdate: function componentDidUpdate() {
+			if (this.props.currentRankingData !== null) {
+				(0, _imgLazyLoad2.default)('.cover-box', true, '.list-box', 'fade-in');
+			}
+		},
+		render: function render() {
+			console.log(this.props.currentSearchResult);
+			var currentSearchResult = this.props.currentSearchResult;
+			if (currentSearchResult === null) {
+				return _react2.default.createElement('p', { className: '\u6B63\u5728\u52A0\u8F7D...' });
+			}
+			return _react2.default.createElement(
+				'ul',
+				{ className: 'search-result rank-list' },
+				currentSearchResult.map(function (searchResultItem, index) {
+
+					// av号
+					var aid = searchResultItem.aid;
+					// 用户名
+					var username = searchResultItem.author;
+					// 视频封面
+					var pic = searchResultItem.pic;
+					// 视频标题
+					var title = searchResultItem.title;
+					// 播放数
+					var playNum = searchResultItem.play >= 10000 ? (searchResultItem.play / 10000).toFixed(1) + '万' : searchResultItem.play;
+					// 弹幕数
+					var barrageNum = searchResultItem.video_review >= 10000 ? (searchResultItem.video_review / 10000).toFixed(1) + '万' : searchResultItem.video_review;
+					// 排名top3添加class改变背景颜色
+					var topThreeClass = index < 3 ? ' top-three' : '';
+
+					return _react2.default.createElement(
+						'li',
+						{ key: index },
+						_react2.default.createElement(
+							'a',
+							{ href: 'video.html?aid=' + aid, className: 'list-box' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'video-cover' },
+								_react2.default.createElement(
+									'div',
+									{ className: 'rank-num' + topThreeClass },
+									index + 1
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'cover-box', 'data-img': pic },
+
+									// 如果当前的数据已经加载过保存起来了，就将图片显示出来
+									// 如果是新的数据则依靠懒加载滚动将图片插入
+									currentSearchResult.ready === true ? _react2.default.createElement('div', { className: 'cover-img', style: { 'backgroundImage': 'url("' + pic + '")', 'opacity': '1' } }) : ''
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'video-info' },
+								_react2.default.createElement(
+									'div',
+									{ className: 'video-title' },
+									title
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'video-detaied' },
+									_react2.default.createElement('img', { className: 'icon-detaied', src: './src/image/ranking/ico_up.png' }),
+									_react2.default.createElement(
+										'span',
+										null,
+										username
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'video-detaied' },
+									_react2.default.createElement(
+										'div',
+										{ className: 'play-danmu' },
+										_react2.default.createElement('img', { className: 'icon-detaied', src: './src/image/ranking/ico_play.png' }),
+										_react2.default.createElement(
+											'span',
+											null,
+											playNum
+										)
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'play-danmu' },
+										_react2.default.createElement('img', { className: 'icon-detaied', src: './src/image/ranking/ico_danmu.png' }),
+										_react2.default.createElement(
+											'span',
+											null,
+											barrageNum
+										)
+									)
+								)
+							)
+						)
+					);
+				})
+			);
+		}
+	});
+
+	exports.default = SearchResult;
 
 /***/ }
 
