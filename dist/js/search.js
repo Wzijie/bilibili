@@ -1050,11 +1050,15 @@ webpackJsonp([5],{
 
 	var _SearchNav2 = _interopRequireDefault(_SearchNav);
 
-	var _SearchFilter = __webpack_require__(225);
+	var _SearchFilterChannel = __webpack_require__(225);
 
-	var _SearchFilter2 = _interopRequireDefault(_SearchFilter);
+	var _SearchFilterChannel2 = _interopRequireDefault(_SearchFilterChannel);
 
-	var _SearchResult = __webpack_require__(226);
+	var _SearchFilterOrder = __webpack_require__(226);
+
+	var _SearchFilterOrder2 = _interopRequireDefault(_SearchFilterOrder);
+
+	var _SearchResult = __webpack_require__(227);
 
 	var _SearchResult2 = _interopRequireDefault(_SearchResult);
 
@@ -1124,22 +1128,28 @@ webpackJsonp([5],{
 			this.requestSearchResult();
 		},
 
-		requestSearchResult: function requestSearchResult() {
+		requestSearchResult: function requestSearchResult(type, channel, order, page) {
 			var _this = this;
 
 			var _state = this.state,
 			    keyword = _state.keyword,
-			    type = _state.type,
-			    channel = _state.channel,
-			    order = _state.order,
-			    page = _state.page,
 			    searchResultStorage = _state.searchResultStorage;
 
+			var type = type || this.state.type;
+			var channel = channel || this.state.channel;
+			var order = order || this.state.order;
+			var page = page || this.state.page;
 			var filterName = type + channel + order;
 			this.setState({ currentSearchResult: null });
 			if (searchResultStorage[filterName] !== undefined) {
 				searchResultStorage[filterName].ready = true;
-				this.setState({ currentSearchResult: searchResultStorage[filterName] });
+				this.setState({
+					currentSearchResult: searchResultStorage[filterName],
+					type: type,
+					channel: channel,
+					order: order,
+					page: page
+				});
 				return;
 			}
 
@@ -1164,7 +1174,13 @@ webpackJsonp([5],{
 						break;
 				}
 				searchResultStorage[filterName] = searchResult;
-				_this.setState({ currentSearchResult: searchResult });
+				_this.setState({
+					currentSearchResult: searchResult,
+					type: type,
+					channel: channel,
+					order: order,
+					page: page
+				});
 			};
 			var searchResultError = function searchResultError(error) {
 				console.log(error, 'searchResultError');
@@ -1177,12 +1193,12 @@ webpackJsonp([5],{
 			return _react2.default.createElement(
 				'div',
 				{ className: 'search-content' },
-				_react2.default.createElement(_SearchNav2.default, { searchNavData: this.state.searchNavData }),
+				_react2.default.createElement(_SearchNav2.default, { searchNavData: this.state.searchNavData, requestSearchResult: this.requestSearchResult }),
 				_react2.default.createElement(
 					'div',
 					{ className: 'filter-container' },
-					_react2.default.createElement(_SearchFilter2.default, { filterChannel: this.state.filterChannel, 'class': 'channel-filter' }),
-					_react2.default.createElement(_SearchFilter2.default, { filterChannel: this.state.filterOrder, 'class': 'order-filter' })
+					_react2.default.createElement(_SearchFilterChannel2.default, { filterChannel: this.state.filterChannel, requestSearchResult: this.requestSearchResult }),
+					_react2.default.createElement(_SearchFilterOrder2.default, { filterOrder: this.state.filterOrder, requestSearchResult: this.requestSearchResult })
 				),
 				_react2.default.createElement(_SearchResult2.default, { currentSearchResult: this.state.currentSearchResult })
 			);
@@ -1213,12 +1229,17 @@ webpackJsonp([5],{
 
 
 		// search-nav li 点击后添加选中class
-		searchNavClickHandler: function searchNavClickHandler(event) {
-			var navList = Array.from(event.currentTarget.parentNode.children).slice(0, -1);
-			navList.forEach(function (navItem) {
-				navItem.classList.remove('menu-active');
-			});
-			event.currentTarget.classList.add('menu-active');
+		searchNavClickHandler: function searchNavClickHandler(type) {
+			var _this = this;
+
+			return function (event) {
+				var navList = Array.from(event.currentTarget.parentNode.children).slice(0, -1);
+				navList.forEach(function (navItem) {
+					navItem.classList.remove('menu-active');
+				});
+				event.currentTarget.classList.add('menu-active');
+				_this.props.requestSearchResult(type);
+			};
 		},
 
 		// 切换filter-container筛选容器的显示隐藏
@@ -1237,7 +1258,7 @@ webpackJsonp([5],{
 		},
 
 		render: function render() {
-			var _this = this;
+			var _this2 = this;
 
 			var searchNavData = this.props.searchNavData;
 			return _react2.default.createElement(
@@ -1257,7 +1278,7 @@ webpackJsonp([5],{
 
 						return _react2.default.createElement(
 							'li',
-							{ className: firstListClass, key: index, onClick: _this.searchNavClickHandler },
+							{ className: firstListClass, key: index, onClick: _this2.searchNavClickHandler(filterName) },
 							_react2.default.createElement(
 								'a',
 								null,
@@ -1303,22 +1324,31 @@ webpackJsonp([5],{
 
 
 		componentDidMount: function componentDidMount() {
-			(0, _navRoll2.default)('.' + this.props.class + ' .roll-list');
+			(0, _navRoll2.default)('.channel-filter .roll-list');
+		},
+
+		changeFilter: function changeFilter(channel) {
+			var _this = this;
+
+			return function () {
+				_this.props.requestSearchResult(undefined, channel);
+			};
 		},
 
 		render: function render() {
+			var _this2 = this;
 
 			var filterChannel = this.props.filterChannel;
 
 			return _react2.default.createElement(
 				'nav',
-				{ className: 'search-filter rank-nav ' + this.props.class },
+				{ className: 'search-filter rank-nav channel-filter' },
 				_react2.default.createElement(
 					'ul',
 					{ className: 'roll-list' },
 					filterChannel.map(function (filterChannelItem, index) {
-						// 标题，筛选关键字
 
+						// 标题，筛选关键字
 						var title = filterChannelItem.title,
 						    filterName = filterChannelItem.filterName;
 
@@ -1327,7 +1357,7 @@ webpackJsonp([5],{
 
 						return _react2.default.createElement(
 							'li',
-							{ className: firstListClass, key: index },
+							{ className: firstListClass, key: index, onClick: _this2.changeFilter(filterName) },
 							_react2.default.createElement(
 								'a',
 								null,
@@ -1345,6 +1375,80 @@ webpackJsonp([5],{
 /***/ },
 
 /***/ 226:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _react = __webpack_require__(9);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _navRoll = __webpack_require__(221);
+
+	var _navRoll2 = _interopRequireDefault(_navRoll);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var SearchFilterChannel = _react2.default.createClass({
+		displayName: 'SearchFilterChannel',
+
+
+		componentDidMount: function componentDidMount() {
+			(0, _navRoll2.default)('.order-filter .roll-list');
+		},
+
+		changeFilter: function changeFilter(order) {
+			var _this = this;
+
+			return function () {
+				_this.props.requestSearchResult(undefined, undefined, order);
+			};
+		},
+
+		render: function render() {
+			var _this2 = this;
+
+			var filterOrder = this.props.filterOrder;
+
+			return _react2.default.createElement(
+				'nav',
+				{ className: 'search-filter rank-nav order-filter' },
+				_react2.default.createElement(
+					'ul',
+					{ className: 'roll-list' },
+					filterOrder.map(function (filterOrderItem, index) {
+
+						// 标题，筛选关键字
+						var title = filterOrderItem.title,
+						    filterName = filterOrderItem.filterName;
+
+
+						var firstListClass = index === 0 ? 'on' : '';
+
+						return _react2.default.createElement(
+							'li',
+							{ className: firstListClass, key: index, onClick: _this2.changeFilter(filterName) },
+							_react2.default.createElement(
+								'a',
+								null,
+								title
+							)
+						);
+					})
+				)
+			);
+		}
+	});
+
+	exports.default = SearchFilterChannel;
+
+/***/ },
+
+/***/ 227:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1375,7 +1479,18 @@ webpackJsonp([5],{
 			console.log(this.props.currentSearchResult);
 			var currentSearchResult = this.props.currentSearchResult;
 			if (currentSearchResult === null) {
-				return _react2.default.createElement('p', { className: '\u6B63\u5728\u52A0\u8F7D...' });
+				return _react2.default.createElement(
+					'p',
+					{ className: 'loading-info' },
+					'\u6B63\u5728\u52A0\u8F7D...'
+				);
+			}
+			if (currentSearchResult.length === 0) {
+				return _react2.default.createElement(
+					'p',
+					{ className: 'loading-info' },
+					'\u6CA1\u6709\u6570\u636E...'
+				);
 			}
 			return _react2.default.createElement(
 				'ul',
@@ -1394,8 +1509,8 @@ webpackJsonp([5],{
 					var playNum = searchResultItem.play >= 10000 ? (searchResultItem.play / 10000).toFixed(1) + '万' : searchResultItem.play;
 					// 弹幕数
 					var barrageNum = searchResultItem.video_review >= 10000 ? (searchResultItem.video_review / 10000).toFixed(1) + '万' : searchResultItem.video_review;
-					// 排名top3添加class改变背景颜色
-					var topThreeClass = index < 3 ? ' top-three' : '';
+					// 视频长度
+					var duration = searchResultItem.duration;
 
 					return _react2.default.createElement(
 						'li',
@@ -1408,16 +1523,16 @@ webpackJsonp([5],{
 								{ className: 'video-cover' },
 								_react2.default.createElement(
 									'div',
-									{ className: 'rank-num' + topThreeClass },
-									index + 1
-								),
-								_react2.default.createElement(
-									'div',
 									{ className: 'cover-box', 'data-img': pic },
 
 									// 如果当前的数据已经加载过保存起来了，就将图片显示出来
 									// 如果是新的数据则依靠懒加载滚动将图片插入
 									currentSearchResult.ready === true ? _react2.default.createElement('div', { className: 'cover-img', style: { 'backgroundImage': 'url("' + pic + '")', 'opacity': '1' } }) : ''
+								),
+								_react2.default.createElement(
+									'span',
+									{ className: 'video-duration' },
+									duration
 								)
 							),
 							_react2.default.createElement(

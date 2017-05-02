@@ -40,3 +40,24 @@
     font-size: 0.14rem; }
   .search-content .search-filter .roll-list li.on a {
     border: 0; }
+
+.search-content .search-result li a.list-box div.video-cover {
+  width: 33%;
+  position: relative; }
+  .search-content .search-result li a.list-box div.video-cover .cover-box {
+    width: 100%; }
+  .search-content .search-result li a.list-box div.video-cover .cover-box .cover-img {
+    border-radius: 0.04rem; }
+  .search-content .search-result li a.list-box div.video-cover .video-duration {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 0.01rem 0.05rem;
+    background: #000;
+    font-size: 0.12rem;
+    color: #fff;
+    opacity: 0.7;
+    border-radius: 0 0 0.04rem 0; }
+
+.search-content .search-result li a.list-box div.video-info {
+  width: 67%; }

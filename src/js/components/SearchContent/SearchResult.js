@@ -13,7 +13,10 @@ var SearchResult = React.createClass({
 		console.log(this.props.currentSearchResult);
 		var currentSearchResult = this.props.currentSearchResult;
 		if(currentSearchResult === null){
-			return <p className='正在加载...'></p>
+			return <p className='loading-info'>正在加载...</p>
+		}
+		if(currentSearchResult.length === 0){
+			return <p className='loading-info'>没有数据...</p>
 		}
 		return	<ul className='search-result rank-list'>
 						{
@@ -31,13 +34,12 @@ var SearchResult = React.createClass({
 								var playNum = searchResultItem.play >= 10000 ? (searchResultItem.play/10000).toFixed(1) + '万' : searchResultItem.play;
 								// 弹幕数
 								var barrageNum = searchResultItem.video_review >= 10000 ? (searchResultItem.video_review/10000).toFixed(1) + '万' : searchResultItem.video_review;
-								// 排名top3添加class改变背景颜色
-								var topThreeClass = index < 3 ? ' top-three' : '';
+								// 视频长度
+								var duration = searchResultItem.duration;
 
 								return	<li key={index}>
 													<a href={'video.html?aid=' + aid} className='list-box'>
 														<div className='video-cover'>
-															<div className={'rank-num' + topThreeClass}>{index+1}</div>
 															<div className='cover-box' data-img={pic}>
 															{	
 																// 如果当前的数据已经加载过保存起来了，就将图片显示出来
@@ -47,6 +49,7 @@ var SearchResult = React.createClass({
 																: ''
 															}
 															</div>
+															<span className='video-duration'>{duration}</span>
 														</div>
 														<div className='video-info'>
 															<div className='video-title'>{title}</div>

@@ -4,12 +4,15 @@ import React from 'react';
 var SearchNav = React.createClass({
 
 	// search-nav li 点击后添加选中class
-	searchNavClickHandler: function(event){
-		var navList = Array.from(event.currentTarget.parentNode.children).slice(0, -1);
-		navList.forEach((navItem) => {
-			navItem.classList.remove('menu-active');
-		});
-		event.currentTarget.classList.add('menu-active');
+	searchNavClickHandler: function(type){
+		return (event) => {
+			var navList = Array.from(event.currentTarget.parentNode.children).slice(0, -1);
+			navList.forEach((navItem) => {
+				navItem.classList.remove('menu-active');
+			});
+			event.currentTarget.classList.add('menu-active');
+			this.props.requestSearchResult(type);
+		}
 	},
 
 	// 切换filter-container筛选容器的显示隐藏
@@ -39,7 +42,7 @@ var SearchNav = React.createClass({
 
 									var firstListClass = index === 0 ? 'menu-active' : '';
 									
-									return	<li className={firstListClass} key={index} onClick={this.searchNavClickHandler}>
+									return	<li className={firstListClass} key={index} onClick={this.searchNavClickHandler(filterName)}>
 														<a>{title}</a>
 													</li>
 								})

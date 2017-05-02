@@ -2,7 +2,8 @@
 import React from 'react';
 
 import SearchNav from './SearchNav.js';
-import SearchFilter from './SearchFilter.js';
+import SearchFilterChannel from './SearchFilterChannel.js';
+import SearchFilterOrder from './SearchFilterOrder.js';
 import SearchResult from './SearchResult.js';
 
 import ajaxRequest from '../../plugs/ajaxRequest.js';
@@ -91,13 +92,23 @@ var SearchContent = React.createClass({
 		this.requestSearchResult();
 	},
 
-	requestSearchResult: function(){
-		var { keyword, type, channel, order, page, searchResultStorage } = this.state;
+	requestSearchResult: function(type, channel, order, page){
+		var { keyword, searchResultStorage } = this.state;
+		var type = type || this.state.type
+		var channel = channel || this.state.channel
+		var order = order || this.state.order
+		var page = page || this.state.page
 		var filterName = type + channel + order;
 		this.setState({ currentSearchResult: null });
 		if(searchResultStorage[filterName] !== undefined){
 			searchResultStorage[filterName].ready = true;
-			this.setState({ currentSearchResult: searchResultStorage[filterName] });
+			this.setState({ 
+				currentSearchResult: searchResultStorage[filterName],
+				type,
+				channel,
+				order,
+				page
+			});
 			return;
 		}
 
@@ -121,7 +132,13 @@ var SearchContent = React.createClass({
 				default: break;
 			} 
 			searchResultStorage[filterName] = searchResult;
-			this.setState({ currentSearchResult: searchResult });
+			this.setState({ 
+				currentSearchResult: searchResult,
+				type,
+				channel,
+				order,
+				page
+			});
 		}
 		var searchResultError = (error) => {
 			console.log(error, 'searchResultError');
@@ -133,10 +150,10 @@ var SearchContent = React.createClass({
 
 	render: function(){
 		return	<div className='search-content'>
-							<SearchNav searchNavData={this.state.searchNavData} />
+							<SearchNav searchNavData={this.state.searchNavData} requestSearchResult={this.requestSearchResult} />
 							<div className='filter-container'>
-								<SearchFilter filterChannel={this.state.filterChannel} class='channel-filter' />
-								<SearchFilter filterChannel={this.state.filterOrder} class='order-filter' />
+								<SearchFilterChannel filterChannel={this.state.filterChannel} requestSearchResult={this.requestSearchResult} />
+								<SearchFilterOrder filterOrder={this.state.filterOrder} requestSearchResult={this.requestSearchResult} />
 							</div>
 							<SearchResult currentSearchResult={this.state.currentSearchResult} />
 						</div>
