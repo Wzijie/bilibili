@@ -88,8 +88,23 @@ var SearchContent = React.createClass({
 	},
 
 	componentDidMount: function(){
+
 		this.props.loadingChange();
 		this.requestSearchResult();
+
+		var historySearch = localStorage.getItem('historySearch');
+		historySearch = historySearch === null ? [] : JSON.parse(historySearch);
+		if(this.state.keyword !== null){
+			var historyHaveKeyword = historySearch.indexOf(decodeURI(this.state.keyword));
+			if(historyHaveKeyword !== -1){
+				historySearch.splice(historyHaveKeyword, 1);
+			}
+			historySearch.unshift(decodeURI(this.state.keyword));
+			if(historySearch.length >= 5){
+				historySearch = historySearch.slice(0, 5);
+			}
+			localStorage.setItem('historySearch', JSON.stringify(historySearch));
+		}
 	},
 
 	requestSearchResult: function(type, channel, order, page){
@@ -150,10 +165,14 @@ var SearchContent = React.createClass({
 
 	render: function(){
 
+		if(this.state.keyword === null){
+			return <p className='loading-info'>获取不到“keyword”查询字符</p>
+		}
+
 		var typeIsVideo = this.state.type === 'video' ? true : false;
 
 		return	<div className='search-content'>
-							<SearchNav searchNavData={this.state.searchNavData} requestSearchResult={this.requestSearchResult} searchType={this.state.type} />
+							<SearchNav searchNavData={this.state.searchNavData} requestSearchResult={this.requestSearchResult} typeIsVideo={typeIsVideo} />
 							{
 								typeIsVideo
 								?	<div className='filter-container'>

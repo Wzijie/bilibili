@@ -2,6 +2,13 @@
 import React from 'react';
 
 var SearchNav = React.createClass({
+	getInitialState: function(){
+		return { typeIsVideo: this.props.typeIsVideo };
+	},
+
+	componentWillReceiveProps: function (nextProps){
+		this.setState({ typeIsVideo: nextProps.typeIsVideo });
+	},
 
 	searchNavClickHandler: function(type){
 		return (event) => {
@@ -11,29 +18,27 @@ var SearchNav = React.createClass({
 				navItem.classList.remove('menu-active');
 			});
 			event.currentTarget.classList.add('menu-active');
-			this.props.requestSearchResult(type);
+			this.props.requestSearchResult(type, '-1', 'default');
 		}
 	},
 
 	// 切换filter-container筛选容器的显示隐藏
-	toggleFilterContainer: false,
 	filterBtnClick: function(event){
 		var filterIcon = event.currentTarget.firstElementChild;
 		var filterContainer = document.querySelector('.filter-container');
-		this.toggleFilterContainer = !this.toggleFilterContainer;
-		if(this.toggleFilterContainer){
+		if(this.state.typeIsVideo){
 			filterIcon.classList.add('on');
 			filterContainer.classList.add('show');
 		}else{
 			filterIcon.classList.remove('on');
 			filterContainer.classList.remove('show');
 		}
+		this.setState({ typeIsVideo: !this.state.typeIsVideo });
 	},
 
 	render: function(){
 
 		var searchNavData = this.props.searchNavData;
-		var typeIsVideo = this.props.searchType === 'video' ? true : false;
 
 		return	<nav className='search-nav menu'>
 							<ul className='menu-list'>
@@ -51,11 +56,11 @@ var SearchNav = React.createClass({
 								})
 							}
 							{
-								typeIsVideo
+								this.props.typeIsVideo
 								?	<li className='filter-btn' onClick={this.filterBtnClick}>
 										<i className='filter-icon'></i>
 									</li>
-								: ''
+								: <li></li>
 							}
 							</ul>
 						</nav>

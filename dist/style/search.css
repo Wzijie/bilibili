@@ -61,3 +61,26 @@
 
 .search-content .search-result li a.list-box div.video-info {
   width: 67%; }
+
+.search-content .other-result li a.list-box div.video-cover .video-sign {
+  top: 0;
+  bottom: inherit;
+  background: #de698c;
+  opacity: 1;
+  border-radius: 0 0.04rem 0 0; }
+
+.search-content .other-result li a.list-box div.video-info .video-title {
+  height: 0.2rem;
+  text-overflow: ellipsis;
+  white-space: nowrap; }
+
+.search-content .other-result li a.list-box div.video-info .video-description {
+  height: 0.36rem;
+  line-height: 0.18rem;
+  white-space: normal; }
+  .search-content .other-result li a.list-box div.video-info .video-description p {
+    height: 100%; }
+
+.search-content .other-result li a.list-box div.video-info .keyword {
+  color: #de698c;
+  font-style: normal; }

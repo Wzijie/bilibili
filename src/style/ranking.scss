@@ -176,6 +176,9 @@
 				}
 			}
 			div.video-info{
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
 				width: 57%;
 				height: 100%;
 				padding: 0 0.1rem;
@@ -190,6 +193,7 @@
 					/*margin-bottom: 0.14rem;*/
 				}
 				div.video-detaied{
+					height: 0.2rem;
 					line-height: 0.2rem;
 					font-size: 0.12rem;
 					color: #999;
@@ -200,6 +204,7 @@
 					.play-danmu{
 						display: inline-block;
 						width: 50%;
+						overflow: hidden;
 					}
 					.icon-detaied{
 						height: 0.12rem;

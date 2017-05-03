@@ -1124,8 +1124,23 @@ webpackJsonp([5],{
 		},
 
 		componentDidMount: function componentDidMount() {
+
 			this.props.loadingChange();
 			this.requestSearchResult();
+
+			var historySearch = localStorage.getItem('historySearch');
+			historySearch = historySearch === null ? [] : JSON.parse(historySearch);
+			if (this.state.keyword !== null) {
+				var historyHaveKeyword = historySearch.indexOf(decodeURI(this.state.keyword));
+				if (historyHaveKeyword !== -1) {
+					historySearch.splice(historyHaveKeyword, 1);
+				}
+				historySearch.unshift(decodeURI(this.state.keyword));
+				if (historySearch.length >= 5) {
+					historySearch = historySearch.slice(0, 5);
+				}
+				localStorage.setItem('historySearch', JSON.stringify(historySearch));
+			}
 		},
 
 		requestSearchResult: function requestSearchResult(type, channel, order, page) {
@@ -1191,12 +1206,20 @@ webpackJsonp([5],{
 
 		render: function render() {
 
+			if (this.state.keyword === null) {
+				return _react2.default.createElement(
+					'p',
+					{ className: 'loading-info' },
+					'\u83B7\u53D6\u4E0D\u5230\u201Ckeyword\u201D\u67E5\u8BE2\u5B57\u7B26'
+				);
+			}
+
 			var typeIsVideo = this.state.type === 'video' ? true : false;
 
 			return _react2.default.createElement(
 				'div',
 				{ className: 'search-content' },
-				_react2.default.createElement(_SearchNav2.default, { searchNavData: this.state.searchNavData, requestSearchResult: this.requestSearchResult, searchType: this.state.type }),
+				_react2.default.createElement(_SearchNav2.default, { searchNavData: this.state.searchNavData, requestSearchResult: this.requestSearchResult, typeIsVideo: typeIsVideo }),
 				typeIsVideo ? _react2.default.createElement(
 					'div',
 					{ className: 'filter-container' },
@@ -1230,6 +1253,13 @@ webpackJsonp([5],{
 	var SearchNav = _react2.default.createClass({
 		displayName: 'SearchNav',
 
+		getInitialState: function getInitialState() {
+			return { typeIsVideo: this.props.typeIsVideo };
+		},
+
+		componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+			this.setState({ typeIsVideo: nextProps.typeIsVideo });
+		},
 
 		searchNavClickHandler: function searchNavClickHandler(type) {
 			var _this = this;
@@ -1241,30 +1271,28 @@ webpackJsonp([5],{
 					navItem.classList.remove('menu-active');
 				});
 				event.currentTarget.classList.add('menu-active');
-				_this.props.requestSearchResult(type);
+				_this.props.requestSearchResult(type, '-1', 'default');
 			};
 		},
 
 		// 切换filter-container筛选容器的显示隐藏
-		toggleFilterContainer: false,
 		filterBtnClick: function filterBtnClick(event) {
 			var filterIcon = event.currentTarget.firstElementChild;
 			var filterContainer = document.querySelector('.filter-container');
-			this.toggleFilterContainer = !this.toggleFilterContainer;
-			if (this.toggleFilterContainer) {
+			if (this.state.typeIsVideo) {
 				filterIcon.classList.add('on');
 				filterContainer.classList.add('show');
 			} else {
 				filterIcon.classList.remove('on');
 				filterContainer.classList.remove('show');
 			}
+			this.setState({ typeIsVideo: !this.state.typeIsVideo });
 		},
 
 		render: function render() {
 			var _this2 = this;
 
 			var searchNavData = this.props.searchNavData;
-			var typeIsVideo = this.props.searchType === 'video' ? true : false;
 
 			return _react2.default.createElement(
 				'nav',
@@ -1291,11 +1319,11 @@ webpackJsonp([5],{
 							)
 						);
 					}),
-					typeIsVideo ? _react2.default.createElement(
+					this.props.typeIsVideo ? _react2.default.createElement(
 						'li',
 						{ className: 'filter-btn', onClick: this.filterBtnClick },
 						_react2.default.createElement('i', { className: 'filter-icon' })
-					) : ''
+					) : _react2.default.createElement('li', null)
 				)
 			);
 		}
@@ -1474,6 +1502,14 @@ webpackJsonp([5],{
 
 	var _ComprehensiveResult2 = _interopRequireDefault(_ComprehensiveResult);
 
+	var _BangumiSpecialResult = __webpack_require__(229);
+
+	var _BangumiSpecialResult2 = _interopRequireDefault(_BangumiSpecialResult);
+
+	var _UpuserResult = __webpack_require__(230);
+
+	var _UpuserResult2 = _interopRequireDefault(_UpuserResult);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var SearchResult = _react2.default.createClass({
@@ -1485,7 +1521,7 @@ webpackJsonp([5],{
 			}
 		},
 		render: function render() {
-			console.log(this.props.currentSearchResult);
+
 			var currentSearchResult = this.props.currentSearchResult;
 			var type = this.props.searchType;
 
@@ -1508,6 +1544,12 @@ webpackJsonp([5],{
 				switch (type) {
 					case 'video':
 						return _react2.default.createElement(_ComprehensiveResult2.default, { currentSearchResult: currentSearchResult });
+					case 'series':
+						return _react2.default.createElement(_BangumiSpecialResult2.default, { currentSearchResult: currentSearchResult, searchType: type });
+					case 'special':
+						return _react2.default.createElement(_BangumiSpecialResult2.default, { currentSearchResult: currentSearchResult, searchType: type });
+					case 'upuser':
+						return _react2.default.createElement(_UpuserResult2.default, { currentSearchResult: currentSearchResult });
 					default:
 						return _react2.default.createElement(
 							'p',
@@ -1641,6 +1683,212 @@ webpackJsonp([5],{
 	});
 
 	exports.default = ComprehensiveResult;
+
+/***/ },
+
+/***/ 229:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _react = __webpack_require__(9);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var BangumiSpecialResult = _react2.default.createClass({
+		displayName: 'BangumiSpecialResult',
+
+		render: function render() {
+
+			var currentSearchResult = this.props.currentSearchResult;
+			var type = this.props.searchType;
+			var videoSign = type === 'series' ? '番剧' : '专题';
+
+			return _react2.default.createElement(
+				'ul',
+				{ className: 'search-result rank-list other-result' },
+				currentSearchResult.map(function (searchResultItem, index) {
+
+					// 视频封面
+					var pic = searchResultItem.pic;
+					// 视频标题 返回内容有html标签，替换掉有可能存在的script标签
+					var title = searchResultItem.title.replace(/\<script/g, '<!--').replace(/\<\/script\>/g, '-->');
+					// 播放数
+					var playNum = searchResultItem.click >= 10000 ? (searchResultItem.click / 10000).toFixed(1) + '万' : searchResultItem.click;
+					// 视频数
+					var videoNum = type === 'series' ? searchResultItem.bgmcount : searchResultItem.count;
+					// 视频描述
+					var description = searchResultItem.description.replace(/\<script/g, '<!--').replace(/\<\/script\>/g, '-->');;
+
+					return _react2.default.createElement(
+						'li',
+						{ key: index },
+						_react2.default.createElement(
+							'a',
+							{ href: '###', className: 'list-box' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'video-cover' },
+								_react2.default.createElement(
+									'div',
+									{ className: 'cover-box', 'data-img': pic },
+
+									// 如果当前的数据已经加载过保存起来了，就将图片显示出来
+									// 如果是新的数据则依靠懒加载滚动将图片插入
+									currentSearchResult.ready === true ? _react2.default.createElement('div', { className: 'cover-img', style: { 'backgroundImage': 'url("' + pic + '")', 'opacity': '1' } }) : ''
+								),
+								_react2.default.createElement(
+									'span',
+									{ className: 'video-duration video-sign' },
+									videoSign
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'video-info' },
+								_react2.default.createElement('div', { className: 'video-title', dangerouslySetInnerHTML: { __html: title } }),
+								_react2.default.createElement(
+									'div',
+									{ className: 'video-detaied' },
+									_react2.default.createElement(
+										'div',
+										{ className: 'play-danmu' },
+										_react2.default.createElement(
+											'span',
+											null,
+											'\u89C6\u9891\uFF1A',
+											videoNum
+										)
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'play-danmu' },
+										_react2.default.createElement('img', { className: 'icon-detaied', src: './src/image/ranking/ico_play.png' }),
+										_react2.default.createElement(
+											'span',
+											null,
+											playNum
+										)
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'video-detaied video-description' },
+									_react2.default.createElement('p', { dangerouslySetInnerHTML: { __html: description } })
+								)
+							)
+						)
+					);
+				})
+			);
+		}
+	});
+
+	exports.default = BangumiSpecialResult;
+
+/***/ },
+
+/***/ 230:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _react = __webpack_require__(9);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var UpuserResult = _react2.default.createClass({
+		displayName: 'UpuserResult',
+
+		render: function render() {
+
+			var currentSearchResult = this.props.currentSearchResult;
+
+			return _react2.default.createElement(
+				'ul',
+				{ className: 'search-result rank-list other-result' },
+				currentSearchResult.map(function (searchResultItem, index) {
+
+					// 用户名
+					var username = searchResultItem.uname;
+					// 用户封面
+					var pic = searchResultItem.upic;
+					// 视频数
+					var videoNum = searchResultItem.videos;
+					// 用户描述
+					var description = searchResultItem.usign.replace(/\<script/g, '<!--').replace(/\<\/script\>/g, '-->');;
+
+					return _react2.default.createElement(
+						'li',
+						{ key: index },
+						_react2.default.createElement(
+							'a',
+							{ href: '###', className: 'list-box' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'video-cover' },
+								_react2.default.createElement(
+									'div',
+									{ className: 'cover-box', 'data-img': pic },
+
+									// 如果当前的数据已经加载过保存起来了，就将图片显示出来
+									// 如果是新的数据则依靠懒加载滚动将图片插入
+									currentSearchResult.ready === true ? _react2.default.createElement('div', { className: 'cover-img', style: { 'backgroundImage': 'url("' + pic + '")', 'opacity': '1' } }) : ''
+								),
+								_react2.default.createElement(
+									'span',
+									{ className: 'video-duration video-sign' },
+									'up\u4E3B'
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'video-info' },
+								_react2.default.createElement(
+									'div',
+									{ className: 'video-title' },
+									username
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'video-detaied' },
+									_react2.default.createElement(
+										'div',
+										{ className: 'play-danmu' },
+										_react2.default.createElement(
+											'span',
+											null,
+											'\u89C6\u9891\uFF1A',
+											videoNum
+										)
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'video-detaied video-description' },
+									_react2.default.createElement('p', { dangerouslySetInnerHTML: { __html: description } })
+								)
+							)
+						)
+					);
+				})
+			);
+		}
+	});
+
+	exports.default = UpuserResult;
 
 /***/ }
 

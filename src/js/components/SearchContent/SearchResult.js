@@ -3,6 +3,8 @@ import React from 'react';
 
 import imgLazyLoad from '../../plugs/imgLazyLoad.js';
 import ComprehensiveResult from './ComprehensiveResult.js';
+import BangumiSpecialResult from './BangumiSpecialResult.js';
+import UpuserResult from './UpuserResult.js';
 
 var SearchResult = React.createClass({
 	componentDidUpdate: function(){
@@ -11,7 +13,7 @@ var SearchResult = React.createClass({
 		}
 	},
 	render: function(){
-		console.log(this.props.currentSearchResult);
+		
 		var currentSearchResult = this.props.currentSearchResult;
 		var type = this.props.searchType;
 
@@ -26,6 +28,12 @@ var SearchResult = React.createClass({
 			switch(type){
 				case 'video':
 					return <ComprehensiveResult currentSearchResult={currentSearchResult} />;
+				case 'series':
+					return <BangumiSpecialResult currentSearchResult={currentSearchResult} searchType={type} />;
+				case 'special':
+					return <BangumiSpecialResult currentSearchResult={currentSearchResult} searchType={type} />;
+				case 'upuser':
+					return <UpuserResult currentSearchResult={currentSearchResult} />;
 				default: return <p className='loading-info'>未知状况...</p>;
 			}
 		}
