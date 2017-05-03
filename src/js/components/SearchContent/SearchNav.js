@@ -3,9 +3,9 @@ import React from 'react';
 
 var SearchNav = React.createClass({
 
-	// search-nav li 点击后添加选中class
 	searchNavClickHandler: function(type){
 		return (event) => {
+			// search-nav li 点击后添加选中class
 			var navList = Array.from(event.currentTarget.parentNode.children).slice(0, -1);
 			navList.forEach((navItem) => {
 				navItem.classList.remove('menu-active');
@@ -31,7 +31,10 @@ var SearchNav = React.createClass({
 	},
 
 	render: function(){
+
 		var searchNavData = this.props.searchNavData;
+		var typeIsVideo = this.props.searchType === 'video' ? true : false;
+
 		return	<nav className='search-nav menu'>
 							<ul className='menu-list'>
 							{
@@ -47,9 +50,13 @@ var SearchNav = React.createClass({
 													</li>
 								})
 							}
-								<li className='filter-btn' onClick={this.filterBtnClick}>
-									<i className='filter-icon'></i>
-								</li>
+							{
+								typeIsVideo
+								?	<li className='filter-btn' onClick={this.filterBtnClick}>
+										<i className='filter-icon'></i>
+									</li>
+								: ''
+							}
 							</ul>
 						</nav>
 	}

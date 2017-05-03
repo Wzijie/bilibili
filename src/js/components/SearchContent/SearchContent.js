@@ -149,13 +149,20 @@ var SearchContent = React.createClass({
 	},
 
 	render: function(){
+
+		var typeIsVideo = this.state.type === 'video' ? true : false;
+
 		return	<div className='search-content'>
-							<SearchNav searchNavData={this.state.searchNavData} requestSearchResult={this.requestSearchResult} />
-							<div className='filter-container'>
-								<SearchFilterChannel filterChannel={this.state.filterChannel} requestSearchResult={this.requestSearchResult} />
-								<SearchFilterOrder filterOrder={this.state.filterOrder} requestSearchResult={this.requestSearchResult} />
-							</div>
-							<SearchResult currentSearchResult={this.state.currentSearchResult} />
+							<SearchNav searchNavData={this.state.searchNavData} requestSearchResult={this.requestSearchResult} searchType={this.state.type} />
+							{
+								typeIsVideo
+								?	<div className='filter-container'>
+										<SearchFilterChannel filterChannel={this.state.filterChannel} requestSearchResult={this.requestSearchResult} />
+										<SearchFilterOrder filterOrder={this.state.filterOrder} requestSearchResult={this.requestSearchResult} />
+									</div>
+								: ''
+							}
+							<SearchResult currentSearchResult={this.state.currentSearchResult} searchType={this.state.type} />
 						</div>
 	}
 });

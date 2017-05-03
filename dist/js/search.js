@@ -1190,17 +1190,20 @@ webpackJsonp([5],{
 		},
 
 		render: function render() {
+
+			var typeIsVideo = this.state.type === 'video' ? true : false;
+
 			return _react2.default.createElement(
 				'div',
 				{ className: 'search-content' },
-				_react2.default.createElement(_SearchNav2.default, { searchNavData: this.state.searchNavData, requestSearchResult: this.requestSearchResult }),
-				_react2.default.createElement(
+				_react2.default.createElement(_SearchNav2.default, { searchNavData: this.state.searchNavData, requestSearchResult: this.requestSearchResult, searchType: this.state.type }),
+				typeIsVideo ? _react2.default.createElement(
 					'div',
 					{ className: 'filter-container' },
 					_react2.default.createElement(_SearchFilterChannel2.default, { filterChannel: this.state.filterChannel, requestSearchResult: this.requestSearchResult }),
 					_react2.default.createElement(_SearchFilterOrder2.default, { filterOrder: this.state.filterOrder, requestSearchResult: this.requestSearchResult })
-				),
-				_react2.default.createElement(_SearchResult2.default, { currentSearchResult: this.state.currentSearchResult })
+				) : '',
+				_react2.default.createElement(_SearchResult2.default, { currentSearchResult: this.state.currentSearchResult, searchType: this.state.type })
 			);
 		}
 	});
@@ -1228,11 +1231,11 @@ webpackJsonp([5],{
 		displayName: 'SearchNav',
 
 
-		// search-nav li 点击后添加选中class
 		searchNavClickHandler: function searchNavClickHandler(type) {
 			var _this = this;
 
 			return function (event) {
+				// search-nav li 点击后添加选中class
 				var navList = Array.from(event.currentTarget.parentNode.children).slice(0, -1);
 				navList.forEach(function (navItem) {
 					navItem.classList.remove('menu-active');
@@ -1261,6 +1264,8 @@ webpackJsonp([5],{
 			var _this2 = this;
 
 			var searchNavData = this.props.searchNavData;
+			var typeIsVideo = this.props.searchType === 'video' ? true : false;
+
 			return _react2.default.createElement(
 				'nav',
 				{ className: 'search-nav menu' },
@@ -1286,11 +1291,11 @@ webpackJsonp([5],{
 							)
 						);
 					}),
-					_react2.default.createElement(
+					typeIsVideo ? _react2.default.createElement(
 						'li',
 						{ className: 'filter-btn', onClick: this.filterBtnClick },
 						_react2.default.createElement('i', { className: 'filter-icon' })
-					)
+					) : ''
 				)
 			);
 		}
@@ -1465,6 +1470,10 @@ webpackJsonp([5],{
 
 	var _imgLazyLoad2 = _interopRequireDefault(_imgLazyLoad);
 
+	var _ComprehensiveResult = __webpack_require__(228);
+
+	var _ComprehensiveResult2 = _interopRequireDefault(_ComprehensiveResult);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var SearchResult = _react2.default.createClass({
@@ -1478,6 +1487,8 @@ webpackJsonp([5],{
 		render: function render() {
 			console.log(this.props.currentSearchResult);
 			var currentSearchResult = this.props.currentSearchResult;
+			var type = this.props.searchType;
+
 			if (currentSearchResult === null) {
 				return _react2.default.createElement(
 					'p',
@@ -1492,6 +1503,50 @@ webpackJsonp([5],{
 					'\u6CA1\u6709\u6570\u636E...'
 				);
 			}
+
+			function TypeFilterResult() {
+				switch (type) {
+					case 'video':
+						return _react2.default.createElement(_ComprehensiveResult2.default, { currentSearchResult: currentSearchResult });
+					default:
+						return _react2.default.createElement(
+							'p',
+							{ className: 'loading-info' },
+							'\u672A\u77E5\u72B6\u51B5...'
+						);
+				}
+			}
+
+			return _react2.default.createElement(TypeFilterResult, null);
+		}
+	});
+
+	exports.default = SearchResult;
+
+/***/ },
+
+/***/ 228:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _react = __webpack_require__(9);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var ComprehensiveResult = _react2.default.createClass({
+		displayName: 'ComprehensiveResult',
+
+		render: function render() {
+
+			var currentSearchResult = this.props.currentSearchResult;
+
 			return _react2.default.createElement(
 				'ul',
 				{ className: 'search-result rank-list' },
@@ -1585,7 +1640,7 @@ webpackJsonp([5],{
 		}
 	});
 
-	exports.default = SearchResult;
+	exports.default = ComprehensiveResult;
 
 /***/ }
 
