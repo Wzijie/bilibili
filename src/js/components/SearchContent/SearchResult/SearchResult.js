@@ -1,10 +1,11 @@
 
 import React from 'react';
 
-import imgLazyLoad from '../../plugs/imgLazyLoad.js';
-import ComprehensiveResult from './ComprehensiveResult.js';
-import BangumiSpecialResult from './BangumiSpecialResult.js';
-import UpuserResult from './UpuserResult.js';
+import imgLazyLoad from '../../../plugs/imgLazyLoad.js';
+
+import ComprehensiveResult from './ComprehensiveResult.js'; // 综合搜索结果
+import BangumiSpecialResult from './BangumiSpecialResult.js'; // 番剧和专题搜索结果
+import UpuserResult from './UpuserResult.js'; // up主搜索结果
 
 var SearchResult = React.createClass({
 	componentDidUpdate: function(){
@@ -24,6 +25,7 @@ var SearchResult = React.createClass({
 			return <p className='loading-info'>没有数据...</p>
 		}
 
+		// 根据type的不同选择不同的显示组件
 		function TypeFilterResult(){
 			switch(type){
 				case 'video':

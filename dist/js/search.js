@@ -1068,6 +1068,8 @@ webpackJsonp([5],{
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	// 排序筛选菜单
+	// 类型筛选菜单
 	var SearchContent = _react2.default.createClass({
 		displayName: 'SearchContent',
 
@@ -1100,25 +1102,35 @@ webpackJsonp([5],{
 				};
 			}
 
-			// 搜索类型
+			// 搜索类型数据
 			var searchNavData = [createSearchNavData('综合', 'video'), createSearchNavData('番剧', 'series'), createSearchNavData('专题', 'special'), createSearchNavData('UP主', 'upuser')];
 
-			// 版块筛选
+			// 版块筛选数据
 			var filterChannel = [createSearchNavData('全部', '-1'), createSearchNavData('动画', '1'), createSearchNavData('番剧', '33'), createSearchNavData('国创', '167'), createSearchNavData('舞蹈', '20'), createSearchNavData('游戏', '4'), createSearchNavData('科技', '36'), createSearchNavData('生活', '160'), createSearchNavData('娱乐', '5'), createSearchNavData('鬼畜', '119'), createSearchNavData('电影', '23'), createSearchNavData('时尚', '155'), createSearchNavData('电视剧', '11')];
 
-			// 排序方式
+			// 排序方式数据
 			var filterOrder = [createSearchNavData('综合', 'default'), createSearchNavData('点击', 'click'), createSearchNavData('弹幕', 'dm'), createSearchNavData('评论', 'scores'), createSearchNavData('日期', 'senddate'), createSearchNavData('收藏', 'stow')];
 
 			return {
+				// 搜索类型数据
 				searchNavData: searchNavData,
+				// 版块筛选数据
 				filterChannel: filterChannel,
+				// 排序筛选数据
 				filterOrder: filterOrder,
+				// 搜索关键字
 				keyword: keyword,
+				// 当前搜索类型选择
 				type: 'video',
+				// 当前版块筛选选择
 				channel: '-1',
+				// 当前排序筛选选择
 				order: 'default',
+				// page控制第几批数据
 				page: 1,
+				// 请求过的搜索结果保存
 				searchResultStorage: {},
+				// 当前搜索结果 Array
 				currentSearchResult: null
 			};
 		},
@@ -1126,16 +1138,22 @@ webpackJsonp([5],{
 		componentDidMount: function componentDidMount() {
 
 			this.props.loadingChange();
+
+			// 执行默认搜索请求
 			this.requestSearchResult();
 
+			// 将搜索关键字存入本地储存localStorage
 			var historySearch = localStorage.getItem('historySearch');
 			historySearch = historySearch === null ? [] : JSON.parse(historySearch);
 			if (this.state.keyword !== null) {
+				// 如果已经有该关键字则删除
 				var historyHaveKeyword = historySearch.indexOf(decodeURI(this.state.keyword));
 				if (historyHaveKeyword !== -1) {
 					historySearch.splice(historyHaveKeyword, 1);
 				}
+				// 在数组头部添加关键字
 				historySearch.unshift(decodeURI(this.state.keyword));
+				// 数据大于5只取前5条数据
 				if (historySearch.length >= 5) {
 					historySearch = historySearch.slice(0, 5);
 				}
@@ -1143,6 +1161,7 @@ webpackJsonp([5],{
 			}
 		},
 
+		// 请求搜索结果 参数为筛选数据
 		requestSearchResult: function requestSearchResult(type, channel, order, page) {
 			var _this = this;
 
@@ -1150,14 +1169,23 @@ webpackJsonp([5],{
 			    keyword = _state.keyword,
 			    searchResultStorage = _state.searchResultStorage;
 
+			// 如果没有传筛选数据参数则取state中的
+
 			var type = type || this.state.type;
 			var channel = channel || this.state.channel;
 			var order = order || this.state.order;
 			var page = page || this.state.page;
+
+			// filterName用于作为属性名保存当前搜索结果数据到searchResultStorage中
 			var filterName = type + channel + order;
+
 			this.setState({ currentSearchResult: null });
+
+			// 如果该搜索结果数据已经存在，直接使用该数据，退出函数
 			if (searchResultStorage[filterName] !== undefined) {
+				// 设置一个ready属性标记该数据为已经存在的
 				searchResultStorage[filterName].ready = true;
+				// 直接使用该数据设置为当前搜索结果
 				this.setState({
 					currentSearchResult: searchResultStorage[filterName],
 					type: type,
@@ -1168,10 +1196,12 @@ webpackJsonp([5],{
 				return;
 			}
 
+			// 请求搜索结果
 			var searchResultSuccess = function searchResultSuccess(data) {
 				console.log(JSON.parse(data.data), 'searchResultSuccess');
 				var data = JSON.parse(data.data);
 				var searchResult = null;
+				// 根据type的不同，数据存在于不同的属性名中
 				switch (type) {
 					case 'video':
 						searchResult = data.res.result || [];
@@ -1188,6 +1218,7 @@ webpackJsonp([5],{
 					default:
 						break;
 				}
+				// 将搜索结果保存
 				searchResultStorage[filterName] = searchResult;
 				_this.setState({
 					currentSearchResult: searchResult,
@@ -1229,8 +1260,9 @@ webpackJsonp([5],{
 				_react2.default.createElement(_SearchResult2.default, { currentSearchResult: this.state.currentSearchResult, searchType: this.state.type })
 			);
 		}
-	});
+	}); // 搜索结果显示
 
+	// 版块筛选菜单
 	exports.default = SearchContent;
 
 /***/ },
@@ -1254,6 +1286,7 @@ webpackJsonp([5],{
 		displayName: 'SearchNav',
 
 		getInitialState: function getInitialState() {
+			// typeIsVideo 搜索类型是否是‘video’
 			return { typeIsVideo: this.props.typeIsVideo };
 		},
 
@@ -1271,6 +1304,8 @@ webpackJsonp([5],{
 					navItem.classList.remove('menu-active');
 				});
 				event.currentTarget.classList.add('menu-active');
+
+				// 请求搜索结果
 				_this.props.requestSearchResult(type, '-1', 'default');
 			};
 		},
@@ -1512,6 +1547,9 @@ webpackJsonp([5],{
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	// up主搜索结果
+
+	// 综合搜索结果
 	var SearchResult = _react2.default.createClass({
 		displayName: 'SearchResult',
 
@@ -1540,6 +1578,7 @@ webpackJsonp([5],{
 				);
 			}
 
+			// 根据type的不同选择不同的显示组件
 			function TypeFilterResult() {
 				switch (type) {
 					case 'video':
@@ -1561,8 +1600,7 @@ webpackJsonp([5],{
 
 			return _react2.default.createElement(TypeFilterResult, null);
 		}
-	});
-
+	}); // 番剧和专题搜索结果
 	exports.default = SearchResult;
 
 /***/ },

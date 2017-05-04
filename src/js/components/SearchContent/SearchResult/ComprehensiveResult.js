@@ -3,7 +3,7 @@ import React from 'react';
 
 var ComprehensiveResult = React.createClass({
 	render: function(){
-
+		
 		var currentSearchResult = this.props.currentSearchResult;
 
 		return	<ul className='search-result rank-list'>

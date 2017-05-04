@@ -1,10 +1,11 @@
 
 import React from 'react';
 
-import SearchNav from './SearchNav.js';
-import SearchFilterChannel from './SearchFilterChannel.js';
-import SearchFilterOrder from './SearchFilterOrder.js';
-import SearchResult from './SearchResult.js';
+
+import SearchNav from './SearchNav.js'; // 类型筛选菜单
+import SearchFilterChannel from './SearchFilterChannel.js'; // 版块筛选菜单
+import SearchFilterOrder from './SearchFilterOrder.js'; // 排序筛选菜单
+import SearchResult from './SearchResult/SearchResult.js'; // 搜索结果显示
 
 import ajaxRequest from '../../plugs/ajaxRequest.js';
 
@@ -38,7 +39,7 @@ var SearchContent = React.createClass({
 			};
 		}
 
-		// 搜索类型
+		// 搜索类型数据
 		var searchNavData = [
 			createSearchNavData('综合', 'video'),
 			createSearchNavData('番剧', 'series'),
@@ -46,7 +47,7 @@ var SearchContent = React.createClass({
 			createSearchNavData('UP主', 'upuser'),
 		];
 
-		// 版块筛选
+		// 版块筛选数据
 		var filterChannel = [
 			createSearchNavData('全部', '-1'),
 			createSearchNavData('动画', '1'),
@@ -63,7 +64,7 @@ var SearchContent = React.createClass({
 			createSearchNavData('电视剧', '11')
 		];
 
-		// 排序方式
+		// 排序方式数据
 		var filterOrder = [
 			createSearchNavData('综合', 'default'),
 			createSearchNavData('点击', 'click'),
@@ -74,15 +75,25 @@ var SearchContent = React.createClass({
 		];
 
 		return {
+			// 搜索类型数据
 			searchNavData: searchNavData,
+			// 版块筛选数据
 			filterChannel: filterChannel,
+			// 排序筛选数据
 			filterOrder: filterOrder,
+			// 搜索关键字
 			keyword: keyword,
+			// 当前搜索类型选择
 			type: 'video',
+			// 当前版块筛选选择
 			channel: '-1',
+			// 当前排序筛选选择
 			order: 'default',
+			// page控制第几批数据
 			page: 1,
+			// 请求过的搜索结果保存
 			searchResultStorage: {},
+			// 当前搜索结果 Array
 			currentSearchResult: null
 		}
 	},
@@ -90,16 +101,22 @@ var SearchContent = React.createClass({
 	componentDidMount: function(){
 
 		this.props.loadingChange();
+
+		// 执行默认搜索请求
 		this.requestSearchResult();
 
+		// 将搜索关键字存入本地储存localStorage
 		var historySearch = localStorage.getItem('historySearch');
 		historySearch = historySearch === null ? [] : JSON.parse(historySearch);
 		if(this.state.keyword !== null){
+			// 如果已经有该关键字则删除
 			var historyHaveKeyword = historySearch.indexOf(decodeURI(this.state.keyword));
 			if(historyHaveKeyword !== -1){
 				historySearch.splice(historyHaveKeyword, 1);
 			}
+			// 在数组头部添加关键字
 			historySearch.unshift(decodeURI(this.state.keyword));
+			// 数据大于5只取前5条数据
 			if(historySearch.length >= 5){
 				historySearch = historySearch.slice(0, 5);
 			}
@@ -107,16 +124,26 @@ var SearchContent = React.createClass({
 		}
 	},
 
+	// 请求搜索结果 参数为筛选数据
 	requestSearchResult: function(type, channel, order, page){
 		var { keyword, searchResultStorage } = this.state;
+
+		// 如果没有传筛选数据参数则取state中的
 		var type = type || this.state.type
 		var channel = channel || this.state.channel
 		var order = order || this.state.order
 		var page = page || this.state.page
+
+		// filterName用于作为属性名保存当前搜索结果数据到searchResultStorage中
 		var filterName = type + channel + order;
+
 		this.setState({ currentSearchResult: null });
+
+		// 如果该搜索结果数据已经存在，直接使用该数据，退出函数
 		if(searchResultStorage[filterName] !== undefined){
+			// 设置一个ready属性标记该数据为已经存在的
 			searchResultStorage[filterName].ready = true;
+			// 直接使用该数据设置为当前搜索结果
 			this.setState({ 
 				currentSearchResult: searchResultStorage[filterName],
 				type,
@@ -127,10 +154,12 @@ var SearchContent = React.createClass({
 			return;
 		}
 
+		// 请求搜索结果
 		var searchResultSuccess = (data) => {
 			console.log(JSON.parse(data.data), 'searchResultSuccess');
 			var data = JSON.parse(data.data);
 			var searchResult = null;
+			// 根据type的不同，数据存在于不同的属性名中
 			switch (type){
 				case 'video':
 					searchResult = data.res.result || [];
@@ -146,6 +175,7 @@ var SearchContent = React.createClass({
 					break;
 				default: break;
 			} 
+			// 将搜索结果保存
 			searchResultStorage[filterName] = searchResult;
 			this.setState({ 
 				currentSearchResult: searchResult,

@@ -3,6 +3,7 @@ import React from 'react';
 
 var SearchNav = React.createClass({
 	getInitialState: function(){
+		// typeIsVideo 搜索类型是否是‘video’
 		return { typeIsVideo: this.props.typeIsVideo };
 	},
 
@@ -18,6 +19,8 @@ var SearchNav = React.createClass({
 				navItem.classList.remove('menu-active');
 			});
 			event.currentTarget.classList.add('menu-active');
+
+			// 请求搜索结果
 			this.props.requestSearchResult(type, '-1', 'default');
 		}
 	},
