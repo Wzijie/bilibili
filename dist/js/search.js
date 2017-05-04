@@ -490,7 +490,7 @@ webpackJsonp([5],{
 			var hotSearchError = function hotSearchError(error) {
 				console.log(error, 'hotSearchError');
 			};
-			var hotSearchURL = 'http://localhost:3000/hotSearch';
+			var hotSearchURL = 'http://weizijie.cc:3000/hotSearch';
 			(0, _ajaxRequest2.default)(hotSearchURL, 'GET', hotSearchSuccess, hotSearchError);
 			// 请求热门搜索数据 end
 		},
@@ -1231,7 +1231,7 @@ webpackJsonp([5],{
 			var searchResultError = function searchResultError(error) {
 				console.log(error, 'searchResultError');
 			};
-			var searchResultURL = 'http://localhost:3000/search?keyword=' + keyword + '&page=' + page + '&order=' + order + '&tids=' + channel + '&type=' + type;
+			var searchResultURL = 'http://weizijie.cc:3000/search?keyword=' + keyword + '&page=' + page + '&order=' + order + '&tids=' + channel + '&type=' + type;
 			(0, _ajaxRequest2.default)(searchResultURL, 'GET', searchResultSuccess, searchResultError);
 		},
 

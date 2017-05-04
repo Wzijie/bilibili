@@ -35,7 +35,7 @@ var InitialSearch = React.createClass({
 		var hotSearchError = (error) => {
 			console.log(error, 'hotSearchError');
 		}
-		var hotSearchURL = 'http://localhost:3000/hotSearch';
+		var hotSearchURL = 'http://weizijie.cc:3000/hotSearch';
 		ajaxRequest(hotSearchURL, 'GET', hotSearchSuccess, hotSearchError);
 		// 请求热门搜索数据 end
 	},

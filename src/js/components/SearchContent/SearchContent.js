@@ -188,7 +188,7 @@ var SearchContent = React.createClass({
 		var searchResultError = (error) => {
 			console.log(error, 'searchResultError');
 		}
-		var searchResultURL = 'http://localhost:3000/search?keyword='+keyword+'&page='+page+'&order='+order+'&tids='+channel+'&type='+type;
+		var searchResultURL = 'http://weizijie.cc:3000/search?keyword='+keyword+'&page='+page+'&order='+order+'&tids='+channel+'&type='+type;
 		ajaxRequest(searchResultURL, 'GET', searchResultSuccess, searchResultError);
 
 	},

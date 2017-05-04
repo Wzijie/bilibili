@@ -571,7 +571,7 @@ webpackJsonp([1],{
 			var hotSearchError = function hotSearchError(error) {
 				console.log(error, 'hotSearchError');
 			};
-			var hotSearchURL = 'http://localhost:3000/hotSearch';
+			var hotSearchURL = 'http://weizijie.cc:3000/hotSearch';
 			(0, _ajaxRequest2.default)(hotSearchURL, 'GET', hotSearchSuccess, hotSearchError);
 			// 请求热门搜索数据 end
 		},
