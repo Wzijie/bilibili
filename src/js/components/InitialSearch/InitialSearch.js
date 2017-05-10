@@ -90,18 +90,18 @@ var InitialSearch = React.createClass({
 		var toggleInitialSearch = this.props.toggleInitialSearch;
 
 		return	<div className='initial-search' ref='initialSearch'>
-					<SearchOperation keyword={this.state.keyword} keywordChange={this.keywordChange} toggleInitialSearch={toggleInitialSearch} />
-					<div className='search-message'>
-					{
-						this.state.keyword === ''
-						?	<div className='hot-history-content'>
-						  		<HotSearch hotSearchData={this.state.hotSearch} />
-								<HistorySearch historySearchData={this.state.historySearch} removeHistorySearch={this.removeHistorySearch} />
-						 	</div>
-						:   <SearchSuggest searchSuggestData={this.state.searchSuggest} />
-					}
-					</div>
-				</div>
+							<SearchOperation keyword={this.state.keyword} keywordChange={this.keywordChange} toggleInitialSearch={toggleInitialSearch} />
+							<div className='search-message'>
+							{
+								this.state.keyword === ''
+								?	<div className='hot-history-content'>
+								  		<HotSearch hotSearchData={this.state.hotSearch} />
+										<HistorySearch historySearchData={this.state.historySearch} removeHistorySearch={this.removeHistorySearch} />
+								 	</div>
+								: <SearchSuggest searchSuggestData={this.state.searchSuggest} />
+							}
+							</div>
+						</div>
 	}
 });
 

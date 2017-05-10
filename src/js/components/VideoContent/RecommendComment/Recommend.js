@@ -55,48 +55,48 @@ var Recommend = React.createClass({
 
 		if(this.state.displayData.length === 0){
 			return	<div className={'recommend main-container' + (this.props.toggleCont !== 'recommend' ? ' hide' : '')}>
-						<p className='loading-info'>(´・ω・｀)正在加载...</p>
-					</div>
+								<p className='loading-info'>(´・ω・｀)正在加载...</p>
+							</div>
 		}
 
 		var recommendDisplayData = this.state.displayData;
 		
 		return	<div className={'recommend main-container' + (this.props.toggleCont !== 'recommend' ? ' hide' : '')}>
-					<ul className='content-list'>
-					{
-						recommendDisplayData.map((recommendDataItem, index) => {
-							// av号
-							var aid = recommendDataItem.aid;
-							// 视频封面url
-							var pic = recommendDataItem.pic;
-							// 标题
-							var title = recommendDataItem.title;
-							// 播放数
-							var view = recommendDataItem.stat.view;
-							// 弹幕数
-							var danmaku = recommendDataItem.stat.danmaku;
+							<ul className='content-list'>
+							{
+								recommendDisplayData.map((recommendDataItem, index) => {
+									// av号
+									var aid = recommendDataItem.aid;
+									// 视频封面url
+									var pic = recommendDataItem.pic;
+									// 标题
+									var title = recommendDataItem.title;
+									// 播放数
+									var view = recommendDataItem.stat.view;
+									// 弹幕数
+									var danmaku = recommendDataItem.stat.danmaku;
 
-							return	<li className='content-item' key={index}>
-										<a href={'video.html?aid=' + aid}>
-											<div className='video-cover' data-img={pic}></div>
-											<p className='video-name'>{title}</p>
-											<div className='video-info'>
-												<div className='play-num'>
-													<span className='index-sprite index-sprite-play'></span>
-													<p>{view >= 10000 ? (view/10000).toFixed(1)+'万' : view}</p>
-												</div>
-												<div className='barrage-num'>
-													<span className='index-sprite index-sprite-barrage'></span>
-													<p>{danmaku >= 10000 ? (danmaku/10000).toFixed(1)+'万' : danmaku}</p>
-												</div>
-											</div>
-										</a>
-									</li>
-						})
-					}
-					</ul>
-					<div className='load-more' onClick={this.displayMoreData} ref='loadMore'>请给我更多!</div>
-				</div>
+									return	<li className='content-item' key={index}>
+														<a href={'video.html?aid=' + aid}>
+															<div className='video-cover' data-img={pic}></div>
+															<p className='video-name'>{title}</p>
+															<div className='video-info'>
+																<div className='play-num'>
+																	<span className='index-sprite index-sprite-play'></span>
+																	<p>{view >= 10000 ? (view/10000).toFixed(1)+'万' : view}</p>
+																</div>
+																<div className='barrage-num'>
+																	<span className='index-sprite index-sprite-barrage'></span>
+																	<p>{danmaku >= 10000 ? (danmaku/10000).toFixed(1)+'万' : danmaku}</p>
+																</div>
+															</div>
+														</a>
+													</li>
+								})
+							}
+							</ul>
+							<div className='load-more' onClick={this.displayMoreData} ref='loadMore'>请给我更多!</div>
+						</div>
 	}
 });
 

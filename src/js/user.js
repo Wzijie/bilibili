@@ -34,13 +34,13 @@ var Root = React.createClass({
 	
 	render: function(){
 		return	<div>
-					<Header toggleInitialSearch={this.toggleInitialSearch} />
-					<InitialSearch initialSearchDisplay={this.state.initialSearchDisplay} toggleInitialSearch={this.toggleInitialSearch} />
-					<Nav pageActive={4} />
-					<UserContent />
-					<AppLink />
-					<Footer />
-				</div>
+							<Header toggleInitialSearch={this.toggleInitialSearch} />
+							<InitialSearch initialSearchDisplay={this.state.initialSearchDisplay} toggleInitialSearch={this.toggleInitialSearch} />
+							<Nav pageActive={4} />
+							<UserContent />
+							<AppLink />
+							<Footer />
+						</div>
 	}
 });
 

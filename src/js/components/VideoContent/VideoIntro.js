@@ -86,8 +86,8 @@ var VideoIntro = React.createClass({
 		// 处理查询不到此aid的数据
 		if(this.state.videoInfo === 404){
 			return	<div className='video-intro'>
-						<p className='loading-info'>查询错误，可能找不到此aid的数据</p>
-					</div>
+								<p className='loading-info'>查询错误，可能找不到此aid的数据</p>
+							</div>
 		}
 		
 		var detaiedData = this.state.detaiedData;

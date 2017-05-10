@@ -24,12 +24,12 @@ var SearchOperation = React.createClass({
 		var deleteIconShow = keyword === '' ? '' : ' show';
 		
 		return	<div className='search-operation'>
-					<form action='search.html' method='GET' className='search-form'>
-						<input className='search-input' name='keyword' type='text' value={keyword} autoComplete='off' placeholder='搜索视频、番剧、up主或AV号' onChange={this.keywordChangeHandler} ref="searchInput" />
-					</form>
-					<i className={'search-input-delete' + deleteIconShow} onClick={this.keywordClear} ref='deleteIcon'></i>
-					<div className='search-cancel' onClick={toggleInitialSearch}>取消</div>
-				</div>
+							<form action='search.html' method='GET' className='search-form'>
+								<input className='search-input' name='keyword' type='text' value={keyword} autoComplete='off' placeholder='搜索视频、番剧、up主或AV号' onChange={this.keywordChangeHandler} ref="searchInput" />
+							</form>
+							<i className={'search-input-delete' + deleteIconShow} onClick={this.keywordClear} ref='deleteIcon'></i>
+							<div className='search-cancel' onClick={toggleInitialSearch}>取消</div>
+						</div>
 	}
 });
 

@@ -123,15 +123,15 @@ var IndexContent = React.createClass({
 	render: function(){
 		
 		return	<div>
-					<RecommendVideoContainer recommendData={this.state.recommendData} />
-					<LiveVideoContainer liveData={this.state.liveData} />
-					<BangumiVideoContainer bangumiData={this.state.bangumiData} />
-					{
-						this.state.mostData.map((mostDataItem, index) => {
-							return <DefaultVideoContainer mostDataItem={mostDataItem} key={index} />
-						})
-					}
-				</div>
+							<RecommendVideoContainer recommendData={this.state.recommendData} />
+							<LiveVideoContainer liveData={this.state.liveData} />
+							<BangumiVideoContainer bangumiData={this.state.bangumiData} />
+							{
+								this.state.mostData.map((mostDataItem, index) => {
+									return <DefaultVideoContainer mostDataItem={mostDataItem} key={index} />
+								})
+							}
+						</div>
 	}
 });
 

@@ -55,13 +55,13 @@ var VideoContent = React.createClass({
 		}
 
 		return	<div className='video-content'>
-					<VideoContainer avNum={aid} videoPage={this.state.videoPage} />
-					<VideoOption />
-					<VideoIntro avNum={aid} />
-					<VideoPart avNum={aid} videoPage={this.state.videoPage} changeVideoPage={this.changeVideoPage} />
-					<RecommendComment avNum={aid} />
-					<VideoTag avNum={aid} />
-				</div>
+							<VideoContainer avNum={aid} videoPage={this.state.videoPage} />
+							<VideoOption />
+							<VideoIntro avNum={aid} />
+							<VideoPart avNum={aid} videoPage={this.state.videoPage} changeVideoPage={this.changeVideoPage} />
+							<RecommendComment avNum={aid} />
+							<VideoTag avNum={aid} />
+						</div>
 	}
 });
 

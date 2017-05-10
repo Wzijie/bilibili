@@ -40,14 +40,14 @@ var Root = React.createClass({
 	render: function(){
 
 		return  <div>
-					<Header toggleInitialSearch={this.toggleInitialSearch} />
-					<InitialSearch initialSearchDisplay={this.state.initialSearchDisplay} toggleInitialSearch={this.toggleInitialSearch} />
-					<LoadCover loading={this.state.loading} />
-					<Nav pageActive={1} />
-					<ChannelContent loadendChange={this.loadendChange} />
-					<AppLink />
-					<Footer />			
-				</div>
+							<Header toggleInitialSearch={this.toggleInitialSearch} />
+							<InitialSearch initialSearchDisplay={this.state.initialSearchDisplay} toggleInitialSearch={this.toggleInitialSearch} />
+							<LoadCover loading={this.state.loading} />
+							<Nav pageActive={1} />
+							<ChannelContent loadendChange={this.loadendChange} />
+							<AppLink />
+							<Footer />			
+						</div>
 	}
 });
 

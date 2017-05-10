@@ -26,13 +26,13 @@ var RecommendComment = React.createClass({
 		var commentCount = this.state.commentCount === null ? '正在加载' : this.state.commentCount;
 	
 		return	<div className='recommend-comment'>
-					<ul className='cont-toggle'>
-						<li onClick={this.toggleChange('recommend')}><p className={toggleCont === 'recommend' ? 'on' : ''}>相关推荐</p></li>
-						<li onClick={this.toggleChange('comment')}><p className={toggleCont === 'comment' ? 'on' : ''}>评论<em className='comment-num'>{commentCount}</em></p></li>
-					</ul>
-					<Recommend toggleCont={toggleCont} avNum={this.props.avNum} />
-					<Comment toggleCont={toggleCont} avNum={this.props.avNum} getCommentCount={this.getCommentCount()} />
-				</div>
+							<ul className='cont-toggle'>
+								<li onClick={this.toggleChange('recommend')}><p className={toggleCont === 'recommend' ? 'on' : ''}>相关推荐</p></li>
+								<li onClick={this.toggleChange('comment')}><p className={toggleCont === 'comment' ? 'on' : ''}>评论<em className='comment-num'>{commentCount}</em></p></li>
+							</ul>
+							<Recommend toggleCont={toggleCont} avNum={this.props.avNum} />
+							<Comment toggleCont={toggleCont} avNum={this.props.avNum} getCommentCount={this.getCommentCount()} />
+						</div>
 	}
 });
 

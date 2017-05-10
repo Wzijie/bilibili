@@ -13,10 +13,10 @@ var Banner = React.createClass({
 
 		if(this.props.bannerData === null){
 			return	<div className='banner'>
-						<div className='load-tip'>
-							<p>正在请求数据...</p>
-						</div>
-					</div>
+								<div className='load-tip'>
+									<p>正在请求数据...</p>
+								</div>
+							</div>
 		}
 
 		var bannerData = this.props.bannerData;
@@ -35,43 +35,43 @@ var Banner = React.createClass({
 		var lastBannerLink = lastBanner.url || lastBanner.link;
 
 		return	<div className='banner'>
-					<ul className='slide'>
-						<li>
-							<a href={lastBannerLink}>
-								<img src={lastBannerImg} alt={lastBannerAlt} />
-							</a>
-						</li>
-						{
-							bannerData.map( (bannerValue, bannerKey) => {
+							<ul className='slide'>
+								<li>
+									<a href={lastBannerLink}>
+										<img src={lastBannerImg} alt={lastBannerAlt} />
+									</a>
+								</li>
+								{
+									bannerData.map( (bannerValue, bannerKey) => {
 
-								// banner图片URL
-								var img = bannerValue.pic || bannerValue.img;
-								// banner图片描述
-								var alt = bannerValue.name || bannerValue.title;
-								// banner链接
-								var link = bannerValue.url || bannerValue.link;
+										// banner图片URL
+										var img = bannerValue.pic || bannerValue.img;
+										// banner图片描述
+										var alt = bannerValue.name || bannerValue.title;
+										// banner链接
+										var link = bannerValue.url || bannerValue.link;
 
-								return	<li key={bannerKey}>
-											<a href={link}>
-												<img src={img} alt={alt} />
-											</a>
-										</li>
-							} )
-						}
-						<li>
-							<a href={firstBannerLink}>
-								<img src={firstBannerImg} alt={firstBannerAlt} />
-							</a>
-						</li>
-					</ul>	
-					<ul className="slide-active">
-						{
-							bannerData.map( (bannerValue, bannerKey) => {
-								return	<li key={bannerKey}></li>
-							} )
-						}
-					</ul>
-				</div>
+										return	<li key={bannerKey}>
+													<a href={link}>
+														<img src={img} alt={alt} />
+													</a>
+												</li>
+									} )
+								}
+								<li>
+									<a href={firstBannerLink}>
+										<img src={firstBannerImg} alt={firstBannerAlt} />
+									</a>
+								</li>
+							</ul>	
+							<ul className="slide-active">
+								{
+									bannerData.map( (bannerValue, bannerKey) => {
+										return	<li key={bannerKey}></li>
+									} )
+								}
+							</ul>
+						</div>
 	}
 });
 

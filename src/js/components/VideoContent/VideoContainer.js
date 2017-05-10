@@ -361,19 +361,19 @@ var VideoContainer = React.createClass({
 		// 处理播放器数据还未加载时
 		if(this.state.playerData === null){
 			return	<div className='video-container'>
-						<div className='video-loading'>
-							<p>(´・ω・｀)正在加载...</p>
-						</div>
-					</div>
+								<div className='video-loading'>
+									<p>(´・ω・｀)正在加载...</p>
+								</div>
+							</div>
 		}
 
 		// 处理查询不到此aid对应的数据
 		if(Object.prototype.toString.call(this.state.playerData) === '[object String]'){
 			return	<div className='video-container'>
-						<div className='video-loading'>
-							<p>查询错误，可能找不到此aid的数据</p>
-						</div>
-					</div>
+								<div className='video-loading'>
+									<p>查询错误，可能找不到此aid的数据</p>
+								</div>
+							</div>
 		}
 
 		var playerData = this.state.playerData;
@@ -384,62 +384,62 @@ var VideoContainer = React.createClass({
 		var videoLengthStr = (videoLength.min < 10 ? '0' + videoLength.min : videoLength.min) + ':' + (videoLength.second < 10 ? '0' + videoLength.second : videoLength.second);
 
 		return	<div className='video-container'>
-					<div className='barrage' ref='barrage'>
-						<div className='barrage-track'></div>						
-						<div className='barrage-track'></div>						
-						<div className='barrage-track'></div>						
-						<div className='barrage-track'></div>						
-						<div className='barrage-track'></div>					
-						<div className='barrage-track'></div>						
-						<div className='barrage-track'></div>						
-						<div className='barrage-track'></div>						
-						<div className='barrage-track'></div>
-					</div>
-					<div className='player-container' onTouchStart={this.controlToggle}>
-						<video className='player'  data-webkit-playsinline preload='auto' onDurationChange={this.changeTotalTime} onLoadStart={this.waiting} onCanPlay={this.canplayHandler} onTimeUpdate={this.changeCurrentTime} onProgress={this.progressHandler} onWaiting={this.waiting} onPlaying={this.playing} onError={this.error} ref='player'>
-							{this.state.playerLoad ? <source src={playerData.durl[0].url} type="video/mp4" /> : ''}
-						</video>
-					</div>
-					<div className={'load-layer' + (this.state.playerLoad ? ' hide' : '')} onTouchStart={this.playerLoadHandler}>
-						<img className='video-cover' src={playerData.img} /> 
-						<h2 className='video-load-title'>av{this.props.avNum}</h2>
-						<a className='app-down'>粉色有角三倍速缓冲，就用bilibili客户端 >></a>
-						<div className='video-length'>{videoLengthStr}</div>
-						<i className='load-player player-icon'></i>
-					</div>
-					<div className={'player-control' + (this.state.controlShow ? '' : ' hide')}>
-						<div className='time-container'>
-							<span className='current-time' ref='currentTime'>00:00</span>
-							<span>/</span>
-							<span className='total-time' ref='totalTime'>00:00</span>
-						</div>
-						<div className='progress' onTouchEnd={this.setCurrentTime} onTouchMove={this.progressTouchMove} onTouchStart={this.progressTouchStart}>
-							<div className='total-progress'></div>	
-							<div className='buffered-progress' ref='bufferedProgress'></div>
-							<div className='current-progress' ref='currentProgress'></div>
-						</div>
-						<div className='more-control'>
-							<div className='danmu-toggle' onClick={this.toggleBarrageDisplay}>
-								<i className='danmu-hide-icon'></i>
+							<div className='barrage' ref='barrage'>
+								<div className='barrage-track'></div>						
+								<div className='barrage-track'></div>						
+								<div className='barrage-track'></div>						
+								<div className='barrage-track'></div>						
+								<div className='barrage-track'></div>					
+								<div className='barrage-track'></div>						
+								<div className='barrage-track'></div>						
+								<div className='barrage-track'></div>						
+								<div className='barrage-track'></div>
 							</div>
-							<div className='full-screen' onClick={this.playerFullScreen}>
-								<i className='full-screen-icon'></i>
+							<div className='player-container' onTouchStart={this.controlToggle}>
+								<video className='player'  data-webkit-playsinline preload='auto' onDurationChange={this.changeTotalTime} onLoadStart={this.waiting} onCanPlay={this.canplayHandler} onTimeUpdate={this.changeCurrentTime} onProgress={this.progressHandler} onWaiting={this.waiting} onPlaying={this.playing} onError={this.error} ref='player'>
+									{this.state.playerLoad ? <source src={playerData.durl[0].url} type="video/mp4" /> : ''}
+								</video>
 							</div>
+							<div className={'load-layer' + (this.state.playerLoad ? ' hide' : '')} onTouchStart={this.playerLoadHandler}>
+								<img className='video-cover' src={playerData.img} /> 
+								<h2 className='video-load-title'>av{this.props.avNum}</h2>
+								<a className='app-down'>粉色有角三倍速缓冲，就用bilibili客户端 >></a>
+								<div className='video-length'>{videoLengthStr}</div>
+								<i className='load-player player-icon'></i>
+							</div>
+							<div className={'player-control' + (this.state.controlShow ? '' : ' hide')}>
+								<div className='time-container'>
+									<span className='current-time' ref='currentTime'>00:00</span>
+									<span>/</span>
+									<span className='total-time' ref='totalTime'>00:00</span>
+								</div>
+								<div className='progress' onTouchEnd={this.setCurrentTime} onTouchMove={this.progressTouchMove} onTouchStart={this.progressTouchStart}>
+									<div className='total-progress'></div>	
+									<div className='buffered-progress' ref='bufferedProgress'></div>
+									<div className='current-progress' ref='currentProgress'></div>
+								</div>
+								<div className='more-control'>
+									<div className='danmu-toggle' onClick={this.toggleBarrageDisplay}>
+										<i className='danmu-hide-icon'></i>
+									</div>
+									<div className='full-screen' onClick={this.playerFullScreen}>
+										<i className='full-screen-icon'></i>
+									</div>
+								</div>
+							</div>
+							<div className={'state-icon' + (this.state.controlShow ? '' : ' hide')} ref='stateIcon'>
+								<i className='loading-icon' ref='loadingIcon'></i>
+								<i className={'play-icon' + (this.state.paused === true ? ' active' : '')} onTouchStart={this.playToggle}></i>
+								<i className={'pause-icon' + (this.state.paused === false ? ' active' : '')} onTouchStart={this.playToggle}></i>
+							</div>
+							{
+								this.state.errorCode !== null ? 
+								<div className='error-info'>
+									<p className='error-msg'>错误代码：{this.state.errorCode}，视频加载发生错误，请刷新页面或重新加载视频</p>
+									<span className='video-reload' onTouchStart={this.videoReload}>重新加载</span>
+								</div> : ''
+							}
 						</div>
-					</div>
-					<div className={'state-icon' + (this.state.controlShow ? '' : ' hide')} ref='stateIcon'>
-						<i className='loading-icon' ref='loadingIcon'></i>
-						<i className={'play-icon' + (this.state.paused === true ? ' active' : '')} onTouchStart={this.playToggle}></i>
-						<i className={'pause-icon' + (this.state.paused === false ? ' active' : '')} onTouchStart={this.playToggle}></i>
-					</div>
-					{
-						this.state.errorCode !== null ? 
-						<div className='error-info'>
-							<p className='error-msg'>错误代码：{this.state.errorCode}，视频加载发生错误，请刷新页面或重新加载视频</p>
-							<span className='video-reload' onTouchStart={this.videoReload}>重新加载</span>
-						</div> : ''
-					}
-				</div>
 	}
 });
 

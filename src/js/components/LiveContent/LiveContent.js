@@ -12,12 +12,12 @@ var LiveContent = React.createClass({
 		var liveData = this.props.liveData;
 
 		return	<div className='live-content'>	
-				{
-					liveData.map((liveSectionData, index) => {
-						return <LiveSection liveSectionData={liveSectionData} key={index} />
-					})
-				}
-				</div>
+						{
+							liveData.map((liveSectionData, index) => {
+								return <LiveSection liveSectionData={liveSectionData} key={index} />
+							})
+						}
+						</div>
 	}
 });
 

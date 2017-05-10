@@ -58,15 +58,15 @@ var Root = React.createClass({
 	render: function(){
 		
 		return  <div>
-					<Header toggleInitialSearch={this.toggleInitialSearch} />
-					<InitialSearch initialSearchDisplay={this.state.initialSearchDisplay} toggleInitialSearch={this.toggleInitialSearch} />
-					<LoadCover loading={this.state.loading} />
-					<Nav pageActive={0} />
-					<Banner bannerData={this.state.bannerData} />
-					<IndexContent loadingChange={this.loadingChange} />
-					<AppLink />
-					<Footer />			
-				</div>
+							<Header toggleInitialSearch={this.toggleInitialSearch} />
+							<InitialSearch initialSearchDisplay={this.state.initialSearchDisplay} toggleInitialSearch={this.toggleInitialSearch} />
+							<LoadCover loading={this.state.loading} />
+							<Nav pageActive={0} />
+							<Banner bannerData={this.state.bannerData} />
+							<IndexContent loadingChange={this.loadingChange} />
+							<AppLink />
+							<Footer />			
+						</div>
 	}
 });
 

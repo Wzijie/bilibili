@@ -91,10 +91,10 @@ var RankingContent = React.createClass({
 	},
 	render: function(){
 		return	<div className='ranking-content'>
-					<RankingTitle />
-					<RankingNav navData={this.state.navData} requestRankData={this.requestRankData} />
-					<RankingList currentRankingData={this.state.currentRankingData} />
-				</div>
+							<RankingTitle />
+							<RankingNav navData={this.state.navData} requestRankData={this.requestRankData} />
+							<RankingList currentRankingData={this.state.currentRankingData} />
+						</div>
 	}
 });
 

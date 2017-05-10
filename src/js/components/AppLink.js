@@ -8,14 +8,14 @@ var AppLink = React.createClass({
 	},
 	render: function(){
 		return	<div className='app-link'>
-					<div className='app-logo'></div>
-					<div className='app-intro text-overflow'>
-						<p>上bilibili客户端</p>
-						<p>高清视频 离线观看 新番电影一览无余</p>
-					</div>
-					<a className='app-down-btn' href='###'>下载</a>
-					<div className='close-btn'></div>
-				</div>
+							<div className='app-logo'></div>
+							<div className='app-intro text-overflow'>
+								<p>上bilibili客户端</p>
+								<p>高清视频 离线观看 新番电影一览无余</p>
+							</div>
+							<a className='app-down-btn' href='###'>下载</a>
+							<div className='close-btn'></div>
+						</div>
 	}
 });
 

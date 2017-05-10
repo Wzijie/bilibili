@@ -961,6 +961,10 @@ webpackJsonp([2],{
 					if (successHandler !== undefined) {
 						successHandler(indexContentData);
 					}
+				} else {
+					if (errorHandler !== undefined) {
+						errorHandler(target.status);
+					}
 				}
 			};
 			xhr.send(null);

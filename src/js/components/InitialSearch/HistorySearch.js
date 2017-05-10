@@ -12,23 +12,23 @@ var HistorySearch  = React.createClass({
 		var removeHistorySearch = this.props.removeHistorySearch;
 
 		return	<div className='history-search'>
-					<h3 className='search-info-title'>历史搜索</h3>
-					{
-						noHistorySearch
-						?	<p className='loading-info'>暂无历史搜索</p>
-						:   <ul className='history-search-list'>
+							<h3 className='search-info-title'>历史搜索</h3>
 							{
-								historySearchData.map((historySearchItem, index) => {
-									// historySearchItem 搜索关键字
-									return	<li key={index}>
-												<a href={'search.html?keyword='+ historySearchItem}>{historySearchItem}</a>
-												<i className='history-delete' onClick={removeHistorySearch(index)}></i>
-											</li>
-								})
+								noHistorySearch
+								?	<p className='loading-info'>暂无历史搜索</p>
+								: <ul className='history-search-list'>
+									{
+										historySearchData.map((historySearchItem, index) => {
+											// historySearchItem 搜索关键字
+											return	<li key={index}>
+																<a href={'search.html?keyword='+ historySearchItem}>{historySearchItem}</a>
+																<i className='history-delete' onClick={removeHistorySearch(index)}></i>
+															</li>
+										})
+									}
+									</ul>
 							}
-							</ul>
-					}
-				</div>
+						</div>
 	}	
 });
 

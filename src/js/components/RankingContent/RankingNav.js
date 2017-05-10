@@ -20,20 +20,20 @@ var RankingNav = React.createClass({
 		}
 
 		return	<nav className='rank-nav'>
-					<ul className='roll-list'>
-					{
-						navData.map((navItem, index) => {
-							
-							// 标题，数据名
-							var { title, dataName } = navItem;
+							<ul className='roll-list'>
+							{
+								navData.map((navItem, index) => {
+									
+									// 标题，数据名
+									var { title, dataName } = navItem;
 
-							return	<li className={index === 0 ? 'on' : ''} key={index} onClick={navClickHandler(dataName)} >
-										<a>{title}</a>
-									</li>
-						})
-					}
-					</ul>
-				</nav>
+									return	<li className={index === 0 ? 'on' : ''} key={index} onClick={navClickHandler(dataName)} >
+														<a>{title}</a>
+													</li>
+								})
+							}
+							</ul>
+						</nav>
 	}
 });
 
