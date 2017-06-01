@@ -42,9 +42,9 @@ var DefaultVideoContainer = React.createClass({
 									// 视频标题
 									var title = partDataItem.title;
 									// 播放数
-									var playNum = partDataItem.play >= 10000 ? (partDataItem.play/10000).toFixed(1)+'万' : partDataItem.play;
+									var playNum = partDataItem.stat.view >= 10000 ? (partDataItem.stat.view/10000).toFixed(1)+'万' : partDataItem.stat.view;
 									// 弹幕数
-									var barrageNum = partDataItem.video_review >= 10000 ? (partDataItem.video_review/10000).toFixed(1)+'万' : partDataItem.video_review;
+									var barrageNum = partDataItem.stat.danmaku >= 10000 ? (partDataItem.stat.danmaku/10000).toFixed(1)+'万' : partDataItem.stat.danmaku;
 
 									return	<li className='content-item' key={index}>		
 												<a href={'video.html?aid=' + aid}>

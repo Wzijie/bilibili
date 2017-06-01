@@ -5,51 +5,51 @@ webpackJsonp([2],{
 
 	'use strict';
 
-	var _react = __webpack_require__(9);
+	var _react = __webpack_require__(3);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(40);
+	var _reactDom = __webpack_require__(34);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _setRootFontsize = __webpack_require__(191);
+	var _setRootFontsize = __webpack_require__(185);
 
 	var _setRootFontsize2 = _interopRequireDefault(_setRootFontsize);
 
-	var _ajaxRequest = __webpack_require__(204);
+	var _ajaxRequest = __webpack_require__(198);
 
 	var _ajaxRequest2 = _interopRequireDefault(_ajaxRequest);
 
-	var _Header = __webpack_require__(192);
+	var _Header = __webpack_require__(186);
 
 	var _Header2 = _interopRequireDefault(_Header);
 
-	var _Nav = __webpack_require__(193);
+	var _Nav = __webpack_require__(187);
 
 	var _Nav2 = _interopRequireDefault(_Nav);
 
-	var _Banner = __webpack_require__(208);
+	var _Banner = __webpack_require__(202);
 
 	var _Banner2 = _interopRequireDefault(_Banner);
 
-	var _Footer = __webpack_require__(194);
+	var _Footer = __webpack_require__(188);
 
 	var _Footer2 = _interopRequireDefault(_Footer);
 
-	var _AppLink = __webpack_require__(196);
+	var _AppLink = __webpack_require__(190);
 
 	var _AppLink2 = _interopRequireDefault(_AppLink);
 
-	var _LoadCover = __webpack_require__(198);
+	var _LoadCover = __webpack_require__(192);
 
 	var _LoadCover2 = _interopRequireDefault(_LoadCover);
 
-	var _InitialSearch = __webpack_require__(199);
+	var _InitialSearch = __webpack_require__(193);
 
 	var _InitialSearch2 = _interopRequireDefault(_InitialSearch);
 
-	var _IndexContent = __webpack_require__(210);
+	var _IndexContent = __webpack_require__(204);
 
 	var _IndexContent2 = _interopRequireDefault(_IndexContent);
 
@@ -125,7 +125,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 191:
+/***/ 185:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -145,7 +145,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 192:
+/***/ 186:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -154,7 +154,7 @@ webpackJsonp([2],{
 		value: true
 	});
 	// Header
-	var React = __webpack_require__(9);
+	var React = __webpack_require__(3);
 
 	var Header = React.createClass({
 		displayName: 'Header',
@@ -190,7 +190,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 193:
+/***/ 187:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -199,7 +199,7 @@ webpackJsonp([2],{
 		value: true
 	});
 	// Nav
-	var React = __webpack_require__(9);
+	var React = __webpack_require__(3);
 	var Nav = React.createClass({
 		displayName: 'Nav',
 
@@ -265,7 +265,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 194:
+/***/ 188:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -274,14 +274,14 @@ webpackJsonp([2],{
 		value: true
 	});
 
-	var _toTop = __webpack_require__(195);
+	var _toTop = __webpack_require__(189);
 
 	var _toTop2 = _interopRequireDefault(_toTop);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// Footer
-	var React = __webpack_require__(9);
+	var React = __webpack_require__(3);
 	// 返回顶部toTop.js
 	var Footer = React.createClass({
 		displayName: 'Footer',
@@ -357,7 +357,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 195:
+/***/ 189:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -385,7 +385,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 196:
+/***/ 190:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -394,14 +394,14 @@ webpackJsonp([2],{
 		value: true
 	});
 
-	var _appLinkShow = __webpack_require__(197);
+	var _appLinkShow = __webpack_require__(191);
 
 	var _appLinkShow2 = _interopRequireDefault(_appLinkShow);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// AppLink底部悬浮窗口
-	var React = __webpack_require__(9);
+	var React = __webpack_require__(3);
 	// 底部悬浮窗口显示隐藏appLinkShow.js
 
 	var AppLink = React.createClass({
@@ -443,7 +443,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 197:
+/***/ 191:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -492,7 +492,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 198:
+/***/ 192:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -501,7 +501,7 @@ webpackJsonp([2],{
 		value: true
 	});
 	// 加载loading页面
-	var React = __webpack_require__(9);
+	var React = __webpack_require__(3);
 
 	var LoadCover = React.createClass({
 		displayName: 'LoadCover',
@@ -524,7 +524,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 199:
+/***/ 193:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -533,31 +533,31 @@ webpackJsonp([2],{
 		value: true
 	});
 
-	var _react = __webpack_require__(9);
+	var _react = __webpack_require__(3);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _SearchOperation = __webpack_require__(200);
+	var _SearchOperation = __webpack_require__(194);
 
 	var _SearchOperation2 = _interopRequireDefault(_SearchOperation);
 
-	var _HotSearch = __webpack_require__(201);
+	var _HotSearch = __webpack_require__(195);
 
 	var _HotSearch2 = _interopRequireDefault(_HotSearch);
 
-	var _HistorySearch = __webpack_require__(202);
+	var _HistorySearch = __webpack_require__(196);
 
 	var _HistorySearch2 = _interopRequireDefault(_HistorySearch);
 
-	var _SearchSuggest = __webpack_require__(203);
+	var _SearchSuggest = __webpack_require__(197);
 
 	var _SearchSuggest2 = _interopRequireDefault(_SearchSuggest);
 
-	var _ajaxRequest = __webpack_require__(204);
+	var _ajaxRequest = __webpack_require__(198);
 
 	var _ajaxRequest2 = _interopRequireDefault(_ajaxRequest);
 
-	var _createScriptJsonp = __webpack_require__(205);
+	var _createScriptJsonp = __webpack_require__(199);
 
 	var _createScriptJsonp2 = _interopRequireDefault(_createScriptJsonp);
 
@@ -677,7 +677,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 200:
+/***/ 194:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -686,7 +686,7 @@ webpackJsonp([2],{
 		value: true
 	});
 
-	var _react = __webpack_require__(9);
+	var _react = __webpack_require__(3);
 
 	var _react2 = _interopRequireDefault(_react);
 
@@ -738,7 +738,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 201:
+/***/ 195:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -747,7 +747,7 @@ webpackJsonp([2],{
 		value: true
 	});
 
-	var _react = __webpack_require__(9);
+	var _react = __webpack_require__(3);
 
 	var _react2 = _interopRequireDefault(_react);
 
@@ -799,7 +799,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 202:
+/***/ 196:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -808,7 +808,7 @@ webpackJsonp([2],{
 		value: true
 	});
 
-	var _react = __webpack_require__(9);
+	var _react = __webpack_require__(3);
 
 	var _react2 = _interopRequireDefault(_react);
 
@@ -863,7 +863,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 203:
+/***/ 197:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -872,7 +872,7 @@ webpackJsonp([2],{
 		value: true
 	});
 
-	var _react = __webpack_require__(9);
+	var _react = __webpack_require__(3);
 
 	var _react2 = _interopRequireDefault(_react);
 
@@ -915,7 +915,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 204:
+/***/ 198:
 /***/ function(module, exports) {
 
 	"use strict";
@@ -971,7 +971,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 205:
+/***/ 199:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -994,7 +994,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 208:
+/***/ 202:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1003,15 +1003,15 @@ webpackJsonp([2],{
 		value: true
 	});
 
-	var _react = __webpack_require__(9);
+	var _react = __webpack_require__(3);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _slideTouch = __webpack_require__(209);
+	var _slideTouch = __webpack_require__(203);
 
 	var _slideTouch2 = _interopRequireDefault(_slideTouch);
 
-	var _ajaxRequest = __webpack_require__(204);
+	var _ajaxRequest = __webpack_require__(198);
 
 	var _ajaxRequest2 = _interopRequireDefault(_ajaxRequest);
 
@@ -1119,7 +1119,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 209:
+/***/ 203:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1285,7 +1285,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 210:
+/***/ 204:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1294,31 +1294,31 @@ webpackJsonp([2],{
 		value: true
 	});
 
-	var _react = __webpack_require__(9);
+	var _react = __webpack_require__(3);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _ajaxRequest = __webpack_require__(204);
+	var _ajaxRequest = __webpack_require__(198);
 
 	var _ajaxRequest2 = _interopRequireDefault(_ajaxRequest);
 
-	var _createScriptJsonp = __webpack_require__(205);
+	var _createScriptJsonp = __webpack_require__(199);
 
 	var _createScriptJsonp2 = _interopRequireDefault(_createScriptJsonp);
 
-	var _RecommendVideoContainer = __webpack_require__(211);
+	var _RecommendVideoContainer = __webpack_require__(205);
 
 	var _RecommendVideoContainer2 = _interopRequireDefault(_RecommendVideoContainer);
 
-	var _LiveVideoContainer = __webpack_require__(213);
+	var _LiveVideoContainer = __webpack_require__(207);
 
 	var _LiveVideoContainer2 = _interopRequireDefault(_LiveVideoContainer);
 
-	var _BangumiVideoContainer = __webpack_require__(214);
+	var _BangumiVideoContainer = __webpack_require__(208);
 
 	var _BangumiVideoContainer2 = _interopRequireDefault(_BangumiVideoContainer);
 
-	var _DefaultVideoContainer = __webpack_require__(215);
+	var _DefaultVideoContainer = __webpack_require__(209);
 
 	var _DefaultVideoContainer2 = _interopRequireDefault(_DefaultVideoContainer);
 
@@ -1450,7 +1450,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 211:
+/***/ 205:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1459,11 +1459,11 @@ webpackJsonp([2],{
 		value: true
 	});
 
-	var _react = __webpack_require__(9);
+	var _react = __webpack_require__(3);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _imgLazyLoad = __webpack_require__(212);
+	var _imgLazyLoad = __webpack_require__(206);
 
 	var _imgLazyLoad2 = _interopRequireDefault(_imgLazyLoad);
 
@@ -1586,7 +1586,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 212:
+/***/ 206:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1682,7 +1682,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 213:
+/***/ 207:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1691,11 +1691,11 @@ webpackJsonp([2],{
 		value: true
 	});
 
-	var _react = __webpack_require__(9);
+	var _react = __webpack_require__(3);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _imgLazyLoad = __webpack_require__(212);
+	var _imgLazyLoad = __webpack_require__(206);
 
 	var _imgLazyLoad2 = _interopRequireDefault(_imgLazyLoad);
 
@@ -1813,7 +1813,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 214:
+/***/ 208:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1822,11 +1822,11 @@ webpackJsonp([2],{
 		value: true
 	});
 
-	var _react = __webpack_require__(9);
+	var _react = __webpack_require__(3);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _imgLazyLoad = __webpack_require__(212);
+	var _imgLazyLoad = __webpack_require__(206);
 
 	var _imgLazyLoad2 = _interopRequireDefault(_imgLazyLoad);
 
@@ -1924,7 +1924,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 215:
+/***/ 209:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1933,11 +1933,11 @@ webpackJsonp([2],{
 		value: true
 	});
 
-	var _react = __webpack_require__(9);
+	var _react = __webpack_require__(3);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _imgLazyLoad = __webpack_require__(212);
+	var _imgLazyLoad = __webpack_require__(206);
 
 	var _imgLazyLoad2 = _interopRequireDefault(_imgLazyLoad);
 
@@ -2004,9 +2004,9 @@ webpackJsonp([2],{
 						// 视频标题
 						var title = partDataItem.title;
 						// 播放数
-						var playNum = partDataItem.play >= 10000 ? (partDataItem.play / 10000).toFixed(1) + '万' : partDataItem.play;
+						var playNum = partDataItem.stat.view >= 10000 ? (partDataItem.stat.view / 10000).toFixed(1) + '万' : partDataItem.stat.view;
 						// 弹幕数
-						var barrageNum = partDataItem.video_review >= 10000 ? (partDataItem.video_review / 10000).toFixed(1) + '万' : partDataItem.video_review;
+						var barrageNum = partDataItem.stat.danmaku >= 10000 ? (partDataItem.stat.danmaku / 10000).toFixed(1) + '万' : partDataItem.stat.danmaku;
 
 						return _react2.default.createElement(
 							'li',
