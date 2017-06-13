@@ -20,17 +20,17 @@ var ChannelList = React.createClass({
 						var updateCount = channelItem.updateCount > 99 ? '99+' : channelItem.updateCount;
 
 						return	<li key={index}>
-									<a href='###'>
-										<i className={'channel-icon channel-icon-' + iconName}>
-											{
-												isUpdateCount 
-												? <span className='channel-num'>{updateCount}</span> 
-												: ''
-											}
-										</i>
-										<p className='channel-name'>{title}</p>
-									</a>
-								</li>
+											<a href='###'>
+												<i className={'channel-icon channel-icon-' + iconName}>
+													{
+														isUpdateCount 
+														? <span className='channel-num'>{updateCount}</span> 
+														: ''
+													}
+												</i>
+												<p className='channel-name'>{title}</p>
+											</a>
+										</li>
 					})
 				}
 				</ul>

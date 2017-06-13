@@ -75,8 +75,8 @@ var ChannelContent = React.createClass({
 		}
 
 		return	<div className='channel-content'>
-					<ChannelList channelData={this.state.channelData} />
-				</div>
+							<ChannelList channelData={this.state.channelData} />
+						</div>
 	}
 });
 
