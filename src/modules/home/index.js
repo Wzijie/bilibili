@@ -57,7 +57,6 @@ class Home extends React.Component {
   }
 
   render() {
-
     const { 
       recommendList, 
       recommendLoading, 

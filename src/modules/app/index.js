@@ -1,29 +1,43 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
 import Layout from './Layout';
 import Home from '../home';
 import Channel from '../channel';
 import Live from '../live'
 import Ranking from '../ranking';
 import Video from '../video';
+import Search from '../search';
 import NoMatch from './NoMatch';
 import './index.less';
 
+const RouteWithLayout = ({ layout: Layout, component: Component, ...rest }) => {
+  return (
+    <Route {...rest} render={(props) => (
+      Layout
+        ? (
+          <Layout>
+            <Component {...props} />
+          </Layout>
+        )
+        : <Component {...props} />
+    )} />
+  );
+}
 
 const App = (props) => {
   return (
-    <Layout>
-      <Switch>
-        <Route exact path='/' component={Home} />
-        <Route path='/channel' component={Channel} />
-        <Route path='/live' component={Live} />
-        <Route path='/ranking' component={Ranking} />
-        <Route path='/video/:aid' component={Video} />
-        <Route component={NoMatch} />
-      </Switch>
-    </Layout>
+    // <Layout>
+    <Switch>
+      <RouteWithLayout layout={Layout} exact path='/' component={Home} />
+      <RouteWithLayout layout={Layout} path='/channel' component={Channel} />
+      <RouteWithLayout layout={Layout} path='/live' component={Live} />
+      <RouteWithLayout layout={Layout} path='/ranking' component={Ranking} />
+      <RouteWithLayout layout={Layout} path='/video/:aid' component={Video} />
+      <Route path='/search' component={Search} />
+      <RouteWithLayout layout={Layout} component={NoMatch} />
+    </Switch>
+    // </Layout>
   );
 }
 

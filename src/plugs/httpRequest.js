@@ -11,7 +11,7 @@ export function getImageUrl(path) {
 export function get(path) {
   return fetch(getUrl(path))
     .then((resource) => {
-      if (resource.status >= 200 && resource.status <= 304) {
+      if (resource.status === 200 || resource.status === 304) {
         return resource.json();
       } else {
         let error = new Error(`服务器响应错误${resource.url}`);

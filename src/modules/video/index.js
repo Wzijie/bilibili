@@ -212,7 +212,7 @@ class Video extends React.Component {
           error={commentError}
         />
       </div>
-    )
+    );
   }
 }
 
