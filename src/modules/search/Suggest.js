@@ -1,4 +1,5 @@
 import React from 'react';
+import { addLoading } from '../../components';
 
 function filterScriptTag(str) {
   return str.replace(/<script/gi, '').replace(/<\/script>/gi, '');
@@ -21,4 +22,4 @@ const Suggest = ({ dataList }) => (
   </ul>
 );
 
-export default Suggest;
+export default addLoading(Suggest);

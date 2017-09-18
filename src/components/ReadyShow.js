@@ -11,4 +11,14 @@ const ReadyShow = ({ loading, error, loadingMessage = '正在加载...', errorMe
   }
 }
 
-export default ReadyShow;
+function addLoading(Component) {
+  return ({ loading, error, ...rest }) => {
+    return (
+      <ReadyShow loading={loading} error={error} >
+        <Component {...rest} />
+      </ReadyShow>
+    );
+  }
+}
+
+export { ReadyShow, addLoading };

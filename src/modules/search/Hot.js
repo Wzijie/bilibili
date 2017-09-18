@@ -1,4 +1,5 @@
 import React from 'react';
+import { addLoading } from '../../components';
 
 const HotItem = ({ keyword }) => (
   <li>
@@ -24,4 +25,4 @@ const Hot = ({ dataList }) => (
   </div>
 );
 
-export default Hot;
+export default addLoading(Hot);

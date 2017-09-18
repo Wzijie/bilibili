@@ -1,14 +1,31 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actionCreators from './actions';
-import { ReadyShow } from '../../components'
 import SearchBar from './SearchBar';
 import Hot from './Hot';
 import History from './History';
 import Suggest from './Suggest';
+import Result from './Result';
 import './index.less';
+
+// function HotAndHistory({ hotLoading, hotError, hotList }) {
+//   return (
+//     <div>
+//       <Hot loading={hotLoading} error={hotError} dataList={hotList} />
+//       <History />
+//     </div>
+//   );
+// }
+
+// function SearchMessage({ keyword, hotAndHistory, suggest }) {
+//   if (keyword === '') {
+//     return hotAndHistory;
+//   } else {
+//     return suggest;
+//   }
+// }
 
 class Search extends React.Component {
 
@@ -40,6 +57,7 @@ class Search extends React.Component {
   render() {
 
     const {
+      match: { path },
       keyword,
       hotList,
       hotLoading,
@@ -52,25 +70,29 @@ class Search extends React.Component {
     return (
       <div className='initial-search'>
         <SearchBar keyword={keyword} onChangeKeyword={this.onChangeKeyword} onClearKeyword={this.onClearKeyword} />
-        <div className='search-message'>
-          {
-            keyword === ''
-              ? (
-                <div>
-                  <ReadyShow loading={hotLoading} error={hotError} >
-                    <Hot dataList={hotList} />
-                  </ReadyShow>
-                  <History />
-                </div>
-              )
-              : (
-                <ReadyShow loading={suggestLoading} error={suggestError} >
-                  <Suggest dataList={suggestList} />
-                </ReadyShow>
-              )
-          }
-        </div>
+        <Switch>
+          <Route path={`${path}/:keyword`} component={Result} />
+          <Route path={`${path}/`} render={() => (
+            <div className='search-message'>
+              {
+                keyword === ''
+                  ? (
+                    <div>
+                      <Hot loading={hotLoading} error={hotError} dataList={hotList} />
+                      <History />
+                    </div>
+                  )
+                  : <Suggest loading={suggestLoading} error={suggestError} dataList={suggestList} />
+              }
+              {/* <SearchMessage
+            keyword={keyword}
+            hotAndHistory={<HotAndHistory hotLoading={hotLoading} hotError={hotError} hotList={hotList} />}
+            suggest={<Suggest loading={suggestLoading} error={suggestError} dataList={suggestList} />}
+          /> */}
 
+            </div>
+          )} />
+        </Switch>
       </div>
     );
   }
