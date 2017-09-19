@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import countFormat from '../../plugs/countFormat';
 
 const RankList = ({ dataList }) => {
   return (
@@ -7,11 +8,11 @@ const RankList = ({ dataList }) => {
       {
         dataList.map((rankingItem, index) => {
           let { aid, pic, title, author, play, video_review } = rankingItem;
-          let playCount = play >= 10000 ? `${(play / 10000).toFixed(1)}万` : play;
-          let barrageCount = video_review >= 10000 ? `${(video_review / 10000).toFixed(1)}万` : video_review;
+          let playCount = countFormat(play);
+          let barrageCount = countFormat(video_review);
           return (
             <li key={aid}>
-              <Link to={`video/${aid}`} className='list-box'>
+              <Link to={`/video/${aid}`} className='list-box'>
                 <div className='video-cover'>
                   <div className={`rank-num ${index < 3 && 'rank-top3'}`}>{index+1}</div>
                   <div className='cover-box' data-img={pic}></div>

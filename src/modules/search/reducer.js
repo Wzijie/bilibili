@@ -5,7 +5,10 @@ import {
   HOT_FAIL,
   SUGGEST_REQUEST,
   SUGGEST_SUCCESS,
-  SUGGEST_FAIL
+  SUGGEST_FAIL,
+  SEARCH_REQUEST,
+  SEARCH_SUCCESS,
+  SEARCH_FAIL
 } from './actionTypes';
 
 const initialState = {
@@ -15,7 +18,10 @@ const initialState = {
   hotList: [],
   suggestLoading: false,
   suggestError: null,
-  suggestList: []
+  suggestList: [],
+  searchLoading: false,
+  searchError: null,
+  searchResult: {}
 };
 
 function search(state = initialState, action) {
@@ -41,6 +47,15 @@ function search(state = initialState, action) {
 
     case SUGGEST_FAIL:
       return { ...state, suggestLoading: false, suggestError: action.payload };
+
+    case SEARCH_REQUEST:
+      return { ...state, searchLoading: true };
+
+    case SEARCH_SUCCESS:
+      return { ...state, searchLoading: false, searchResult: action.payload };
+
+    case SEARCH_FAIL:
+      return { ...state, searchLoading: false, searchError: action.payload };
 
     default: return state;
   }

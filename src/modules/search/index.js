@@ -7,7 +7,7 @@ import SearchBar from './SearchBar';
 import Hot from './Hot';
 import History from './History';
 import Suggest from './Suggest';
-import Result from './Result';
+import SearchResult from './searchResult';
 import './index.less';
 
 // function HotAndHistory({ hotLoading, hotError, hotList }) {
@@ -33,6 +33,16 @@ class Search extends React.Component {
     this.fetchHot();
   }
 
+  fetchHot = () => {
+    let { hotRequest } = this.props;
+    hotRequest();
+  }
+
+  fetchSuggest = (keyword) => {
+    let { suggestRequest } = this.props;
+    suggestRequest(keyword);
+  }
+
   onChangeKeyword = (event) => {
     let { changeKeyword } = this.props;
     changeKeyword(event.target.value);
@@ -44,14 +54,15 @@ class Search extends React.Component {
     changeKeyword('');
   }
 
-  fetchHot = () => {
-    let { hotRequest } = this.props;
-    hotRequest();
+  onSearchBarFocus = () => {
+    let { history: { push }, match: { path } } = this.props;
+    push(path);
   }
 
-  fetchSuggest = (keyword) => {
-    let { suggestRequest } = this.props;
-    suggestRequest(keyword);
+  onSearchSubmit = (event) => {
+    event.preventDefault();
+    let { keyword, history: { push }, match: { path } } = this.props;
+    push(`${path}/${keyword}`);
   }
 
   render() {
@@ -69,20 +80,26 @@ class Search extends React.Component {
 
     return (
       <div className='initial-search'>
-        <SearchBar keyword={keyword} onChangeKeyword={this.onChangeKeyword} onClearKeyword={this.onClearKeyword} />
+        <SearchBar 
+          keyword={keyword} 
+          onChangeKeyword={this.onChangeKeyword} 
+          onClearKeyword={this.onClearKeyword} 
+          onSearchBarFocus={this.onSearchBarFocus} 
+          onSearchSubmit={this.onSearchSubmit}
+        />
         <Switch>
-          <Route path={`${path}/:keyword`} component={Result} />
-          <Route path={`${path}/`} render={() => (
+          <Route path={`${path}/:keyword`} component={SearchResult} />
+          <Route path={`${path}`} render={({ match: { path } }) => (
             <div className='search-message'>
               {
                 keyword === ''
                   ? (
                     <div>
-                      <Hot loading={hotLoading} error={hotError} dataList={hotList} />
+                      <Hot loading={hotLoading} error={hotError} dataList={hotList} path={path} />
                       <History />
                     </div>
                   )
-                  : <Suggest loading={suggestLoading} error={suggestError} dataList={suggestList} />
+                  : <Suggest loading={suggestLoading} error={suggestError} dataList={suggestList} path={path} />
               }
               {/* <SearchMessage
             keyword={keyword}

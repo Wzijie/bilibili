@@ -90,7 +90,8 @@ class Video extends React.Component {
         changeCurrentTime,
         changeBufferedTime,
         toggleControlShow,
-        toggleShowAllPart
+        toggleShowAllPart,
+        showMore
       },
       player: {
         playerLoading,
@@ -136,8 +137,7 @@ class Video extends React.Component {
         recommendLoading,
         recommendError,
         recommendList,
-        recommendVisibleList,
-        showMore
+        recommendVisibleList
       },
       comment: {
         commentLoading,

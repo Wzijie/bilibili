@@ -6,7 +6,10 @@ import {
   HOT_FAIL,
   SUGGEST_REQUEST,
   SUGGEST_SUCCESS,
-  SUGGEST_FAIL
+  SUGGEST_FAIL,
+  SEARCH_REQUEST,
+  SEARCH_SUCCESS,
+  SEARCH_FAIL
 } from './actionTypes';
 import { get } from '../../plugs/httpRequest';
 
@@ -56,5 +59,27 @@ export function suggestRequest(keyword) {
         dispatch(suggestFail(error.message));
         message.error(error.message);
       });
+  }
+}
+
+export function searchSuccess(searchResult) {
+  return { type: SEARCH_SUCCESS, payload: searchResult };
+}
+
+export function searchFail(message) {
+  return { type: SEARCH_FAIL, payload: message };
+}
+
+export function search(keyword) {
+  return (dispatch) => {
+    dispatch({ type: SEARCH_REQUEST });
+    return get(`/search?keyword=${keyword}`)
+      .then((result) => {
+        dispatch(searchSuccess(result.data.result));
+      })
+      .catch((error) => {
+        dispatch(searchFail(error.message));
+        message.error(error.message);
+      })
   }
 }

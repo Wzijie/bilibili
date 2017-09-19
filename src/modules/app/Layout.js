@@ -1,5 +1,4 @@
 import React from 'react';
-import { BackTop } from 'antd';
 import { Menu } from '../../components';
 
 const Layout = ({ children }) => {
@@ -9,7 +8,6 @@ const Layout = ({ children }) => {
       <div className='content'>
         {children}
       </div>
-      <BackTop style={{ right: 50 }} />
     </div>
   )
 }

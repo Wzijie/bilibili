@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { BackTop } from 'antd';
 import Layout from './Layout';
 import Home from '../home';
 import Channel from '../channel';
@@ -27,17 +28,18 @@ const RouteWithLayout = ({ layout: Layout, component: Component, ...rest }) => {
 
 const App = (props) => {
   return (
-    // <Layout>
-    <Switch>
-      <RouteWithLayout layout={Layout} exact path='/' component={Home} />
-      <RouteWithLayout layout={Layout} path='/channel' component={Channel} />
-      <RouteWithLayout layout={Layout} path='/live' component={Live} />
-      <RouteWithLayout layout={Layout} path='/ranking' component={Ranking} />
-      <RouteWithLayout layout={Layout} path='/video/:aid' component={Video} />
-      <Route path='/search' component={Search} />
-      <RouteWithLayout layout={Layout} component={NoMatch} />
-    </Switch>
-    // </Layout>
+    <div>
+      <Switch>
+        <RouteWithLayout layout={Layout} exact path='/' component={Home} />
+        <RouteWithLayout layout={Layout} path='/channel' component={Channel} />
+        <RouteWithLayout layout={Layout} path='/live' component={Live} />
+        <RouteWithLayout layout={Layout} path='/ranking' component={Ranking} />
+        <RouteWithLayout layout={Layout} path='/video/:aid' component={Video} />
+        <Route path='/search' component={Search} />
+        <RouteWithLayout layout={Layout} component={NoMatch} />
+      </Switch>
+      <BackTop style={{ right: 50 }} />
+    </div>
   );
 }
 
