@@ -1,4 +1,5 @@
 @ui_3: './images/ui_3@2x.png';
+@img_loading: './images/img_loading.png';
 
 .initial-search {
   position: absolute;
@@ -240,6 +241,9 @@
     .search-result {
   
       li a.list-box { 
+        font-size: 0.14rem;
+        color: inherit;
+
         div.video-cover {
           width: 33%;
           position: relative;
@@ -261,6 +265,77 @@
         div.video-info {
           width: 67%;
         }	
+      }
+
+      li.bangumi-item a.list-box {
+        height: 1.05rem;
+
+        .bangumi-cover {
+          width: 0.8rem;
+          min-width: 0.8rem;
+          background: url('@{img_loading}') no-repeat center;
+          background-size: contain;
+
+          img {
+            width: 100%;
+            height: 100%;
+            border-radius: 4px;
+          }
+        }
+
+        .bangumi-info {
+          flex: 1;
+          margin-left: 0.16rem;
+          line-height: 1.6;
+
+          .bangumi-tag {
+            display: flex;
+            align-items: center;
+
+            i.icon-bangumi {
+              display: inline-block;
+              width: 0.2rem;
+              height: 0.2rem;
+              margin-right: 0.04rem;
+              background: url('./images/bangumi.png') no-repeat center;
+              background-size: cover;
+            }
+          }
+
+          .update-info {
+            font-size: 0.12rem;
+            color: #999;
+          }
+        }
+      }
+
+      li.user-item a.list-box {
+        height: 0.6rem;
+
+        .user-face {
+          width: 0.6rem;
+          min-width: 0.6rem;
+          background: url('@{img_loading}') no-repeat center;
+          background-size: contain;
+        }
+
+        .user-info {
+          flex: 1;
+          margin-left: 0.16rem;
+          line-height: 1.6;
+          overflow: hidden;
+
+          .fans-count {
+            margin-right: 0.1rem;
+          }
+
+          .fans-count,
+          .video-count,
+          .user-sign {
+            font-size: 0.12rem;
+            color: #999;
+          }
+        }
       }
     }
   

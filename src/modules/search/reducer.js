@@ -8,7 +8,8 @@ import {
   SUGGEST_FAIL,
   SEARCH_REQUEST,
   SEARCH_SUCCESS,
-  SEARCH_FAIL
+  SEARCH_FAIL,
+  CHANGE_SEARCH_TYPE
 } from './actionTypes';
 
 const initialState = {
@@ -21,7 +22,8 @@ const initialState = {
   suggestList: [],
   searchLoading: false,
   searchError: null,
-  searchResult: {}
+  searchResult: {},
+  searchType: 'all'
 };
 
 function search(state = initialState, action) {
@@ -56,6 +58,9 @@ function search(state = initialState, action) {
 
     case SEARCH_FAIL:
       return { ...state, searchLoading: false, searchError: action.payload };
+
+    case CHANGE_SEARCH_TYPE:
+      return { ...state, searchType: action.payload };
 
     default: return state;
   }

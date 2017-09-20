@@ -11,3 +11,5 @@ export const SUGGEST_FAIL = 'search/SUGGEST_FAIL';
 export const SEARCH_REQUEST = 'search/SEARCH_REQUEST';
 export const SEARCH_SUCCESS = 'search/SEARCH_SUCCESS';
 export const SEARCH_FAIL = 'search/SEARCH_FAIL';
+
+export const CHANGE_SEARCH_TYPE = 'search/CHANGE_SEARCH_TYPE';

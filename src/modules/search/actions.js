@@ -9,7 +9,8 @@ import {
   SUGGEST_FAIL,
   SEARCH_REQUEST,
   SEARCH_SUCCESS,
-  SEARCH_FAIL
+  SEARCH_FAIL,
+  CHANGE_SEARCH_TYPE
 } from './actionTypes';
 import { get } from '../../plugs/httpRequest';
 
@@ -70,10 +71,10 @@ export function searchFail(message) {
   return { type: SEARCH_FAIL, payload: message };
 }
 
-export function search(keyword) {
+export function search(keyword, type = 'all') {
   return (dispatch) => {
     dispatch({ type: SEARCH_REQUEST });
-    return get(`/search?keyword=${keyword}`)
+    return get(`/search?keyword=${keyword}&search_type=${type}`)
       .then((result) => {
         dispatch(searchSuccess(result.data.result));
       })
@@ -82,4 +83,8 @@ export function search(keyword) {
         message.error(error.message);
       })
   }
+}
+
+export function changeSearchType(searchType) {
+  return { type: CHANGE_SEARCH_TYPE, payload: searchType };
 }
