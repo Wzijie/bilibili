@@ -7,15 +7,15 @@ import UserList from './UserList';
 const SwitchResult = ({ result, type }) => {
   switch (type) {
     case 'all':
-      return <VideoList dataList={result.video} />;
+      return <VideoList dataList={result.all} />;
 
     case 'bangumi':
-      return <BangumiList dataList={result} />;
+      return <BangumiList dataList={result.bangumi} />;
 
     case 'upuser':
-      return <UserList dataList={result} />;
+      return <UserList dataList={result.upuser} />;
 
-    default: return <div>没有这个搜索类型</div>;
+    default: return <p className='loading-info'>没做这个搜索结果</p>;
   }
 }
 

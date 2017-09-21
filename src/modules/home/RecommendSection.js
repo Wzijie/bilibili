@@ -2,7 +2,7 @@ import React from 'react';
 import { SectionHeader, SectionItem } from './components';
 import { ReadyShow } from '../../components';
 
-const RecommendSection = ({ dataList, loading, error }) => {
+const RecommendSection = ({ dataList, io, loading, error }) => {
   return (
     <div className='main-container'>      
       <SectionHeader title='热门推荐' icon='hot'>
@@ -21,7 +21,8 @@ const RecommendSection = ({ dataList, loading, error }) => {
                 pic,
                 title,
                 playCount: play >= 10000 ? `${(play / 10000).toFixed(1)}万` : play,
-                barrageCount: video_review >= 10000 ? `${(video_review / 10000).toFixed(1)}万` : video_review
+                barrageCount: video_review >= 10000 ? `${(video_review / 10000).toFixed(1)}万` : video_review,
+                io: io
               }
 
               return <SectionItem {...sectionItemProps} />

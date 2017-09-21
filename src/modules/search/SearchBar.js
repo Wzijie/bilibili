@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const SearchBar = ({ keyword, onChangeKeyword, onClearKeyword, onSearchBarFocus, onSearchSubmit }) => {
   return (
@@ -15,7 +16,9 @@ const SearchBar = ({ keyword, onChangeKeyword, onClearKeyword, onSearchBarFocus,
         />
       </form>
       { keyword !== '' && <i className='search-input-delete' onClick={onClearKeyword} ></i> }
-      <div className='search-cancel'>取消</div>
+      <div className='search-cancel'>
+        <Link to='/'>返回</Link>
+      </div>
     </div>
   );
 }

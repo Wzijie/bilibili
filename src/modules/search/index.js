@@ -65,6 +65,13 @@ class Search extends React.Component {
     push(`${path}/${keyword}`);
   }
 
+  onDeleteHistorySearch = (index) => {
+    let { deleteHistory } = this.props;
+    return () => {
+      deleteHistory(index);
+    }
+  }
+
   render() {
 
     const {
@@ -75,7 +82,8 @@ class Search extends React.Component {
       hotError,
       suggestList,
       suggestLoading,
-      suggestError
+      suggestError,
+      historyList
     } = this.props;
 
     return (
@@ -96,7 +104,7 @@ class Search extends React.Component {
                   ? (
                     <div>
                       <Hot loading={hotLoading} error={hotError} dataList={hotList} path={path} />
-                      <History />
+                      <History dataList={historyList} onDeleteHistorySearch={this.onDeleteHistorySearch} path={path} />
                     </div>
                   )
                   : <Suggest loading={suggestLoading} error={suggestError} dataList={suggestList} path={path} />

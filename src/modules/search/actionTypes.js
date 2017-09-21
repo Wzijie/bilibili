@@ -13,3 +13,7 @@ export const SEARCH_SUCCESS = 'search/SEARCH_SUCCESS';
 export const SEARCH_FAIL = 'search/SEARCH_FAIL';
 
 export const CHANGE_SEARCH_TYPE = 'search/CHANGE_SEARCH_TYPE';
+export const CHANGE_SEARCH_ORDER = 'search/CHANGE_SEARCH_ORDER';
+
+export const ADD_HISTORY = 'search/ADD_HISTORY';
+export const DELETE_HISTORY = 'search/DELETE_HISTORY';

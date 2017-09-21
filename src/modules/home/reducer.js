@@ -13,6 +13,18 @@ import {
   MAIN_FAIL
 } from './actionTypes';
 
+function getIo() {
+  const io = new IntersectionObserver((iose) => {
+    iose.forEach((ioseItem) => {
+      if (ioseItem.intersectionRatio > 0) {
+        ioseItem.target.src = ioseItem.target.getAttribute('data-img');
+        io.unobserve(ioseItem.target);
+      }
+    });
+  });
+  return io;
+}
+
 const initialState = {
   recommendList: [],
   recommendLoading: false,
@@ -25,7 +37,8 @@ const initialState = {
   bangumiError: null,
   mainList: [],
   mainLoading: false,
-  mainError: null
+  mainError: null,
+  io: getIo()
 }
 
 function home(state = initialState, action) {

@@ -2,11 +2,7 @@
 @img_loading: './images/img_loading.png';
 
 .initial-search {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
+  min-height: 100vh;
   background: #fff;
 
   .search-operation {
@@ -67,7 +63,11 @@
       position: absolute;
       top: 0; right: 0;
       font-size: 0.14rem;
-      color: #999;
+
+      a {
+        display: block;
+        color: #999;
+      }
     }
   }
 
@@ -215,6 +215,14 @@
           }
           i.on { background-position: -0.85rem -2.06rem; }
         }
+      }
+    }
+
+    .order-nav .menu-list li {
+      font-size: 0.14rem;
+
+      &.on a {
+        color: #de698c;
       }
     }
 

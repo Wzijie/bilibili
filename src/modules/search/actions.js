@@ -10,7 +10,10 @@ import {
   SEARCH_REQUEST,
   SEARCH_SUCCESS,
   SEARCH_FAIL,
-  CHANGE_SEARCH_TYPE
+  CHANGE_SEARCH_TYPE,
+  CHANGE_SEARCH_ORDER,
+  ADD_HISTORY,
+  DELETE_HISTORY
 } from './actionTypes';
 import { get } from '../../plugs/httpRequest';
 
@@ -63,20 +66,21 @@ export function suggestRequest(keyword) {
   }
 }
 
-export function searchSuccess(searchResult) {
-  return { type: SEARCH_SUCCESS, payload: searchResult };
+export function searchSuccess(searchResult, type) {
+  return { type: SEARCH_SUCCESS, payload: { searchResult, type } };
 }
 
 export function searchFail(message) {
   return { type: SEARCH_FAIL, payload: message };
 }
 
-export function search(keyword, type = 'all') {
+export function search(keyword, type = 'all', order = 'totalrank', page = 1) {
   return (dispatch) => {
     dispatch({ type: SEARCH_REQUEST });
-    return get(`/search?keyword=${keyword}&search_type=${type}`)
+    return get(`/search?keyword=${keyword}&search_type=${type}&order=${order}&page=${page}`)
       .then((result) => {
-        dispatch(searchSuccess(result.data.result));
+        console.log(result);
+        dispatch(searchSuccess(result.data, type));
       })
       .catch((error) => {
         dispatch(searchFail(error.message));
@@ -87,4 +91,16 @@ export function search(keyword, type = 'all') {
 
 export function changeSearchType(searchType) {
   return { type: CHANGE_SEARCH_TYPE, payload: searchType };
+}
+
+export function changeSearchOrder(searchOrder) {
+  return { type: CHANGE_SEARCH_ORDER, payload: searchOrder };
+}
+
+export function addHistory(keyword) {
+  return { type: ADD_HISTORY, payload: keyword };
+}
+
+export function deleteHistory(index) {
+  return { type: DELETE_HISTORY, payload: index };
 }

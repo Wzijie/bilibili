@@ -16,7 +16,7 @@ const UserItem = ({ face, username, fansCount, videoCount, sign }) => (
   </li>
 );
 
-const UserList = ({ dataList }) => (
+const UserList = ({ dataList = [] }) => (
   <ul className='search-result rank-list'>
     {
       dataList.map((result) => {

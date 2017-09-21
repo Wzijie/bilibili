@@ -69,15 +69,16 @@ class Home extends React.Component {
       bangumiError,
       mainList,
       mainLoading,
-      mainError
+      mainError,
+      io
     } = this.props;
 
     return (
       <div>
-        <RecommendSection dataList={recommendList} loading={recommendLoading} error={recommendError} />
+        <RecommendSection dataList={recommendList} io={io} loading={recommendLoading} error={recommendError} />
         <LiveSection dataList={liveList} loading={liveLoading} error={liveError} />
         <BangumiSection dataList={bangumiList} loading={bangumiLoading} error={bangumiError} />
-        <MainSection mainList={mainList} loading={mainLoading} error={mainError} />
+        <MainSection mainList={mainList} io={io} loading={mainLoading} error={mainError} />
       </div>
     )
   }
