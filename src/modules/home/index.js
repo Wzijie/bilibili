@@ -8,18 +8,21 @@ import {
   recommendRequest, 
   liveRequest,
   bangumiRequest,
-  mainRequest
+  mainRequest,
+  bannerRequest
 } from './actions';
 import RecommendSection from './RecommendSection';
 import LiveSection from './LiveSection';
 import BangumiSection from './BangumiSection';
 import MainSection from './MainSection';
+import IndexBanner from './IndexBanner';
 
 const actionCreators = {
   recommendRequest,
   liveRequest,
   bangumiRequest,
-  mainRequest
+  mainRequest,
+  bannerRequest
 };
 
 class Home extends React.Component {
@@ -34,6 +37,7 @@ class Home extends React.Component {
     this.fetchLive();
     this.fetchBangumi();
     this.fetchMain();
+    this.fetchBanner();
   }
 
   fetchRecommend = () => {
@@ -56,6 +60,11 @@ class Home extends React.Component {
     mainRequest();
   }
 
+  fetchBanner = () => {
+    const { bannerRequest } = this.props;
+    bannerRequest();
+  }
+
   render() {
     const { 
       recommendList, 
@@ -70,15 +79,18 @@ class Home extends React.Component {
       mainList,
       mainLoading,
       mainError,
-      io
+      bannerList,
+      bannerLoading,
+      bannerError
     } = this.props;
 
     return (
       <div>
-        <RecommendSection dataList={recommendList} io={io} loading={recommendLoading} error={recommendError} />
+        <IndexBanner dataList={bannerList} loading={bannerLoading} error={bannerError} />
+        <RecommendSection dataList={recommendList} loading={recommendLoading} error={recommendError} />
         <LiveSection dataList={liveList} loading={liveLoading} error={liveError} />
         <BangumiSection dataList={bangumiList} loading={bangumiLoading} error={bangumiError} />
-        <MainSection mainList={mainList} io={io} loading={mainLoading} error={mainError} />
+        <MainSection mainList={mainList} loading={mainLoading} error={mainError} />
       </div>
     )
   }

@@ -1,13 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import { getImageUrl } from '../../../plugs/httpRequest';
+import { getImageUrl } from '../../../plugs/httpRequest';
+import { LazyLoadImg } from '../../../components';
 
-const SectionItem = ({ aid, pic, title, playCount, barrageCount, io }) => {
+const SectionItem = ({ aid, pic, title, playCount, barrageCount }) => {
   return (
     <li className='content-item'>
       <Link to={`/video/${aid}`}>
-        <div className='video-cover' data-img={pic}>
-          <img alt='pic' data-img={pic} ref={(img) => {if (img) {io.observe(img);}}} />
+        <div className='video-cover' data-img={getImageUrl(pic)}>
+          <LazyLoadImg url={pic} />
         </div>
         <p className='video-name'>{title}</p>
         <div className='video-info'>

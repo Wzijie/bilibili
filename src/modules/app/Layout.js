@@ -1,9 +1,11 @@
 import React from 'react';
-import { Menu } from '../../components';
+import Header from './Header';
+import Menu from './Menu';
 
 const Layout = ({ children }) => {
   return (
     <div>
+      <Header />
       <Menu />
       <div className='content'>
         {children}

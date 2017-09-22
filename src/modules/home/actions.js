@@ -11,7 +11,10 @@ import {
   BANGUMI_FAIL,
   MAIN_REQUEST,
   MAIN_SUCCESS,
-  MAIN_FAIL
+  MAIN_FAIL,
+  BANNER_REQUEST,
+  BANNER_SUCCESS,
+  BANNER_FAIL
 } from './actionTypes';
 import { get } from '../../plugs/httpRequest';
 
@@ -100,5 +103,28 @@ export function mainRequest() {
         dispatch(mainFail(error.message));
         message.error(error.message);
       });
+  }
+}
+
+export function bannerSuccess(bannerData) {
+  return { type: BANNER_SUCCESS, payload: bannerData };
+}
+
+export function bannerFail(message) {
+  return { type: BANNER_FAIL, payload: message };
+}
+
+export function bannerRequest() {
+  return (dispatch) => {
+    dispatch({ type: BANNER_REQUEST });
+    return get('/indexBanner')
+      .then((result) => {
+        console.log(result);
+        dispatch(bannerSuccess(result.data));
+      })
+      .catch((error) => {
+        dispatch(bannerFail(error.message));
+        message.error(error.message);
+      })
   }
 }

@@ -17,3 +17,7 @@ export const BANGUMI_FAIL = 'home/BANGUMI_FAIL';
 export const MAIN_REQUEST = 'home/MAIN_REQUEST';
 export const MAIN_SUCCESS = 'home/MAIN_SUCCESS';
 export const MAIN_FAIL = 'home/MAIN_FAIL';
+
+export const BANNER_REQUEST = 'home/BANNER_REQUEST';
+export const BANNER_SUCCESS = 'home/BANNER_SUCCESS';
+export const BANNER_FAIL = 'home/BANNER_FAIL';

@@ -10,20 +10,11 @@ import {
   BANGUMI_FAIL,
   MAIN_REQUEST,
   MAIN_SUCCESS,
-  MAIN_FAIL
+  MAIN_FAIL,
+  BANNER_REQUEST,
+  BANNER_SUCCESS,
+  BANNER_FAIL
 } from './actionTypes';
-
-function getIo() {
-  const io = new IntersectionObserver((iose) => {
-    iose.forEach((ioseItem) => {
-      if (ioseItem.intersectionRatio > 0) {
-        ioseItem.target.src = ioseItem.target.getAttribute('data-img');
-        io.unobserve(ioseItem.target);
-      }
-    });
-  });
-  return io;
-}
 
 const initialState = {
   recommendList: [],
@@ -38,7 +29,9 @@ const initialState = {
   mainList: [],
   mainLoading: false,
   mainError: null,
-  io: getIo()
+  bannerList: [],
+  bannerLoading: false,
+  bannerError: null
 }
 
 function home(state = initialState, action) {
@@ -78,6 +71,15 @@ function home(state = initialState, action) {
 
     case MAIN_FAIL:
       return { ...state, mainError: action.payload, mainLoading: false };
+
+    case BANNER_REQUEST:
+      return { ...state, bannerLoading: true };
+
+    case BANNER_SUCCESS:
+      return { ...state, bannerLoading: false, bannerList: action.payload };
+
+    case BANNER_FAIL:
+      return { ...state, bannerLoading: false, bannerError: action.payload };
 
     default: return state;
   }

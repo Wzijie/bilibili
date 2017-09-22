@@ -1,12 +1,14 @@
 import React from 'react';
 import { SectionHeader } from './components';
-import { ReadyShow } from '../../components';
+import { ReadyShow, LazyLoadImg } from '../../components';
 
 const BangumiListItem = ({ cover, title, bgmcount }) => {
   return (
-    <li className='content-item bangumi-item'>    
+    <li className='content-item bangumi-item'>
       <a href='###'>
-        <div className='video-cover' data-img={cover}></div>
+        <div className='video-cover' data-img={cover}>
+          <LazyLoadImg url={cover} />
+        </div>
         <p className='bangumi-name text-overflow'>{title}</p>
         <p className='bangumi-update-to text-overflow'>更新至第{bgmcount}话</p>
       </a>
@@ -19,7 +21,7 @@ const BangumiSection = ({ dataList, loading, error }) => {
     <div className='main-container'>
       <SectionHeader title='番剧更新' icon='bangumi'>
         <p>查看更多番剧</p>
-        <span className='index-sprite index-sprite-arrow'></span> 
+        <span className='index-sprite index-sprite-arrow'></span>
       </SectionHeader>
       <ReadyShow loading={loading} error={error} >
         <ul className='content-list'>

@@ -2,7 +2,7 @@ import React from 'react';
 import { SectionHeader, SectionItem } from './components';
 import { ReadyShow } from '../../components';
 
-const MainSectionList = ({ dataList, io }) => {
+const MainSectionList = ({ dataList }) => {
   return (
     <ul className='content-list'>
       {
@@ -14,8 +14,7 @@ const MainSectionList = ({ dataList, io }) => {
             title,
             pic,
             playCount: view >= 10000 ? `${(view / 10000).toFixed(1)}万` : view,
-            barrageCount: danmaku >= 10000 ? `${(danmaku / 10000).toFixed(1)}万` : danmaku,
-            io: io
+            barrageCount: danmaku >= 10000 ? `${(danmaku / 10000).toFixed(1)}万` : danmaku
           };
           return <SectionItem {...sectionItemProps} />
         })
@@ -24,7 +23,7 @@ const MainSectionList = ({ dataList, io }) => {
   )
 }
 
-const MainSection = ({ mainList, io, loading, error }) => {
+const MainSection = ({ mainList, loading, error }) => {
   return (
     <ReadyShow loading={loading} error={error} loadingMessage='正在加载大部分版块...'>
       <div>
@@ -37,7 +36,7 @@ const MainSection = ({ mainList, io, loading, error }) => {
                   <p>查看更多更新</p>
                   <span className='index-sprite index-sprite-arrow'></span> 
                 </SectionHeader>
-                <MainSectionList dataList={list} io={io} />
+                <MainSectionList dataList={list} />
               </div>
             )
           })

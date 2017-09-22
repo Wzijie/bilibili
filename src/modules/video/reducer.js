@@ -1,3 +1,6 @@
+/**
+ * reducer已经拆分到reducer文件夹了，保留这个拆分前的
+ */
 import {
   PLAYER_REQUEST,
   PLAYER_SUCCESS,

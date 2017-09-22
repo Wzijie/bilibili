@@ -1,4 +1,4 @@
-import Menu from './Menu';
 import { ReadyShow, addLoading } from './ReadyShow';
+import LazyLoadImg from './LazyLoadImg';
 
-export { Menu, ReadyShow, addLoading };
+export { ReadyShow, addLoading, LazyLoadImg };
