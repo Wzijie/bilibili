@@ -1,11 +1,11 @@
 import React from 'react';
-import { getImageUrl } from '../../../plugs/httpRequest';
+import { LazyLoadImg } from '../../../components';
 
 const BangumiItem = ({ cover, title, update }) => (
   <li className='bangumi-item'>
     <a className='list-box'>
       <div className='bangumi-cover' data-img={cover} >
-        <img src={getImageUrl(`https:${cover}`)} alt="cover" />
+        <LazyLoadImg url={cover} />
       </div>
       <div className='bangumi-info'>
         <div className='bangumi-tag'>

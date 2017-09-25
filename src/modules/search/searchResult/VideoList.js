@@ -1,12 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import countFormat from '../../../plugs/countFormat';
+import { LazyLoadImg } from '../../../components';
 
 const VideoItem = ({ aid, pic, duration, title, author, play, barrage }) => (
   <li>
     <Link to={`/video/${aid}`} className='list-box'>
       <div className='video-cover'>
-        <div className='cover-box' data-img={pic}></div>
+        <div className='cover-box' data-img={pic}>
+          <LazyLoadImg url={pic} />
+        </div>
         <span className='video-duration'>{duration}</span>
       </div>
       <div className='video-info'>

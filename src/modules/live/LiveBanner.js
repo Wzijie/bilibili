@@ -2,16 +2,16 @@ import React from 'react';
 import { Banner, BannerItem } from '../app/Banner';
 import { getImageUrl } from '../../plugs/httpRequest';
 
-const IndexBanner = ({ dataList, loading, error }) => {
-  let { pic: firstPic } = dataList[0] || {};
-  let { pic: lastPic } = dataList[dataList.length - 1] || {};
+const LiveBanner = ({ dataList, loading, error }) => {
+  let { img: firstPic } = dataList[0] || {};
+  let { img: lastPic } = dataList[dataList.length - 1] || {};
   return (
     <Banner dataList={dataList} loading={loading} error={error} >
       <BannerItem url={getImageUrl(lastPic)} />
       {
         dataList.map((banner) => {
-          let { id, pic } = banner;
-          return <BannerItem key={id} url={getImageUrl(pic)} />
+          let { remark, img } = banner;
+          return <BannerItem key={remark} url={getImageUrl(img)} />
         })
       }
       <BannerItem url={getImageUrl(firstPic)} />
@@ -19,4 +19,4 @@ const IndexBanner = ({ dataList, loading, error }) => {
   );
 }
 
-export default IndexBanner;
+export default LiveBanner;

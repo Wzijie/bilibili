@@ -56,7 +56,6 @@ export function suggestRequest(keyword) {
     dispatch({ type: SUGGEST_REQUEST });
     return get(`/search/suggest?keyword=${keyword}`)
       .then((result) => {
-        console.log(result);
         dispatch(suggestSuccess(result.data));
       })
       .catch((error) => {
@@ -79,7 +78,6 @@ export function search(keyword, type = 'all', order = 'totalrank', page = 1) {
     dispatch({ type: SEARCH_REQUEST });
     return get(`/search?keyword=${keyword}&search_type=${type}&order=${order}&page=${page}`)
       .then((result) => {
-        console.log(result);
         dispatch(searchSuccess(result.data, type));
       })
       .catch((error) => {

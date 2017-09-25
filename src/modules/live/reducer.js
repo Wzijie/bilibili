@@ -6,6 +6,7 @@ import {
 
 const initialState = {
   liveList: [],
+  bannerList: [],
   loading: false,
   error: null
 };
@@ -17,7 +18,13 @@ function live(state = initialState, action) {
       return { ...state, loading: true };
 
     case LIVE_SUCCESS:
-      return { ...state, liveList: action.payload, loading: false };
+      let { partitions, banner } = action.payload;
+      return { 
+        ...state, 
+        liveList: partitions, 
+        bannerList: banner, 
+        loading: false 
+      };
 
     case LIVE_FAIL:
       return { ...state, error: action.payload, loading: false };

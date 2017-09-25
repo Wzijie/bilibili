@@ -1,3 +1,5 @@
+// 图片懒加载
+// IntersectionObserver监测元素是否可见
 function imgLazyLoadObserver() {
   let io = null;
   console.log('imgLazyLoadObserver');

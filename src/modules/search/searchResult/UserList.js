@@ -1,9 +1,12 @@
 import React from 'react';
+import { LazyLoadImg } from '../../../components';
 
 const UserItem = ({ face, username, fansCount, videoCount, sign }) => (
   <li className='user-item'>
     <a className='list-box'>
-      <div className='user-face' data-img={face}></div>
+      <div className='user-face' data-img={face}>
+        <LazyLoadImg url={face} />
+      </div>
       <div className='user-info'>
         <p className='username'>{username}</p>
         <p>

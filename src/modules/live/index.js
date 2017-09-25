@@ -3,8 +3,9 @@ import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { liveRequest } from './actions';
-import LiveSection from './LiveSection';
 import { ReadyShow } from '../../components';
+import LiveSection from './LiveSection';
+import LiveBanner from './LiveBanner';
 import './index.less';
 
 let actionCreators = {
@@ -26,12 +27,14 @@ class Live extends React.Component {
 
     const { 
       liveList,
+      bannerList,
       loading,
       error
     } = this.props;
 
     return (
       <div className='live-content'>
+        <LiveBanner dataList={bannerList} loading={loading} error={error} />
         <ReadyShow loading={loading} error={error} >
           <LiveSection liveSectionList={liveList} />
         </ReadyShow>

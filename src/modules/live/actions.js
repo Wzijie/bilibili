@@ -19,7 +19,7 @@ export function liveRequest() {
     dispatch({ type: LIVE_REQUEST });
     return get('/live')
       .then((result) => {
-        dispatch(liveSuccess(result.data.data.partitions));
+        dispatch(liveSuccess(result.data));
       })
       .catch((error) => {
         dispatch(liveFail(error.message));
