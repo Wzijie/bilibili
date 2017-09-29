@@ -22,11 +22,11 @@ const ShowMorePartBtn = ({ showAllPart, toggleShowAllPart, partCount }) => {
   }
 }
 
-const Part = ({ aid, partCount, partVisibleList, showAllPart, toggleShowAllPart, part, onFetchPlayer }) => {
+const Part = ({ aid, partCount, partVisibleList, showAllPart, toggleShowAllPart, part, onSwitchPartFetchPlayer }) => {
 
   let PartList = partVisibleList.map((partTitle, index) => {
     return (
-      <li className={part === index + 1 && 'on'} key={partTitle} onClick={() => { onFetchPlayer(aid, index + 1) }} >
+      <li className={part === index + 1 && 'on'} key={partTitle} onClick={onSwitchPartFetchPlayer(aid, index + 1)} >
         <a>{partTitle}</a>
       </li>
     );
@@ -49,46 +49,5 @@ const Part = ({ aid, partCount, partVisibleList, showAllPart, toggleShowAllPart,
     </div>
   )
 }
-
-
-// if (partLength === 0) {
-//   return (
-//     <div className='video-part'>
-//       <ul className='part-list'>
-//         <li className='on'>
-//           <a>1</a>
-//         </li>
-//       </ul>
-//     </div>
-//   )
-// } else {
-//   return (
-//     <div className='video-part'>
-//       <ul className='part-list'>
-//         {
-//           partList.map((partTitle, index) => {
-//             return (
-//               <li className={part === index + 1 && 'on'} key={partTitle} onClick={() => { onFetchPlayer(aid, index + 1) }} >
-//                 <a>{partTitle}</a>
-//               </li>
-//             )
-//           })
-//         }
-//         {
-//           partLength > 3 && (
-//             <li className='display-more-part' onClick={toggleShowAllPart} >
-//               {
-//                 showAllPart
-//                   ? <a>收起</a>
-//                   : <a>查看全部（共{partLength}P）</a>
-//               }
-//             </li>
-//           )
-//         }
-//       </ul>
-//     </div>
-//   )
-// }
-
 
 export default Part;
