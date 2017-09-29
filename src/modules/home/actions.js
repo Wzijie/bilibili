@@ -119,6 +119,7 @@ export function bannerRequest() {
     dispatch({ type: BANNER_REQUEST });
     return get('/indexBanner')
       .then((result) => {
+        result.data.type = 'home';
         dispatch(bannerSuccess(result.data));
       })
       .catch((error) => {

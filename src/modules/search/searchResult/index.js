@@ -59,6 +59,7 @@ class SearchResult extends React.Component {
     search(keyword, type, order, page);
   }
 
+  // 改变type搜索
   onSwitchTypeSearch = (type) => {
     const { changeSearchType, searchOrder } = this.props;
     return () => {
@@ -67,6 +68,7 @@ class SearchResult extends React.Component {
     }
   }
 
+  // 改变排序搜索
   onSwitchOrderSearch = (order) => {
     const { changeSearchOrder, searchType } = this.props;
     return () => {
@@ -75,6 +77,7 @@ class SearchResult extends React.Component {
     }
   }
 
+  // 滚动加载更多
   onScrollFetchMoreSearch = () => {
     const { searchLoading, searchType, searchOrder, page, totalPage } = this.props;
     if (totalPage > page && !searchLoading) {

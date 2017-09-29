@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { liveRequest } from './actions';
 import { ReadyShow } from '../../components';
 import LiveSection from './LiveSection';
-import LiveBanner from './LiveBanner';
+import { Banner } from '../app/Banner';
 import './index.less';
 
 let actionCreators = {
@@ -34,7 +34,7 @@ class Live extends React.Component {
 
     return (
       <div className='live-content'>
-        <LiveBanner dataList={bannerList} loading={loading} error={error} />
+        <Banner dataList={bannerList} loading={loading} error={error} />
         <ReadyShow loading={loading} error={error} >
           <LiveSection liveSectionList={liveList} />
         </ReadyShow>

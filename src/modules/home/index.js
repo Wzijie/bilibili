@@ -15,7 +15,7 @@ import RecommendSection from './RecommendSection';
 import LiveSection from './LiveSection';
 import BangumiSection from './BangumiSection';
 import MainSection from './MainSection';
-import IndexBanner from './IndexBanner';
+import { Banner } from '../app/Banner';
 
 const actionCreators = {
   recommendRequest,
@@ -86,7 +86,7 @@ class Home extends React.Component {
 
     return (
       <div>
-        <IndexBanner dataList={bannerList} loading={bannerLoading} error={bannerError} />
+        <Banner dataList={bannerList} loading={bannerLoading} error={bannerError} />
         <RecommendSection dataList={recommendList} loading={recommendLoading} error={recommendError} />
         <LiveSection dataList={liveList} loading={liveLoading} error={liveError} />
         <BangumiSection dataList={bangumiList} loading={bangumiLoading} error={bangumiError} />

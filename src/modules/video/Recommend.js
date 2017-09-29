@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { LazyLoadImg } from '../../components';
 
 function countFormat(count) {
   return count >= 10000 ? `${(count / 10000).toFixed(1)}万` : count;
@@ -9,7 +10,9 @@ const RecommendItem = ({ aid, pic, title, view, danmaku }) => {
   return (
     <li className='content-item'>
       <Link to={`/video/${aid}`}>
-        <div className='video-cover' data-img={pic}></div>
+        <div className='video-cover'>
+          <LazyLoadImg url={pic} />
+        </div>
         <p className='video-name'>{title}</p>
         <div className='video-info'>
           <div className='play-num'>

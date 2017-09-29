@@ -4,8 +4,17 @@ function getUrl(path) {
   return `${apiServer}${path}`;
 }
 
-export function getImageUrl(path) {
-  return `${apiServer}/img?url=${path}`;
+function addProtocol(url) {
+  const reg = /^http|https/;
+  if (reg.test(url)) {
+    return url;
+  } else {
+    return `https:${url}`;
+  }
+}
+
+export function getImageUrl(url) {
+  return `${apiServer}/img?url=${addProtocol(url)}`;
 }
 
 export function get(path) {

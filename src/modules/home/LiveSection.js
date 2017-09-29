@@ -1,17 +1,18 @@
 import React from 'react';
 import { SectionHeader } from './components';
 import { ReadyShow, LazyLoadImg } from '../../components';
-import { getImageUrl } from '../../plugs/httpRequest';
 
 const LiveListItem = ({ roomid, cover, face, uname, title, online }) => {
   return (
     <li className='content-item'>
       <a href={`http://live.bilibili.com/h5/${roomid}`}>
-        <div className='video-cover' data-img={cover}>
+        <div className='video-cover'>
           <LazyLoadImg url={cover} />
         </div>
         <div className='user'>
-          <div className='face'><img src={getImageUrl(`https:${face}`)} alt={uname} /></div>
+          <div className='face'>
+            <LazyLoadImg url={face} />
+          </div>
           <p className='name text-overflow'>{uname}</p>
         </div>
         <div className='user'>

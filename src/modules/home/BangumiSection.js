@@ -6,7 +6,7 @@ const BangumiListItem = ({ cover, title, bgmcount }) => {
   return (
     <li className='content-item bangumi-item'>
       <a href='###'>
-        <div className='video-cover' data-img={cover}>
+        <div className='video-cover'>
           <LazyLoadImg url={cover} />
         </div>
         <p className='bangumi-name text-overflow'>{title}</p>

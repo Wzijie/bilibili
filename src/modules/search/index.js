@@ -10,23 +10,6 @@ import Suggest from './Suggest';
 import SearchResult from './searchResult';
 import './index.less';
 
-// function HotAndHistory({ hotLoading, hotError, hotList }) {
-//   return (
-//     <div>
-//       <Hot loading={hotLoading} error={hotError} dataList={hotList} />
-//       <History />
-//     </div>
-//   );
-// }
-
-// function SearchMessage({ keyword, hotAndHistory, suggest }) {
-//   if (keyword === '') {
-//     return hotAndHistory;
-//   } else {
-//     return suggest;
-//   }
-// }
-
 class Search extends React.Component {
 
   componentDidMount() {
@@ -54,6 +37,7 @@ class Search extends React.Component {
     changeKeyword('');
   }
 
+  // 搜索表单获取焦点跳到/search
   onSearchBarFocus = () => {
     let { history: { push }, match: { path } } = this.props;
     push(path);
@@ -109,12 +93,6 @@ class Search extends React.Component {
                   )
                   : <Suggest loading={suggestLoading} error={suggestError} dataList={suggestList} path={path} />
               }
-              {/* <SearchMessage
-            keyword={keyword}
-            hotAndHistory={<HotAndHistory hotLoading={hotLoading} hotError={hotError} hotList={hotList} />}
-            suggest={<Suggest loading={suggestLoading} error={suggestError} dataList={suggestList} />}
-          /> */}
-
             </div>
           )} />
         </Switch>

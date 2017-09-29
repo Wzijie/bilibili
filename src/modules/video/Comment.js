@@ -1,7 +1,6 @@
 import React from 'react';
 import { Icon } from 'antd';
-import { getImageUrl } from '../../plugs/httpRequest';
-import { ReadyShow } from '../../components';
+import { ReadyShow, LazyLoadImg } from '../../components';
 
 const CommentItem = ({ message, face, username, createTime }) => {
   return (
@@ -9,7 +8,7 @@ const CommentItem = ({ message, face, username, createTime }) => {
       <div className='comment-face'>
         <a>
           <Icon className='icon-loading' type="hourglass" />
-          <img src={getImageUrl(face)} alt='face' />
+          <LazyLoadImg url={face} />
         </a>
       </div>
       <div className='comment-main'>

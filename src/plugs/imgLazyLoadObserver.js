@@ -2,10 +2,10 @@
 // IntersectionObserver监测元素是否可见
 function imgLazyLoadObserver() {
   let io = null;
-  console.log('imgLazyLoadObserver');
   return () => {
     if (!window.IntersectionObserver) return false;
     if (!io) {
+      console.log('new IntersectionObserver')
       io = new IntersectionObserver((iose) => {
         iose.forEach((ioseItem) => {
           if (ioseItem.intersectionRatio > 0) {

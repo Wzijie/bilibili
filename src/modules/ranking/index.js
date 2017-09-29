@@ -43,6 +43,7 @@ class Ranking extends React.Component {
     this.fetchRanking();
   }
 
+  // 判断是否已有缓存数据，有就直接使用不重新请求
   fetchRanking = (rankId, day) => {
     let { rankingRequest, rankingSuccess, rankingListCache } = this.props;
     if (rankingListCache[rankId]) {

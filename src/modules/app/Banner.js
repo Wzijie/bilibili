@@ -1,10 +1,23 @@
 import React from 'react';
-import { ReadyShow } from '../../components';
+import { ReadyShow, LazyLoadImg } from '../../components';
+
+// 属性名根据type区分
+function switchBannerProperty(banner, type) {
+  switch (type) {
+    case 'home':
+      let { id, pic } = banner;
+      return { key: id, url: pic };
+    case 'live':
+      let { remark, img } = banner;
+      return { key: remark, url: img };
+    default: return {};
+  }
+}
 
 const BannerItem = ({ url }) => (
   <li>
     <a>
-      <img src={url} alt='banner' />
+      <LazyLoadImg url={url} />
     </a>
   </li>
 );
@@ -158,8 +171,11 @@ class Banner extends React.Component {
   render() {
 
     const { translateX, slideActiveIndex, isTransition } = this.state;
-    const { dataList, loading, error, children } = this.props;
+    const { dataList, loading, error } = this.props;
     const slideTotal = dataList.length + 2;
+
+    const { url: firstUrl } = switchBannerProperty(dataList[0], dataList.type);
+    const { url: lastUrl } = switchBannerProperty(dataList[dataList.length - 1], dataList.type);
 
     return (
       <div className='banner'>
@@ -172,7 +188,14 @@ class Banner extends React.Component {
             onTouchMove={this.onSlideTouchMove}
             onTouchEnd={this.onTouchEnd}
           >
-            {children}
+            <BannerItem url={lastUrl} />;
+            {
+              dataList.map((banner) => {
+                let { key, url } = switchBannerProperty(banner, dataList.type);
+                return <BannerItem key={key} url={url} />;
+              })
+            }
+            <BannerItem url={firstUrl} />;
           </ul>
         </ReadyShow>
         <ul className="slide-active">

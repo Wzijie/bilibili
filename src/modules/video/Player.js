@@ -9,32 +9,38 @@ function lengthFormat(totalSecond) {
 
 class Player extends React.Component {
 
+  // 加载video元素
   onLoadStart = (event) => {
     let { onLoadVideoElement } = this.props;
     onLoadVideoElement(event.target);
   }
 
+  // 可以播放
   onCanPlay = () => {
     let { onPlay, videoElement } = this.props;
     videoElement.play();
     onPlay();
   }
 
+  // 等待缓冲
   onWaiting = () => {
     let { onBufferedWaiting } = this.props;
     onBufferedWaiting();
   }
 
+  // 缓冲后已就绪
   onPlaying = () => {
     let { onBufferedCompleted } = this.props;
     onBufferedCompleted();
   }
 
+  // 播放位置改变
   onTimeUpdate = () => {
     let { videoElement, onChangeCurrentTime } = this.props;
     onChangeCurrentTime(videoElement.currentTime);
   }
 
+  // 改变缓冲进度
   onProgress = () => {
     let { videoElement, onChangeBufferedTime } = this.props;
     if (videoElement.buffered.length !== 0) {
@@ -42,18 +48,21 @@ class Player extends React.Component {
     }
   }
 
+  // 播放
   playHandler = () => {
     let { videoElement, onPlay } = this.props;
     videoElement.play();
     onPlay();
   }
 
+  // 暂停
   pauseHandler = () => {
     let { videoElement, onPause } = this.props;
     videoElement.pause();
     onPause();
   }
 
+  // 计算当前进度条拖动的长度百分比
   computedTouchProgressRatio = (pageX, progress) => {
     pageX = pageX - progress.offsetLeft;
     pageX = pageX < 0 ? 0 : pageX;
@@ -61,10 +70,12 @@ class Player extends React.Component {
     return pageX / progress.offsetWidth;
   }
 
+  // 进度条拖动开始
   onProgressTouchStart = () => {
     this.pauseHandler();
   }
 
+  // 进度条拖动中
   onProgressTouchMove = (event) => {
     event.persist();
     let { onChangeCurrentTime, length } = this.props;
@@ -72,6 +83,7 @@ class Player extends React.Component {
     onChangeCurrentTime(progressRatio * length);
   }
 
+  // 进度条拖动结束改变播放位置
   onProgressTouchEnd = (event) => {
     event.persist();
     let { videoElement, length, onChangeCurrentTime } = this.props;

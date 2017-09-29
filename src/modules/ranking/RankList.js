@@ -8,7 +8,7 @@ const RankItem = ({ aid, index, cover, title, author, playCount, barrageCount })
     <Link to={`/video/${aid}`} className='list-box'>
       <div className='video-cover'>
         <div className={`rank-num ${index < 3 && 'rank-top3'}`}>{index + 1}</div>
-        <div className='cover-box' data-img={cover}>
+        <div className='cover-box'>
           <LazyLoadImg url={cover} />
         </div>
       </div>

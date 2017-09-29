@@ -4,7 +4,7 @@ import { LazyLoadImg } from '../../../components';
 const UserItem = ({ face, username, fansCount, videoCount, sign }) => (
   <li className='user-item'>
     <a className='list-box'>
-      <div className='user-face' data-img={face}>
+      <div className='user-face'>
         <LazyLoadImg url={face} />
       </div>
       <div className='user-info'>

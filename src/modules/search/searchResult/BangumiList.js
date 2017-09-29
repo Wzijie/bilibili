@@ -4,7 +4,7 @@ import { LazyLoadImg } from '../../../components';
 const BangumiItem = ({ cover, title, update }) => (
   <li className='bangumi-item'>
     <a className='list-box'>
-      <div className='bangumi-cover' data-img={cover} >
+      <div className='bangumi-cover'>
         <LazyLoadImg url={cover} />
       </div>
       <div className='bangumi-info'>

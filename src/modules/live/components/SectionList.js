@@ -1,15 +1,16 @@
 import React from 'react';
-import { getImageUrl } from '../../../plugs/httpRequest';
 import { LazyLoadImg } from '../../../components';
 
 const SectionItem = ({ roomId, cover, face, name, online, title }) => (
   <li className='content-item'>
     <a href={`http://live.bilibili.com/h5/${roomId}`}>
-      <div className='video-cover' data-img={getImageUrl(cover)}>
+      <div className='video-cover'>
         <LazyLoadImg url={cover} />
       </div>
       <div className='user'>
-        <div className='face'><img src={getImageUrl(face)} alt={name} /></div>
+        <div className='face'>
+          <LazyLoadImg url={face} />
+        </div>
         <p className='name text-overflow'>{name}</p>
       </div>
       <div className='user'>

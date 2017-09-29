@@ -7,7 +7,7 @@ const VideoItem = ({ aid, pic, duration, title, author, play, barrage }) => (
   <li>
     <Link to={`/video/${aid}`} className='list-box'>
       <div className='video-cover'>
-        <div className='cover-box' data-img={pic}>
+        <div className='cover-box'>
           <LazyLoadImg url={pic} />
         </div>
         <span className='video-duration'>{duration}</span>

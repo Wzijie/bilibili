@@ -83,7 +83,7 @@ function search(state = initialState, action) {
     case CHANGE_SEARCH_ORDER:
       return { ...state, searchOrder: action.payload };
 
-    // 已存在-删除 超过5条-删除
+    // 已存在->删除 超过5条->删除
     case ADD_HISTORY:
       let addedHistoryList = state.historyList.slice();
       if (addedHistoryList.indexOf(action.payload) !== -1) {

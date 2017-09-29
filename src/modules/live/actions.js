@@ -19,6 +19,7 @@ export function liveRequest() {
     dispatch({ type: LIVE_REQUEST });
     return get('/live')
       .then((result) => {
+        result.data.banner.type = 'live';
         dispatch(liveSuccess(result.data));
       })
       .catch((error) => {
