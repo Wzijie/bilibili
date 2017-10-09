@@ -3,15 +3,19 @@ import { ReadyShow } from '../../components';
 import { getImageUrl } from '../../plugs/httpRequest';
 
 // 属性名根据type区分
-function switchBannerProperty(banner, type) {
+function switchBannerProperty(type) {
   switch (type) {
     case 'home':
-      let { id, pic } = banner;
-      return { key: id, url: pic };
+      return (banner) => {
+        let { id, pic } = banner;
+        return { key: id, url: pic };
+      }
     case 'live':
-      let { remark, img } = banner;
-      return { key: remark, url: img };
-    default: return {};
+      return (banner) => {
+        let { remark, img } = banner;
+        return { key: remark, url: img };
+      }
+    default: return () => ({});
   }
 }
 
@@ -175,8 +179,9 @@ class Banner extends React.Component {
     const { dataList, loading, error } = this.props;
     const slideTotal = dataList.length + 2;
 
-    const { url: firstUrl } = switchBannerProperty(dataList[0], dataList.type);
-    const { url: lastUrl } = switchBannerProperty(dataList[dataList.length - 1], dataList.type);
+    const getBannerProperty = switchBannerProperty(dataList.type);
+    const { url: firstUrl } = getBannerProperty(dataList[0]);
+    const { url: lastUrl } = getBannerProperty(dataList[dataList.length - 1]);
 
     return (
       <div className='banner'>
@@ -192,7 +197,7 @@ class Banner extends React.Component {
             <BannerItem url={lastUrl} />
             {
               dataList.map((banner) => {
-                let { key, url } = switchBannerProperty(banner, dataList.type);
+                let { key, url } = getBannerProperty(banner);
                 return <BannerItem key={key} url={url} />;
               })
             }

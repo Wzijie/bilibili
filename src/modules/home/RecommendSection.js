@@ -1,6 +1,7 @@
 import React from 'react';
 import { SectionHeader, SectionItem } from './components';
 import { ReadyShow } from '../../components';
+import countFormat from '../../plugs/countFormat';
 
 const RecommendSection = ({ dataList, loading, error }) => {
   return (
@@ -20,8 +21,8 @@ const RecommendSection = ({ dataList, loading, error }) => {
                 aid,
                 pic,
                 title,
-                playCount: play >= 10000 ? `${(play / 10000).toFixed(1)}万` : play,
-                barrageCount: video_review >= 10000 ? `${(video_review / 10000).toFixed(1)}万` : video_review
+                playCount: countFormat(play),
+                barrageCount: countFormat(video_review)
               }
 
               return <SectionItem {...sectionItemProps} />

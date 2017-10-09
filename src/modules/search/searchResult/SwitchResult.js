@@ -15,7 +15,7 @@ const SwitchResult = ({ result, type }) => {
     case 'upuser':
       return <UserList dataList={result.upuser} />;
 
-    default: return <p className='loading-info'>没做这个搜索结果</p>;
+    default: return <p className='loading-info'>没有这个搜索结果</p>;
   }
 }
 

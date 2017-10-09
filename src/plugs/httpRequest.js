@@ -4,6 +4,7 @@ function getUrl(path) {
   return `${apiServer}${path}`;
 }
 
+// 给链接添加https
 function addProtocol(url) {
   const reg = /^http|https/;
   if (reg.test(url)) {

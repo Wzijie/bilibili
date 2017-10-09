@@ -1,6 +1,7 @@
 import React from 'react';
 import { SectionHeader, SectionItem } from './components';
 import { ReadyShow } from '../../components';
+import countFormat from '../../plugs/countFormat';
 
 const MainSectionList = ({ dataList }) => {
   return (
@@ -13,8 +14,8 @@ const MainSectionList = ({ dataList }) => {
             aid,
             title,
             pic,
-            playCount: view >= 10000 ? `${(view / 10000).toFixed(1)}万` : view,
-            barrageCount: danmaku >= 10000 ? `${(danmaku / 10000).toFixed(1)}万` : danmaku
+            playCount: countFormat(view),
+            barrageCount: countFormat(danmaku)
           };
           return <SectionItem {...sectionItemProps} />
         })

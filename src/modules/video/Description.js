@@ -1,9 +1,6 @@
 import React from 'react';
 import { LazyLoadImg } from '../../components';
-
-function countFormat(count) {
-  return count >= 10000 ? `${(count / 10000).toFixed(1)}万` : count;
-}
+import countFormat from '../../plugs/countFormat';
 
 const Description = ({ aid, title, username, face, intro, playCount, barrageCount, favorite, createTime, breadcrumb }) => {
   return (
