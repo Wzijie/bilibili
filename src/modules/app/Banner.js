@@ -1,5 +1,6 @@
 import React from 'react';
-import { ReadyShow, LazyLoadImg } from '../../components';
+import { ReadyShow } from '../../components';
+import { getImageUrl } from '../../plugs/httpRequest';
 
 // 属性名根据type区分
 function switchBannerProperty(banner, type) {
@@ -17,7 +18,7 @@ function switchBannerProperty(banner, type) {
 const BannerItem = ({ url }) => (
   <li>
     <a>
-      <LazyLoadImg url={url} />
+      <img src={getImageUrl(url)} alt='banner' />
     </a>
   </li>
 );
@@ -188,14 +189,14 @@ class Banner extends React.Component {
             onTouchMove={this.onSlideTouchMove}
             onTouchEnd={this.onTouchEnd}
           >
-            <BannerItem url={lastUrl} />;
+            <BannerItem url={lastUrl} />
             {
               dataList.map((banner) => {
                 let { key, url } = switchBannerProperty(banner, dataList.type);
                 return <BannerItem key={key} url={url} />;
               })
             }
-            <BannerItem url={firstUrl} />;
+            <BannerItem url={firstUrl} />
           </ul>
         </ReadyShow>
         <ul className="slide-active">
