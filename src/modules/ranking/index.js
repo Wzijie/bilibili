@@ -53,6 +53,12 @@ class Ranking extends React.Component {
     }
   }
 
+  switchRankTypeFetch = (rankId) => {
+    return () => {
+      this.fetchRanking(rankId);
+    }
+  }
+
   render() {
 
     let { rankingList, rankingLoading, rankingError } = this.props;
@@ -66,7 +72,7 @@ class Ranking extends React.Component {
                 let { title, rankId } = navItem;
                 return (
                   <li key={rankId} >
-                    <NavLink to={`/ranking/${rankId}`} onClick={() => {this.fetchRanking(rankId)}} activeClassName='on'>{title}</NavLink>
+                    <NavLink to={`/ranking/${rankId}`} onClick={this.switchRankTypeFetch(rankId)} activeClassName='on'>{title}</NavLink>
                   </li>
                 )
               })

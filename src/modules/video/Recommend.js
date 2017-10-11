@@ -1,10 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { LazyLoadImg } from '../../components';
-
-function countFormat(count) {
-  return count >= 10000 ? `${(count / 10000).toFixed(1)}万` : count;
-}
+import countFormat from '../../plugs/countFormat';
 
 const RecommendItem = ({ aid, pic, title, view, danmaku }) => {
   return (

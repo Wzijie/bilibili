@@ -8,7 +8,7 @@ import rootReducer from './rootReducer';
 import App from './modules/app';
 
 import registerServiceWorker from './registerServiceWorker';
-import setRootFontSize from './plugs/setRootFontSize.js';
+// import setRootFontSize from './plugs/setRootFontSize.js';
 
 let store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
@@ -19,4 +19,4 @@ ReactDOM.render(
         </Router>
     </Provider>, document.getElementById('root'));
 registerServiceWorker();
-setRootFontSize();
+// setRootFontSize();

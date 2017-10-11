@@ -5,7 +5,7 @@ function imgLazyLoadObserver() {
   return () => {
     if (!window.IntersectionObserver) return false;
     if (!io) {
-      console.log('new IntersectionObserver')
+      // console.log('看看执行了几次new IntersectionObserver')
       io = new IntersectionObserver((iose) => {
         iose.forEach((ioseItem) => {
           if (ioseItem.intersectionRatio > 0) {

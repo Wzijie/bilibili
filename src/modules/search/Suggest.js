@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { addLoading } from '../../components';
 
+// 过滤script标签
 function filterScriptTag(str) {
   return str.replace(/<script/gi, '').replace(/<\/script>/gi, '');
 }

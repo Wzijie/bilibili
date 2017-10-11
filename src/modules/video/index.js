@@ -72,6 +72,12 @@ class Video extends React.Component {
     commentRequest(aid, commentPage + 1);
   }
 
+  switchPartFetchPlayer = (aid, part) => {
+    return () => {
+      this.fetchPlayer(aid, part);
+    }
+  }
+
   setTitle = () => {
     let { aid } = this.props.match.params;
     document.title = `av${aid}`;
@@ -195,7 +201,7 @@ class Video extends React.Component {
             showAllPart={showAllPart}
             toggleShowAllPart={toggleShowAllPart}
             part={part}
-            onFetchPlayer={this.fetchPlayer}
+            onSwitchPartFetchPlayer={this.switchPartFetchPlayer}
           />
         </ReadyShow>
         <ReadyShow loading={tagLoading} error={tagError} >
