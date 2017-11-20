@@ -3,13 +3,12 @@ import { LazyLoadImg } from '../../components';
 import countFormat from '../../plugs/countFormat';
 
 const Description = ({ aid, title, username, face, intro, playCount, barrageCount, favorite, createTime, breadcrumb }) => {
+  console.log(face);
   return (
     <div className='video-intro'>
       <div className='up-info'>
         <div className='up-face'>
-          <a>
-            <LazyLoadImg url={face} />
-          </a>
+          <LazyLoadImg url={face} />
         </div>
         <div className='up-name'>
           <a>UP主：{username}</a>
