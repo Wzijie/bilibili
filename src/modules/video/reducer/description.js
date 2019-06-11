@@ -25,14 +25,14 @@ function description(state = initialState, action) {
       return { ...state, descriptionLoading: true };
 
     case DESCRIPTION_SUCCESS:
-      let { title, username, face, descript, view, danmaku, favorite, createTime, navInfo } = action.payload;
+      let { title, username, face, desc, view, danmaku, favorite, createTime, navInfo } = action.payload;
       return { 
         ...state, 
         descriptionLoading: false, 
         title,
         username,
         face,
-        intro: descript,
+        intro: desc,
         playCount: view,
         barrageCount: danmaku,
         favorite,

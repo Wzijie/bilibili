@@ -124,7 +124,7 @@ export function descriptionFail(message) {
 export function descriptionRequest(aid) {
   return (dispatch) => {
     dispatch({ type: DESCRIPTION_REQUEST });
-    return get(`/video/description?aid=${aid}`)
+    return get(`/video/desc?aid=${aid}`)
       .then((result) => {
         dispatch(descriptionSuccess(result.data));
       })

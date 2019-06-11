@@ -125,7 +125,7 @@ class Video extends React.Component {
         barrageCount,
         favorite,
         createTime,
-        breadcrumb
+        breadcrumb = []
       },
       part: {
         partLoading,
