@@ -1,6 +1,6 @@
 import React from 'react';
 import { ReadyShow } from '../../components';
-import { getImageUrl } from '../../plugs/httpRequest';
+import { getImageUrl } from '../../utils/httpRequest';
 
 // 属性名根据type区分
 function switchBannerProperty(type) {

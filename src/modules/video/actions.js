@@ -1,5 +1,5 @@
 import { message } from 'antd';
-import { get } from '../../plugs/httpRequest';
+import { get } from '../../utils/httpRequest';
 import {
   PLAYER_REQUEST,
   PLAYER_SUCCESS,

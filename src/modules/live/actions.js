@@ -4,7 +4,7 @@ import {
   LIVE_SUCCESS,
   LIVE_FAIL
 } from './actionTypes';
-import { get } from '../../plugs/httpRequest';
+import { get } from '../../utils/httpRequest';
 
 export function liveSuccess(liveData) {
   return { type: LIVE_SUCCESS, payload: liveData };

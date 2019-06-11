@@ -1,5 +1,5 @@
 import React from 'react';
-import { getImageUrl } from '../../plugs/httpRequest';
+import { getImageUrl } from '../../utils/httpRequest';
 
 function lengthFormat(totalSecond) {
   let minute = Math.floor(totalSecond / 60);

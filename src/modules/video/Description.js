@@ -1,6 +1,6 @@
 import React from 'react';
 import { LazyLoadImg } from '../../components';
-import countFormat from '../../plugs/countFormat';
+import countFormat from '../../utils/countFormat';
 
 const Description = ({ aid, title, username, face, intro, playCount, barrageCount, favorite, createTime, breadcrumb }) => {
   return (

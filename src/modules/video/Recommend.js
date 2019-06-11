@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { LazyLoadImg } from '../../components';
-import countFormat from '../../plugs/countFormat';
+import countFormat from '../../utils/countFormat';
 
 const RecommendItem = ({ aid, pic, title, view, danmaku }) => {
   return (

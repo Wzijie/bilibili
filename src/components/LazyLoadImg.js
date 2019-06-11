@@ -1,7 +1,7 @@
 import React from 'react';
-import imgObserver from '../plugs/imgLazyLoadObserver';
+import imgObserver from '../utils/imgLazyLoadObserver';
 import { forbiddenImage } from '../common/setting';
-import { getImageUrl } from '../plugs/httpRequest';
+import { getImageUrl } from '../utils/httpRequest';
 
 const io = imgObserver();
 
