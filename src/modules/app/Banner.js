@@ -12,8 +12,8 @@ function switchBannerProperty(type) {
       }
     case 'live':
       return (banner) => {
-        let { remark, img } = banner;
-        return { key: remark, url: img };
+        let { id, img } = banner;
+        return { key: id, url: img };
       }
     default: return () => ({});
   }
