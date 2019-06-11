@@ -3,7 +3,6 @@ import { LazyLoadImg } from '../../components';
 import countFormat from '../../plugs/countFormat';
 
 const Description = ({ aid, title, username, face, intro, playCount, barrageCount, favorite, createTime, breadcrumb }) => {
-  console.log(face);
   return (
     <div className='video-intro'>
       <div className='up-info'>
@@ -34,7 +33,7 @@ const Description = ({ aid, title, username, face, intro, playCount, barrageCoun
         <li>播放：{countFormat(playCount)}</li>
         <li>弹幕：{countFormat(barrageCount)}</li>
         <li>收藏：{countFormat(favorite)}</li>
-        <li>时间：{createTime}</li>
+        <li>时间：{new Date(createTime).toLocaleDateString()}</li>
       </ul>
       <div className='more-info-toggle'>
         <i className='icon icon-arrow-down'></i>
